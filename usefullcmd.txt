@@ -1,0 +1,37 @@
+Align : ctrl + alt + A
+AutoComplete (php) : alt + shift + /
+Command : ctrl + shift + p
+:%s/[sS]dz/melkir
+:'<,'>s/[sS]dz/melkir
+
+Entité command :
+
+Compléte une entité
+php app/console doctrine:generate:entities melkirBlogBundle:Article
+
+Créée une entité
+php app/console doctrine:generate:entity
+
+Affiche les requêtes / Met à jours la BBD
+php app/console doctrine:schema:update [--dump-sql | --force]
+
+Tester ces requêtes
+php app/console doctrine:query:dql "select a from melkirBlogBundle:Article a"
+
+Charger les datafixtures
+php app/console doctrine:fixtures:load
+
+Créer un bundle
+php app/console generate:bundle
+
+Installer les nouveaux bundle avec composer
+php composer.phar install
+
+TODO
+/*
+ * Ajouter des régles de validations (titre, auteur, contenu, mot de pass != user etc..)
+ * Panel d'administration des user à l'aide du userManager de FOS
+ * Gestion des droits (ex : modification d'un article si l'on est admin ou s'il nous appartient -> ALC doc FOSUserBundle)
+ * Installer un editeur améliorer tel que CKEditor, voir SDZ "les tags sur les services"
+ * Améliorer BigBrother pour prendre des paramètres sur les mot à interdire
+ */
