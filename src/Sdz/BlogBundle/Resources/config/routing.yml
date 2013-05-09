@@ -2,6 +2,10 @@ sdzblog_ajouter:
     pattern:   /ajouter
     defaults:  { _controller: SdzBlogBundle:Blog:ajouter }
 
+sdzblog_admin:
+    pattern:   /admin
+    defaults:  { _controller: SdzBlogBundle:Blog:admin }
+
 sdzblog_modifier:
     pattern:   /modifier/{id}
     defaults:  { _controller: SdzBlogBundle:Blog:modifier }

@@ -349,6 +349,13 @@ class BlogController extends Controller
     ));
   }
 
+  /**
+   * @Secure(roles="ROLE_ADMIN")
+   */
+  public function adminAction() {
+    //TODO
+  }
+
   // Méthodes protégées :
 
   /**

@@ -36,9 +36,11 @@
             {% if is_granted('ROLE_AUTEUR') %}
               <li><a href="{{ path('sdzblog_ajouter') }}">Ajouter un article</a></li>
             {% endif %}
+            {# Si l'utilisateur est admin afficher le lien vers l'administration #}
+            {% if is_granted('ROLE_ADMIN') %}
+              <li><a href="{{ path('sdzblog_admin') }}">Administration</a></li>
+            {% endif %}
           </ul>
-
-          <!-- winzouCoreBundle::injectAdsense -->
 
           {# On affiche les 3 derniers articles #}
           {{ render(controller("SdzBlogBundle:Blog:menu", {'nombre': 3})) }}
