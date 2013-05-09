@@ -5,7 +5,7 @@ namespace Sdz\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="tut_site")
+ * @ORM\Table(name="ism_site")
  * @ORM\Entity
  */
 class Site

@@ -11,7 +11,7 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 /**
  * Sdz\BlogBundle\Entity\Article
  *
- * @ORM\Table(name="tut_article")
+ * @ORM\Table(name="ism_article")
  * @ORM\Entity(repositoryClass="Sdz\BlogBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Assert\Callback(methods={"contenuValide"})
@@ -69,7 +69,7 @@ class Article
 
   /**
    * @ORM\ManyToMany(targetEntity="Sdz\BlogBundle\Entity\Categorie", cascade={"persist"})
-   * @ORM\JoinTable(name="tut_article_categorie")
+   * @ORM\JoinTable(name="ism_article_categorie")
    */
   private $categories;
 

@@ -6,7 +6,7 @@ namespace Sdz\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="tut_categorie")
+ * @ORM\Table(name="ism_categorie")
  * @ORM\Entity(repositoryClass="Sdz\BlogBundle\Entity\CategorieRepository")
  */
 class Categorie

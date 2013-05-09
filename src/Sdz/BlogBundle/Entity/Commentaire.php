@@ -9,7 +9,7 @@ use Sdz\BlogBundle\Akismet\Akismet;
 use Sdz\BlogBundle\Validator\AntiFlood;
 
 /**
- * @ORM\Table(name="tut_commentaire")
+ * @ORM\Table(name="ism_commentaire")
  * @ORM\Entity(repositoryClass="Sdz\BlogBundle\Entity\CommentaireRepository")
  * @Akismet
  */

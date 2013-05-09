@@ -9,7 +9,7 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tut_article_competence")
+ * @ORM\Table(name="ism_article_competence")
  * @Assert\Callback(methods={"niveauValid"})
  */
 class ArticleCompetence

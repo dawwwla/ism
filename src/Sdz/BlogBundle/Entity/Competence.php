@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="tut_competence")
+ * @ORM\Table(name="ism_competence")
  * @ORM\Entity(repositoryClass="Sdz\BlogBundle\Entity\CompetenceRepository")
  */
 class Competence
