@@ -35,4 +35,6 @@ TODO
  * http://symfony.com/fr/doc/current/cookbook/security/acl.html
  * Installer un editeur améliorer tel que CKEditor, voir SDZ "les tags sur les services"
  * Améliorer BigBrother pour prendre des paramètres sur les mot à interdire
+ * Ajouter le userprofile dans userHelpers pour voir la description de l'utilisateur
  */
+

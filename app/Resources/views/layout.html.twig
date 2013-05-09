@@ -52,6 +52,8 @@
             <h3>Membre</h3>
             <ul class="nav nav-pills nav-stacked">
               <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</li>
+              <li><a href="{{ path('fos_user_profile_show') }}">Voir le profil</a></li>
+              <li><a href="{{ path('fos_user_profile_edit') }}">Editer le profil</a></li>
               <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
             </ul>
           {# On affiche le formulaire de login, sauf sur la page de connexion #}

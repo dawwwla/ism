@@ -327,13 +327,6 @@ class BlogController extends Controller
     ));
   }
 
-  public function traductionAction($name)
-  {
-    return $this->render('SdzBlogBundle:Blog:traduction.html.twig', array(
-      'name' => $name
-    ));
-  }
-
   public function feedAction()
   {
     $articles = $this->getDoctrine()
