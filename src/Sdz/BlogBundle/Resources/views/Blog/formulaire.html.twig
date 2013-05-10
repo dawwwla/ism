@@ -14,7 +14,7 @@
 </div>
 
 {# On charge la librairie jQuery. Ici, je la prends depuis le site jquery.com, mais si vous l'avez en local, changez simplement l'adresse. #}
-<script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script>document.write('<script src="{{ asset('js/jquery.min.js') }}"><\/script>')</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -29,13 +29,13 @@ $(document).ready(function() {
     $container = $('');
   }
 
-  // On ajoute un lien pour ajouter une nouvelle catégorie
-  var $lienAjout = $('<a href="#" id="ajout_categorie" class="btn">Ajouter une catégorie</a>');
+  // On ajoute un lien pour ajouter une nouvelle compétence
+  var $lienAjout = $('<a href="#" id="ajout_competence" class="btn">Ajouter une compétence</a>');
   $container.append($lienAjout);
 
   // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
   $lienAjout.click(function(e) {
-    ajouterCategorie($container);
+    ajouterCompetence($container);
     e.preventDefault(); // évite qu'un # apparaisse dans l'URL
     return false;
   });
@@ -44,21 +44,21 @@ $(document).ready(function() {
   var index = $container.find(':input').length;
 
   if (index > 0) {
-    // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+    // Pour chaque compétence déjà existante, on ajoute un lien de suppression
     $container.children('div').each(function() {
       ajouterLienSuppression($(this));
     });
   }
 
   // La fonction qui ajoute un formulaire Categorie
-  function ajouterCategorie($container) {
+  function ajouterCompetence($container) {
     // Dans le contenu de l'attribut « data-prototype », on remplace :
     // - le texte "__name__label__" qu'il contient par le label du champ
     // - le texte "__name__" qu'il contient par le numéro du champ
     var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Catégorie n°' + (index+1))
                                                         .replace(/__name__/g, index));
 
-    // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+    // On ajoute au prototype un lien pour pouvoir supprimer la compétence
     ajouterLienSuppression($prototype);
 
     // On ajoute le prototype modifié à la fin de la balise <div>
@@ -68,7 +68,7 @@ $(document).ready(function() {
     index++;
   }
 
-  // La fonction qui ajoute un lien de suppression d'une catégorie
+  // La fonction qui ajoute un lien de suppression d'une compétence
   function ajouterLienSuppression($prototype) {
     // Création du lien
     $lienSuppression = $('<a href="#" class="btn btn-danger">Supprimer</a><br /><br />');
@@ -79,6 +79,7 @@ $(document).ready(function() {
     // Ajout du listener sur le clic du lien
     $lienSuppression.click(function(e) {
       $prototype.remove();
+      index--;
       e.preventDefault(); // évite qu'un # apparaisse dans l'URL
       return false;
     });

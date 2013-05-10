@@ -43,12 +43,12 @@
                     {{ categorie.nom }}{% if not loop.last %}, {% endif %}
                 {% endfor %}
             {% endif %}
-
+</br>
             {# On affiche les compétences éventuelles #}
             {% if article.articleCompetences|length > 0 %}
-                - Compétences utilisées :
+                Compétences :
                 {% for articleCompetence in article.articleCompetences %}
-                    {{ articleCompetence.competence.nom }} : {{ articleCompetence.textNiveau }}{% if not loop.last %}, {% else %}.{% endif %}
+                    {{ articleCompetence.competence.nom }} {{ articleCompetence.textNiveau }}{% if not loop.last %}, {% else %}.{% endif %}
                 {% endfor %}
             {% endif %}
         </i></p>
