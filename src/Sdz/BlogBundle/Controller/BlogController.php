@@ -67,6 +67,20 @@ class BlogController extends Controller
     ));
   }
 
+  public function rechercherAction()
+  {
+    $repository = $this->getDoctrine()
+                       ->getManager()
+                       ->getRepository('SdzBlogBundle:Article');
+
+    $listeArticles = $repository->findAll();
+
+    return $this->render('SdzBlogBundle:Blog:rechercher.html.twig', array(
+      'listeArticles'      => $listeArticles,
+    ));
+
+  }
+
   /**
    * @Secure(roles="ROLE_AUTEUR")
    */

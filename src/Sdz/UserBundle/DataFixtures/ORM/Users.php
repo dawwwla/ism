@@ -18,7 +18,7 @@ class Users implements FixtureInterface
     }
 
     // Les des noms d'utilisateur à créer
-    $noms = array('winzou', 'John', 'Talus');
+    $noms = array('melkir', 'John', 'Talus');
 
     foreach ($noms as $i => $nom) {
       // On crée l'utilisateur

@@ -1,0 +1,19 @@
+parameters:
+#    sdz_admin.example.class: Sdz\AdminBundle\Example
+
+services:
+#    sdz_admin.example:
+#        class: %sdz_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    sdz.blog.admin.article:
+        class: Sdz\AdminBundle\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sdzblog, label: Articles }
+        arguments: [null, Sdz\BlogBundle\Entity\Article, SdzAdminBundle:ArticleAdmin]
+
+    sdz.blog.admin.categorie:
+        class: Sdz\AdminBundle\Admin\CategorieAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sdzblog, label: Categories }
+        arguments: [null, Sdz\BlogBundle\Entity\Categorie, SdzAdminBundle:CategorieAdmin]

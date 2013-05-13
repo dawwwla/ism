@@ -1,0 +1,15 @@
+{# src/Sdz/BlogBundle/Resources/views/Blog/rechercher.html.twig #}
+
+{% extends "SdzBlogBundle::layout.html.twig" %}
+
+{% block title %}
+  Rechercher un article - {{ parent() }}
+{% endblock %}
+
+{% block sdzblog_body %}
+
+  <h2>Rechercher un article</h2>
+
+  {% include "SdzBlogBundle:Blog:formulaire.html.twig" %}
+
+{% endblock %}

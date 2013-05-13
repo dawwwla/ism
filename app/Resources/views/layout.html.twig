@@ -38,7 +38,7 @@
             {% endif %}
             {# Si l'utilisateur est admin afficher le lien vers l'administration #}
             {% if is_granted('ROLE_ADMIN') %}
-              <li><a href="{{ path('sdzblog_admin') }}">Administration</a></li>
+              <li><a href="{{ path('sonata_admin_dashboard') }}">Administration</a></li>
             {% endif %}
           </ul>
 

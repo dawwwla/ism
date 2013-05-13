@@ -14,11 +14,6 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH] # On garde ce rôle superadmin, il nous resservira par la suite
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
         main:
             id: fos_user.user_provider.username_email
 
@@ -40,5 +35,5 @@ security:
             remember_me:
                 key:        "%secret%"
 
-    #access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }

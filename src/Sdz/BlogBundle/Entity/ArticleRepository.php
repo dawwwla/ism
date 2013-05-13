@@ -45,4 +45,54 @@ class ArticleRepository extends EntityRepository
 
     return new Paginator($query);
   }
+
+  public function myFindAll()
+  {
+    return $this->createQueryBuilder('a')
+                ->getQuery()
+                ->getResult();
+  }
+
+  public function findByAuteurAndDate($auteur, $annee)
+  {
+    // On utilise le QueryBuilder créé par le repository directement pour gagner du temps
+    // Plus besoin de faire le select() ni le from() par la suite donc
+    $qb = $this->createQueryBuilder('a');
+
+    $qb->where('a.auteur = :auteur')
+        ->setParameter('auteur', $auteur)
+       ->andWhere('a.date < :annee')
+        ->setParameter('annee', $annee)
+       ->orderBy('a.date', 'DESC');
+
+    return $qb->getQuery()
+              ->getResult();
+  }
+
+  public function whereCurrentYear(\Doctrine\ORM\QueryBuilder $qb)
+  {
+    $qb->andWhere('a.date BETWEEN :debut AND :fin')
+        ->setParameter('debut', new \Datetime(date('Y').'-01-01'))  // Date entre le 1er janvier de cette année
+        ->setParameter('fin',   new \Datetime(date('Y').'-12-31')); // Et le 31 décembre de cette année
+
+      return $qb;
+  }
+
+  public function myFind()
+  {
+    $qb = $this->createQueryBuilder('a');
+
+    // On peut ajouter ce qu'on veut avant
+    $qb->where('a.user_id = :user')
+        ->setParameter('user', 1);
+
+    // On applique notre condition
+    $qb = $this->whereCurrentYear($qb);
+
+    // On peut ajouter ce qu'on veut après
+    $qb->orderBy('a.date', 'DESC');
+
+    return $qb->getQuery()
+              ->getResult();
+  }
 }

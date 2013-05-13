@@ -83,3 +83,21 @@ fos_user:
 ornicar_akismet:
     api_key: %akismet_key%
     url:     %akismet_url%
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.rss:
+
+sonata_admin:
+    title:      ISM - Panneau d'administration
+    dashboard:
+        groups:
+            Blog:
+                items:
+                    - sdz.blog.admin.article
+                    - sdz.blog.admin.categorie
