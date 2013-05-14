@@ -19,3 +19,11 @@ app/config/parameters.yml
 # Capifony
 Capfile
 app/config/deploy.rb
+
+# Personnal
+/web/bundles/
+/app/bootstrap.php.cache
+/build/
+/vendor/
+/bin/
+/composer.phar

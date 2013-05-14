@@ -101,3 +101,11 @@ sonata_admin:
                 items:
                     - sdz.blog.admin.article
                     - sdz.blog.admin.categorie
+                    - sdz.blog.admin.commentaire
+                    - sdz.blog.admin.competence
+            Utilisateurs:
+                items:
+                    - sdz.admin.user
+            Mediateque:
+                items:
+                    - sdz.blog.admin.image

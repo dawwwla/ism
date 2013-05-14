@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ArticleAdmin extends Admin {
+class CommentaireAdmin extends Admin {
     // setup the default sort column and order
   protected $datagridValues = array(
                                     '_sort_order' => 'ASC',
@@ -17,7 +17,6 @@ class ArticleAdmin extends Admin {
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-    ->add('titre')
     ->add('date')
     ->add('user')
     ->add('auteur')
@@ -29,8 +28,6 @@ class ArticleAdmin extends Admin {
   {
     $datagridMapper
     ->add('id')
-    ->add('titre')
-    ->add('slug')
     ->add('auteur')
     ->add('contenu')
     ;
@@ -40,15 +37,10 @@ class ArticleAdmin extends Admin {
   {
     $listMapper
     ->add('id')
-    ->add('titre')
-    ->add('slug')
-    ->add('date')
     ->add('user')
     ->add('auteur')
     ->add('contenu')
-    ->add('articleCompetences', null, array('label' => 'Competences'))
-    ->add('image', null, array('label' => 'Image'))
-    ->add('commentaires', null, array('label' => 'Commentaires'))
+    ->add('date')
     ;
   }
 }

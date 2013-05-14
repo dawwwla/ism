@@ -173,4 +173,9 @@ class Commentaire
     {
         return $this->user;
     }
+
+    public function __toString()
+    {
+      return $this->getAuteur() . $this->getUser() . ' : ' . $this->getContenu();
+    }
 }

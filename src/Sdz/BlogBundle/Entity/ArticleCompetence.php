@@ -90,6 +90,6 @@ class ArticleCompetence
 
   public function __toString()
   {
-    return 'ArticleCompetence{'.$this->niveau.'}';//sprintf('[Article=%s|Competence=%s]', $this->getArticle()->getTitre(), $this->getCompetence()->getNom());
+    return $this->getCompetence()->getNom() . ' ' . $this->getTextNiveau();
   }
 }
