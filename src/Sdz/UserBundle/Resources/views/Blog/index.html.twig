@@ -1,0 +1,18 @@
+{# src/Sdz/UserBundle/Resources/views/Blog/index.html.twig #}
+
+{% extends "SdzUserBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block sdzuser_body %}
+  <div>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="{{ path('fos_user_profile_show') }}">Voir le profil</a></li>
+        <li><a href="{{ path('fos_user_profile_edit') }}">Editer le profil</a></li>
+        <li><a href="{{ path('fos_user_group_list') }}">Voir les groupes</a></li>
+        <li><a href="{{ path('sdzuser_fiche_create') }}">Créer une fiche membre</a></li>
+      </ul>
+  </div>
+{% endblock %}

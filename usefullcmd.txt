@@ -37,5 +37,7 @@ TODO
  * Améliorer BigBrother pour prendre des paramètres sur les mot à interdire
  * Ajouter le userprofile dans userHelpers pour voir la description de l'utilisateur
  * Ajouter la recherche par catégorie, tag ou compétence
+ * Installer et configurer FOSCommentBundle
+ * Installer et configurer FOSMessageBundle
  */
 

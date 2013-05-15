@@ -30,7 +30,7 @@ $(document).ready(function() {
   }
 
   // On ajoute un lien pour ajouter une nouvelle compétence
-  var $lienAjout = $('<a href="#" id="ajout_competence" class="btn">Ajouter une compétence</a>');
+  var $lienAjout = $('<a href="#" id="ajout_competence" class="btn">Ajouter</a>');
   $container.append($lienAjout);
 
   // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
@@ -55,7 +55,7 @@ $(document).ready(function() {
     // Dans le contenu de l'attribut « data-prototype », on remplace :
     // - le texte "__name__label__" qu'il contient par le label du champ
     // - le texte "__name__" qu'il contient par le numéro du champ
-    var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Catégorie n°' + (index+1))
+    var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Compétence n°' + (index+1))
                                                         .replace(/__name__/g, index));
 
     // On ajoute au prototype un lien pour pouvoir supprimer la compétence

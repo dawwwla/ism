@@ -1,17 +1,17 @@
-{% extends "SdzBlogBundle::layout.html.twig" %}
+{% extends "SdzUserBundle::layout.html.twig" %}
 
 {% block title %}
-  Ajouter un membre - {{ parent() }}
+  Création de la fiche membre - {{ parent() }}
 {% endblock %}
 
-{% block sdzblog_body %}
+{% block sdzuser_body %}
 
-  <h2>Ajouter un membre</h2>
+  <h2>Créer une fiche membre</h2>
 
   {% include "SdzUserBundle:Blog:formulaire.html.twig" %}
 
   <p>
-    Vous ajoutez un nouveau membre.
+    Vous ajoutez une nouvelle fiche membre.
   </p>
 
 {% endblock %}

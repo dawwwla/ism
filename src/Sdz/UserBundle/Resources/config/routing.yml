@@ -1,3 +1,11 @@
-user_member_create:
+sdzuser_index:
+    pattern:   /
+    defaults:  { _controller: SdzUserBundle:User:index }
+
+sdzuser_fiche_create:
     pattern:   /ajouter
-    defaults:  { _controller: SdzUserBundle:User:ajouterMembre }
+    defaults:  { _controller: SdzUserBundle:User:ajouter }
+
+sdzuser_fiche_view:
+    pattern:   /voir
+    defaults:  { _controller: SdzUserBundle:Blog:voir }

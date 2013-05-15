@@ -9,7 +9,7 @@ SdzBlogBundlePrefix:
 
 SdzUserBundlePrefix:
     resource: "@SdzUserBundle/Resources/config/routing.yml"
-    prefix:   /membre
+    prefix:   /panel
 
 # Les imports pour FOSUB :
 fos_user_security:
