@@ -1,0 +1,3 @@
+user_member_create:
+    pattern:   /ajouter
+    defaults:  { _controller: SdzUserBundle:User:ajouterMembre }
