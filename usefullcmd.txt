@@ -30,10 +30,10 @@ php composer.phar install
 TODO
 /*
  * Ajouter des régles de validations (titre, auteur, contenu, mot de pass != user etc..)
- * Panel d'administration des user à l'aide du userManager de FOS
+ * Panel d'administration des user à l'aide du userManager de FOS -> Sonata Admin DONE
  * Gestion des droits avancé (ex : modification d'un article si l'on est admin ou s'il nous appartient -> ALC doc FOSUserBundle)
  * http://symfony.com/fr/doc/current/cookbook/security/acl.html
- * Installer un editeur améliorer tel que CKEditor, voir SDZ "les tags sur les services"
+ * Installer un editeur améliorer tel que CKEditor, voir SDZ "les tags sur les services" -> DONE
  * Améliorer BigBrother pour prendre des paramètres sur les mot à interdire
  * Ajouter le userprofile dans userHelpers pour voir la description de l'utilisateur
  * Ajouter la recherche par catégorie, tag ou compétence
