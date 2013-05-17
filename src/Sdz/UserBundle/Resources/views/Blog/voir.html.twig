@@ -14,13 +14,13 @@
       Retour au profil
     </a>
     {% if is_granted('ROLE_AUTEUR') %}
-      <a href="{{ path('sdzuser_modifier', {'id': membre.id}) }}" class="btn">
+      <a href="{{ path('sdzuser_fiche_edit', {'id': membre.id}) }}" class="btn">
         <i class="icon-edit"></i>
         Modifier la fiche
       </a>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
-      <a href="{{ path('sdzuser_supprimer', {'id': membre.id}) }}" class="btn">
+      <a href="{{ path('sdzuser_fiche_delete', {'id': membre.id}) }}" class="btn">
         <i class="icon-trash"></i>
         Supprimer la fiche
       </a>

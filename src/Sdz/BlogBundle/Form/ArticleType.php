@@ -16,7 +16,10 @@ class ArticleType extends AbstractType
     $builder
       ->add('date',        'datetime')
       ->add('titre',       'text')
-      ->add('contenu',     'textarea')
+      ->add('contenu', 'ckeditor', array(
+          'startup_outline_blocks'       => false,
+          'height'                       => '320'
+      ))
       ->add('image',       new ImageType(), array('required' => false))
       ->add('categories',  'entity',        array(
         'class'    => 'SdzBlogBundle:Categorie',

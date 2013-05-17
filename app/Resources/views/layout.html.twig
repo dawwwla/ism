@@ -11,10 +11,12 @@
     {% block stylesheets %}
       {% stylesheets output='css/main.css' filter='cssrewrite, ?yui_css'
         'css/bootstrap.css'
+        'css/bootstrap-responsive.css'
         '@SdzBlogBundle/Resources/public/css/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
       {% endstylesheets %}
     {% endblock %}
+
   </head>
 
   <body>
@@ -36,10 +38,6 @@
             {% if is_granted('ROLE_AUTEUR') %}
               <li><a href="{{ path('sdzblog_ajouter') }}">Ajouter un article</a></li>
             {% endif %}
-            {# Si l'utilisateur est admin afficher le lien vers l'administration #}
-            {% if is_granted('ROLE_ADMIN') %}
-              <li><a href="{{ path('sonata_admin_dashboard') }}">Administration</a></li>
-            {% endif %}
           </ul>
 
           {# On affiche les 3 derniers articles #}
@@ -59,6 +57,14 @@
           {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
             <h3>Identification</h3>
             {{ render(controller('SdzUserBundle:Security:login')) }}
+          {% endif %}
+          {# Si l'utilisateur est admin afficher le lien vers l'administration #}
+          {% if is_granted('ROLE_ADMIN') %}
+            <h3>Administration</h3>
+            <ul class="nav nav-pills nav-stacked">
+              <li><a href="{{ path('sonata_admin_dashboard') }}">Dashboard</a></li>
+              <li><a href="{{ path('fos_user_group_list') }}">Gérer les groupes</a></li>
+            </ul>
           {% endif %}
         </div>
 

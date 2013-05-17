@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             new Sdz\AdminBundle\SdzAdminBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

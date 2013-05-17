@@ -10,7 +10,7 @@
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*@dev",
-        "symfony/assetic-bundle": "2.1.*",
+        "symfony/assetic-bundle": "dev-master",
         "symfony/swiftmailer-bundle": "2.2.*",
         "symfony/monolog-bundle": "2.2.*",
         "sensio/distribution-bundle": "2.2.*",
@@ -32,7 +32,8 @@
         "sonata-project/cache-bundle": "dev-master",
         "simplethings/entity-audit-bundle": "dev-master",
         "knplabs/knp-menu-bundle":"1.1.x-dev",
-        "sonata-project/block-bundle": "dev-master"
+        "sonata-project/block-bundle": "dev-master",
+        "Trsteel/ckeditor-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
