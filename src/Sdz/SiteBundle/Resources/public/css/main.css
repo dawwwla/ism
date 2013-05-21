@@ -1,0 +1,25 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  background-image:url('../img/background.png');
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 75px;
+  color:white;
+}
+
+.hero-unit {
+  background-color: #FFFFFF;
+  filter:alpha(opacity=95);
+  -moz-opacity:0.95;
+  opacity: 0.95;
+}
+
+h1,h3 {
+  text-align:center;
+}

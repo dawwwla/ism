@@ -6,17 +6,21 @@
     Blog - {{ parent() }}
 {% endblock %}
 
+{% block header %}
+    <header class="jumbotron subhead">
+      <div class="container">
+        <h1>Blog</h1>
+        <p class="lead">Partager, communiquer, découvrir.</p>
+      </div>
+    </header>
+{% endblock %}
+
 {% block body %}
-
-    {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
-    <h1>Blog</h1>
-
-    <hr>
 
     {# On gère les messages flash de façon globale pour tout le bundle
        On peut catégoriser les messages dans différents sacs (bag),
        ici on les a mis dans "info", "success" et "error", qui correspondent aux classes CSS du Bootstrap #}
-    
+
     {% for type in ['info', 'success', 'error'] %}
         {% for message in app.session.flashbag.get(type) %}
             <div class="alert alert-{{ type }}">

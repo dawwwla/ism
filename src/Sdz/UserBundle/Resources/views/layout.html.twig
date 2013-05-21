@@ -6,10 +6,17 @@
     Panneau de l'utilisateur - {{ parent() }}
 {% endblock %}
 
+{% block header %}
+    <header class="jumbotron subhead">
+      <div class="container">
+        <h1>Espace membre</h1>
+        <p class="lead">Consulter votre profil</p>
+      </div>
+    </header>
+{% endblock %}
+
 {# Dans notre layout, il faut définir le block body #}
 {% block body %}
-  <h1>Espace membre</h1>
-  <hr>
   {# On affiche les messages flash que définissent les contrôleurs du bundle #}
   {% for key, messages in app.session.flashbag.all() %}
      {% for message in messages %}

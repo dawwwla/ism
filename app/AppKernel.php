@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Sdz\AdminBundle\SdzAdminBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
+            new Sdz\SiteBundle\SdzSiteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

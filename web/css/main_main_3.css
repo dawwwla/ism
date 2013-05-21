@@ -1,0 +1,27 @@
+h1 {
+font-size: 30px;
+line-height: 32px;
+}
+
+h2 {
+font-size: 24px;
+line-height: 32px;
+}
+
+body {
+font-size: 13.5px;
+}
+
+p {
+margin: 0 0 9px;
+}
+
+h2 {
+margin-bottom:2px;
+margin-top:12px;
+}
+
+h3 {
+margin-bottom:2px;
+margin-top:15px;
+}

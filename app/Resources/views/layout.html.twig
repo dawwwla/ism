@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="author" content="Alexandre Bacco">
-    <meta name="keywords" content="Symfony2, Symfony, Symfony2.1, Symfony2.2, tutoriel, tutorial, blog, checklist, livre, cours">
-    <link rel="alternate" type="application/rss+xml" title="Un blog goutû sur Symfony2" href="{{ url('sdzblog_feed') }}">
+    <meta name="author" content="Thibault Vieux">
+    <meta name="keywords" content="Symfony2.2, blog">
+    <link rel="alternate" type="application/rss+xml" title="Blog sur Symfony2" href="{{ url('sdzblog_feed') }}">
 
     <title>{% block title %}ISM{% endblock %}</title>
 
@@ -16,74 +16,98 @@
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
       {% endstylesheets %}
     {% endblock %}
-
   </head>
 
   <body>
-    <div class="container">
-      <div id="header" class="hero-unit">
-        <h1>Projet Web ISM</h1>
-        <p>Ce projet est propulsé par Symfony2, construit à partir du tuto sdz et de la documentation officielle.</p>
-        <p><a class="btn btn-primary btn-large" href="http://www.siteduzero.com/informatique/tutoriels/developpez-votre-site-web-avec-le-framework-symfony2">
-          Lire le tutoriel &raquo;
-        </a></p>
-      </div>
-
-      <div class="row">
-        <div id="menu" class="span3">
-          <h3>Le blog</h3>
-          <ul class="nav nav-pills nav-stacked">
-            <li><a href="{{ path('sdzblog_accueil') }}">Accueil du blog</a></li>
-            {# On n'affiche le lien pour ajouter un article qu'aux utilisateurs disposant du rôle ROLE_AUTEUR #}
-            {% if is_granted('ROLE_AUTEUR') %}
-              <li><a href="{{ path('sdzblog_ajouter') }}">Ajouter un article</a></li>
-            {% endif %}
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">ISM</a>
+          <ul class="nav">
+            <li><a href="#"><i class="icon-black icon-home"></i> Accueil</a></li>
+            <li><a href="{{ path('sdzblog_accueil') }}"></i> Blog</a></li>
+            <li><a href="#">Roadmap</a></li>
+            <li><a href="#">Catalogue</a></li>
+            <li><a href="#">A propos</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Liens</a></li>
           </ul>
-
-          {# On affiche les 3 derniers articles #}
-          {{ render(controller("SdzBlogBundle:Blog:menu", {'nombre': 3})) }}
-
-          {# On affiche un coin espace membre :
-             * Si le membre est identifié : lien de déconnexion
-             * Sinon : formulaire de connexion #}
-          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <h3>Membre</h3>
-            <ul class="nav nav-pills nav-stacked">
-              <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</li>
-              <li><a href="{{ path('sdzuser_index') }}">Espace membre</a></li>
-              <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
-            </ul>
-          {# On affiche le formulaire de login, sauf sur la page de connexion #}
-          {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
-            <h3>Identification</h3>
-            {{ render(controller('SdzUserBundle:Security:login')) }}
-          {% endif %}
-          {# Si l'utilisateur est admin afficher le lien vers l'administration #}
-          {% if is_granted('ROLE_ADMIN') %}
-            <h3>Administration</h3>
-            <ul class="nav nav-pills nav-stacked">
-              <li><a href="{{ path('sonata_admin_dashboard') }}">Dashboard</a></li>
-              <li><a href="{{ path('fos_user_group_list') }}">Gérer les groupes</a></li>
-            </ul>
-          {% endif %}
+          <ul class="nav pull-right">
+            <form class="navbar-search pull-left">
+              <input type="text" class="search-query" placeholder="Search">
+            </form>
+            <li><a href="{{ path('fos_user_registration_register') }}"><i class="icon-black icon-pencil"></i>S'inscrire</a></li>
+            <li><a href="{{ path('fos_user_security_login') }}"><i class="icon-black icon-user"></i> Mon compte</a></li>
+          </ul>
         </div>
+      </div>
+    </div>
 
-        {# Contenu central de la page #}
+    <!-- Header
+    ================================================== -->
+    {% block header %}
+    {% endblock %}
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+
+              <li class="nav-header">Le blog</li>
+              <li><a href="{{ path('sdzblog_accueil') }}">Accueil du blog</a></li>
+
+              {% if is_granted('ROLE_AUTEUR') %}
+                <li><a href="{{ path('sdzblog_ajouter') }}">Ajouter un article</a></li>
+              {% endif %}
+
+              {# On affiche les 3 derniers articles #}
+              {{ render(controller("SdzBlogBundle:Blog:menu", {'nombre': 3})) }}
+
+              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li class="nav-header">Membre</li>
+                <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</li>
+                <li><a href="{{ path('sdzuser_index') }}">Espace membre</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+              {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
+              <li class="nav-header">Identification</li>
+                {{ render(controller('SdzUserBundle:Security:login')) }}
+              {% endif %}
+
+              {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-header">Administration</li>
+                <li><a href="{{ path('sonata_admin_dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ path('fos_user_group_list') }}">Gérer les groupes</a></li>
+              {% endif %}
+
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+
+        <!-- Content
+        ================================================== -->
         <div id="content" class="span9">
           {% block body %}
           {% endblock %}
         </div>
-      </div>
+
+      </div><!--/row-->
 
       <hr>
 
+      <!-- Footer
+      ================================================== -->
       <footer>
-        <p>
-          ISM &copy; 2013 - <a href="{{ path('sdzblog_feed') }}">Flux RSS Blog</a>
-        </p>
+        <p>© ISM 2013 - <a href="{{ path('sdzblog_feed') }}">Flux RSS Blog</a> - <a href="">Flux RSS Site</a></p>
       </footer>
+
     </div>
 
+    <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     {% block javascripts %}
       {# jQuery depuis le CDN de Google, ou fallback sur une copie locale #}
       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -96,5 +120,6 @@
         <script type="text/javascript" src="{{ asset_url }}"></script>
       {% endjavascripts %}
     {% endblock %}
+
   </body>
 </html>

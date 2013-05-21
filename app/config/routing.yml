@@ -1,5 +1,3 @@
-# J'ai séparé cet import afin de ne pas avoir le préfixe /blog lors de l'import
-
 SdzBlogBundlePrefix:
     resource: "@SdzBlogBundle/Resources/config/routing.yml"
     prefix:   /blog
@@ -7,6 +5,10 @@ SdzBlogBundlePrefix:
 SdzUserBundlePrefix:
     resource: "@SdzUserBundle/Resources/config/routing.yml"
     prefix:   /membre
+
+SdzSiteBundlePrefix:
+    resource: "@SdzSiteBundle/Resources/config/routing.yml"
+    prefix:   /
 
 # Les imports pour FOSUB :
 fos_user_security:

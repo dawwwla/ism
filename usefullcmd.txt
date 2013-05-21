@@ -39,5 +39,6 @@ TODO
  * Ajouter la recherche par catégorie, tag ou compétence
  * Installer et configurer FOSCommentBundle
  * Installer et configurer FOSMessageBundle
+ * Installer un Breadcrumbs (barre de navigation intégré)
  */
 
