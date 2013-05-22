@@ -15,23 +15,15 @@
     </header>
 {% endblock %}
 
-{# Dans notre layout, il faut définir le block body #}
-{% block body %}
-  {# On affiche les messages flash que définissent les contrôleurs du bundle #}
-  {% for key, messages in app.session.flashbag.all() %}
-     {% for message in messages %}
+{% block content %}
 
-        {{ message|trans({}, 'FOSUserBundle') }}
-
-     {% endfor %}
+  {% for key, message in app.session.flashbag.all() %}
+    <div class="alert alert-{{ key }}">
+      {{ message|trans({}, 'FOSUserBundle') }}
+    </div>
   {% endfor %}
 
-  {# On définit un nouveau block, que les vues du bundle pourront remplir #}
-  {% block sdzuser_body %}
-  {% endblock %}
-
-  {% block content %}
-    {% block fos_user_content %}{% endblock %}
-  {% endblock %}
+  {% block fos_user_content %}
+  {% endblock fos_user_content %}
 
 {% endblock %}

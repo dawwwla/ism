@@ -26,20 +26,41 @@
         <div class="container">
           <a class="brand" href="#">ISM</a>
           <ul class="nav">
-            <li><a href="#"><i class="icon-black icon-home"></i> Accueil</a></li>
+            <li><a href="{{ path('sdzsite_homepage') }}"><i class="icon-black icon-home"></i> Accueil</a></li>
             <li><a href="{{ path('sdzblog_accueil') }}"></i> Blog</a></li>
-            <li><a href="#">Roadmap</a></li>
-            <li><a href="#">Catalogue</a></li>
             <li><a href="#">A propos</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Liens</a></li>
+            <li><a href="#">Roadmap</a></li>
+            <li><a href="#">Catalogue</a></li>
           </ul>
           <ul class="nav pull-right">
             <form class="navbar-search pull-left">
               <input type="text" class="search-query" placeholder="Search">
             </form>
-            <li><a href="{{ path('fos_user_registration_register') }}"><i class="icon-black icon-pencil"></i>S'inscrire</a></li>
-            <li><a href="{{ path('fos_user_security_login') }}"><i class="icon-black icon-user"></i> Mon compte</a></li>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+              <li class="dropdown">
+                <a href="#" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="icon-black icon-user"></i> {{ app.user.username }} <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                  <li><a href="#">Mon profil</a></li>
+                  <li><a href="#">Mes paramamètres</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                </ul>
+              </li>
+            {% else %}
+              <li><a href="{{ path('fos_user_registration_register') }}"><i class="icon-black icon-pencil"></i>S'inscrire</a></li>
+              <li class="dropdown">
+                <a href="#" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="icon-black icon-user"></i> Se connecter <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                  {{ render(controller('SdzUserBundle:Security:login')) }}
+                </ul>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -50,60 +71,22 @@
     {% block header %}
     {% endblock %}
 
+    <!-- Contenu principal
+    ================================================== -->
     <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-
-              <li class="nav-header">Le blog</li>
-              <li><a href="{{ path('sdzblog_accueil') }}">Accueil du blog</a></li>
-
-              {% if is_granted('ROLE_AUTEUR') %}
-                <li><a href="{{ path('sdzblog_ajouter') }}">Ajouter un article</a></li>
-              {% endif %}
-
-              {# On affiche les 3 derniers articles #}
-              {{ render(controller("SdzBlogBundle:Blog:menu", {'nombre': 3})) }}
-
-              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li class="nav-header">Membre</li>
-                <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</li>
-                <li><a href="{{ path('sdzuser_index') }}">Espace membre</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
-              {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
-              <li class="nav-header">Identification</li>
-                {{ render(controller('SdzUserBundle:Security:login')) }}
-              {% endif %}
-
-              {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-header">Administration</li>
-                <li><a href="{{ path('sonata_admin_dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ path('fos_user_group_list') }}">Gérer les groupes</a></li>
-              {% endif %}
-
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-
-        <!-- Content
-        ================================================== -->
-        <div id="content" class="span9">
-          {% block body %}
-          {% endblock %}
-        </div>
-
-      </div><!--/row-->
-
-      <hr>
-
-      <!-- Footer
-      ================================================== -->
-      <footer>
-        <p>© ISM 2013 - <a href="{{ path('sdzblog_feed') }}">Flux RSS Blog</a> - <a href="">Flux RSS Site</a></p>
-      </footer>
-
+    {% block content %}
+    {% endblock %}
     </div>
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+      {% block footer %}
+        © ISM 2013
+      {% endblock %}
+      </div>
+    </footer>
 
     <!-- Javascript
     ================================================== -->

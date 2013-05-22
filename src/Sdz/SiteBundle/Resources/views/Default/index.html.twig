@@ -1,230 +1,64 @@
-<!doctype html>
-<html lang="fr">
+{# src/Sdz/SiteBundle/Resources/views/Default/index.html.twig #}
 
-<head>
-  <meta charset="utf-8">
-  <title>ISM</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ingénierie Systèmes et Middleware">
-  <meta name="author" content="Thibault Vieux">
+{% extends "SdzSiteBundle::layout.html.twig" %}
 
-</head>
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
 
-<body>
+{% block content %}
 
-  <!-- Barre de navigation top -->
-  <div id="navbartop" class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-  <div class="container">
+  <div class="marketing">
 
-    <!-- Brand -->
-    <a class="brand">ISM</a>
+    <h1>Présentation du service ISM.</h1>
+    <p class="marketing-byline">Ingénierie Système et Management.</p>
 
-    <!-- Nav menu -->
-    <div class="nav-collapse collapse">
-      <ul class="nav">
-        <li class="active"><a id="btn-home" href="#accueil" data-toggle="tab"><i class="icon-white icon-home"></i> Accueil</a></li>
-        <li><a id="btn-about" href="#about" data-toggle="tab">A propos</a></li>
-        <li><a id="btn-contact" href="#contact" data-toggle="tab">Contact</a></li>
+    <div class="row-fluid">
+      <div class="span4">
+        <img class="marketing-img" src="../assets/img/bs-docs-twitter-github.png">
+        <h2>Ingénierie.</h2>
+        <p>Built at Twitter by <a href="http://twitter.com/mdo">@mdo</a> and <a href="http://twitter.com/fat">@fat</a>, Bootstrap utilizes <a href="http://lesscss.org">LESS CSS</a>, is compiled via <a href="http://nodejs.org">Node</a>, and is managed through <a href="http://github.com">GitHub</a> to help nerds do awesome stuff on the web.</p>
+      </div>
+      <div class="span4">
+        <img class="marketing-img" src="../assets/img/bs-docs-responsive-illustrations.png">
+        <h2>Système.</h2>
+        <p>Bootstrap was made to not only look and behave great in the latest desktop browsers (as well as IE7!), but in tablet and smartphone browsers via <a href="./scaffolding.html#responsive">responsive CSS</a> as well.</p>
+      </div>
+      <div class="span4">
+        <img class="marketing-img" src="../assets/img/bs-docs-bootstrap-features.png">
+        <h2>Management.</h2>
+        <p>A 12-column responsive <a href="./scaffolding.html#gridSystem">grid</a>, dozens of components, <a href="./javascript.html">JavaScript plugins</a>, typography, form controls, and even a <a href="./customize.html">web-based Customizer</a> to make Bootstrap your own.</p>
+      </div>
+    </div>
+
+    <hr class="soften">
+
+    <h1>Nos Projets.</h1>
+    <p class="marketing-byline">Pour plus d'information, <a href="" target="_blank">visiter la galerie</a> ou <a href="">regarder les exemples</a>.</p>
+    <div class="row-fluid">
+      <ul class="thumbnails example-sites">
+        <li class="span3">
+          <a class="thumbnail" href="http://soundready.fm/" target="_blank">
+            <img src="../assets/img/example-sites/soundready.png" alt="SoundReady.fm">
+          </a>
+        </li>
+        <li class="span3">
+          <a class="thumbnail" href="http://kippt.com/" target="_blank">
+            <img src="../assets/img/example-sites/kippt.png" alt="Kippt">
+          </a>
+        </li>
+        <li class="span3">
+          <a class="thumbnail" href="http://www.gathercontent.com/" target="_blank">
+            <img src="../assets/img/example-sites/gathercontent.png" alt="Gather Content">
+          </a>
+        </li>
+        <li class="span3">
+          <a class="thumbnail" href="http://www.jshint.com/" target="_blank">
+            <img src="../assets/img/example-sites/jshint.png" alt="JS Hint">
+          </a>
+        </li>
       </ul>
-        <div id="user-logsign">
-        <ul class="nav pull-right">
-          <li><a id="btn-signin" href="#signin" data-toggle="modal"><i class="icon-white icon-pencil"></i> S'inscrire</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" id="btn-account" href="#"><i class="icon-white icon-user" data-toggle="dropdown"></i> Mon compte
-            <span class="caret" style="border-top-color:white; border-bottom-color:white;"></span></a>
-            <!-- navbartop-login -->
-            <ul class="dropdown-menu" id="dpmenu">
-              <li>
-                <!-- Message alertbox (hide) -->
-                <div id="alertbox" style="display:none">
-                  <button type="button" class="close" data-dismiss="alert">×</button>
-                  <div id="resultat-connexion" class="alert-heading"></div>
-                </div>
-                <!-- Login menu -->
-                <form id="login-menu" style="margin: 0px" accept-charset="UTF-8" method="post">
-                <fieldset class="textbox" style="padding: 3px 20px;">
-                  <label>Nom d'utilisateur</label>
-                  <input id="user" style="margin-top: 2px" name="login" type="text" placeholder="Username" onsubmit="verifPseudo(this)"><br>
-                  <label>Mot de passe</label>
-                  <input style="margin-top: 2px" name="pass" type="password" placeholder="Password" onsubmit="verifPassword(this)"><br>
-                  <div class="form-inline">
-                    <button id="btn_login" class="btn btn-primary" style="margin-top: 2px" type="submit">Connexion</button>
-                    <label> Mémoriser <input class="rememberMeCheckbox" name="rememberMe" type="checkbox" checked="checked"></label>
-                  </div>
-                  <li class="divider"></li>
-                </fieldset>
-                </form>
-              </li>
-              <li><a id="forgotPass" href=""><i class="icon-search"></i> Mot de passe oublié ?</a></li>
-              <!-- Recover panel (hide) -->
-              <div id="recover-panel" style="display:none">
-              <form id="pass-recover" accept-charset="UTF-8" method="post">
-              <fieldset class="textbox" style="padding: 3px 20px;">
-                <p>Entrer votre adresse email et nous vous enverrons un mail avec les instructions pour le reinitialiser</p>
-                <input id="forgot" style="margin-top: 2px" name="forgot" type="text" placeholder="Email Address" onsubmit="verifMail(this)"><br>
-                <button id="btn_accept" class="btn" style="margin-top: 2px" type="submit">Valider</button>
-              </fieldset>
-              </form>
-              </div>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div><!--/.nav-collapse -->
-
-    <!-- User menu -->
-    <div id="user-menu" style="display:none" class="nav-collapse collapse">
-    <ul class="nav pull-right">
-    <li class="dropdown">
-      <a id="user-panel-content" class="dropdown-toggle" data-toggle="dropdown" href=""></a>
-      <ul class="dropdown-menu">
-        <li class="nav-header">Title1</li>
-        <li><a href=""><i class="icon-shopping-cart"></i> Submenu1</a></li>
-        <li><a href=""><i class="icon-tags"></i> Submenu2</a></li>
-        <li><a href=""><i class="icon-download-alt"></i> Submenu3</a></li>
-        <li><a href=""><i class="icon-search"></i> Submenu4</a></li>
-        <li class="nav-header">Account</li>
-        <li><a href=""><i class="icon-cog"></i> Paramètres du compte</a></li>
-        <li><a href=""><i class="icon-book"></i> Submenu</a></li>
-        <li class="divider"></li>
-        <li><a href="#logout" id="btn-logout"><i class="icon-off"></i> Se déconnecter</a></li>
-      </ul>
-    </li>
-    </ul>
-    </div>
-
-  </div><!-- container -->
-  </div><!-- navbar-inner -->
-  </div>
-
-  <!-- sign formulaire -->
-  <form id="signin" class="modal hide fade" method="post">
-
-    <div class="modal-header">
-      <button class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3>Inscription</h3>
-    </div>
-
-    <div class="modal-body">
-      <!-- sign cond -->
-      <div id="signin-cond">
-        <h1>Utilisation de nos Services</h1>
-        <p>Vous devez respecter les règles applicables aux Services que vous utilisez.</p>
-        </br>
-        <p>N’utilisez pas nos Services de façon impropre. Ne tentez pas, par exemple, de produire des interférences avec nos Services ou d’y accéder en utilisant une méthode autre que l’interface et les instructions que nous mettons à votre disposition. Vous ne devez utiliser nos Services que dans le respect des lois en vigueur, y compris les lois et réglementations applicables concernant le contrôle des exportations et ré-exportations. Nous pouvons suspendre ou cesser la fourniture de nos Services si vous ne respectez pas les conditions ou règlements applicables, ou si nous examinons une suspicion d’utilisation impropre.</p>
-        <label for="rules">
-          <input type="checkbox" name="agree" id="rules">
-          <strong>J'accepte les conditions ci-dessus</strong>
-        </label>
-        <div id="alertbox2" style="display:none">
-          <div id="result-cond" class="alert-heading"></div>
-        </div>
-      </div>
-      <!-- sign-form -->
-      <!-- Message alertbox (hide) -->
-      <div id="sign-form" style="display:none" class="form-horizontal">
-        <div id="alertbox3" style="display:none">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <div id="result-sign" class="alert-heading"></div>
-        </div>
-        <div class="control-group">
-        <label class="control-label">Nom d'utilisateur</label><div class="controls">
-        <input id="signuser" class="span3" type="text" name="signuser" style="display:block" placeholder="Username" onsubmit="verifPseudo(this)">
-        </div></div>
-        <div class="control-group"><label class="control-label">Mot de passe</label><div class="controls">
-        <input id="signpass" class="span3" type="password" name="signpass" style="display:block" placeholder="Password" onsubmit="verifPassword(this)">
-        </div></div>
-        <div class="control-group">
-        <label class="control-label">Adresse email</label><div class="controls">
-        <input id="mail" class="span3" type="text" name="signemail" style="display:block" placeholder="email@mail.com" onsubmit="verifMail(this)">
-        </div></div>
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <div id="cond-foot">
-        <button id="btn-ref" class="btn" name="btn-cond-false" data-dismiss="modal">Refuser</button>
-        <button id="btn-acc" class="btn btn-primary" name="btn-cond-true">Accepter</button>
-      </div>
-      <div id="sign-foot" style="display:none">
-        <button id="btn-submit" class="btn btn-primary" type="submit" name="btn-submit" data-text-loading="loading..." >S'inscrire</button>
-      </div>
-    </div>
-
-  </form> <!-- sign formulaire -->
-
-  <!-- Contenu du site -->
-  <div id="content" class="container">
-    <!-- Cadre de présentation -->
-    <div id="accueil" class="hero-unit">
-      <h1>Bienvenue sur ISM !</h1>
-      </br>
-      <p>Le groupe ISM (Ingénierie Systèmes et Middleware) est rattaché au département Ingénierie technique de la direction technique de la FDJ. Ce groupe a pour principale mission de définir les standards des solutions techniques mis en œuvre sur le SI ainsi que d’intervenir sur tous les projets métiers en tant qu’architecte technique.</p>
-      </br>
-      <a id="btn-more" class="btn btn-primary btn-large">En savoir plus &raquo;</a>
-    </div>
-
-    <!-- Cadre more (hide) -->
-    <div id="more" class="hero-unit" style="display:none">
-      <h2 style="text-align:center">Gallerie des membres
-        <a href="#more/large"> <i class="icon-th-large" title="large"></i></a>
-        <a href="#more/compact"><i class="icon-th" title="compact"></i></a>
-      </h2>
-      <div style="text-align:center">
-        <img src="../img/sample.jpg" class="img-rounded">
-      </div>
-    </div>
-
-    <!-- Cadre à propos (hide) -->
-    <div id="about" class="hero-unit" style="display:none">
-      <h1>A propos</h1>
-      </br>
-      <p>La Française des Jeux est une entreprise publique française de 1976 détenue à 72 % par l'État français qui lui a confié le monopole des jeux de loterie et de paris sportifs sur tout son territoire, départements d'outre-mer inclus, ainsi que dans la collectivité territoriale de Saint-Pierre-et-Miquelon, la collectivité d'outre-mer de la Polynésie française et la principauté de Monaco.</p>
-    </div>
-
-    <!-- Cadre contact (hide) -->
-    <div id="contact" class="hero-unit" style="display:none">
-      <h3>Contacter le support de la FDJ pour obtenir de l'aide</h3>
-      </br>
-      <div id="alertbox4" style="display:none">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <div id="result-contact"></div>
-      </div>
-      <form id="form-contact" class="form-horizontal" method="post">
-        <div class="control-group"><label class="control-label">Adresse email</label><div class="controls">
-          <input id="contactmail" class="span3" type="text" name="contactmail" placeholder="Email" style="display:block" onsubmit="verifMail(this)">
-        </div></div>
-        <div class="control-group"><label class="control-label">Sujet</label><div class="controls">
-          <input id="subject" class="span5" type="text" name="subject" placeholder="Sujet" style="display:block" required>
-        </div></div>
-        <div class="control-group"><label class="control-label">Message</label><div class="controls">
-          <textarea rows="10" class="field span6" id="message" name="message" placeholder="Votre message ici" required></textarea>
-          </br>
-          <button id="contact-submit" class="btn btn-success" style="margin-top: 2px" type="submit">Envoyer</button>
-        </div></div>
-      </form>
-    </div>
+     </div>
 
   </div>
-
-  <!-- Bas de page -->
-  <footer style="text-align:right">
-    <p>&copy; ISM FDJ 2013. Made with <a target="_blank" href="http://getbootstrap.com">Bootstrap.</a></p>
-  </footer>
-
-  {% block javascripts %}
-    {# jQuery depuis le CDN de Google, ou fallback sur une copie locale #}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.min.js') }}"><\/script>')</script>
-
-    {# Tous nos javascripts avec Assetic #}
-    {% javascripts output='js/main.js' filter='?yui_js'
-      'js/bootstrap.js'
-      '@SdzSiteBundle/Resources/public/js/*' %}
-      <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-  {% endblock %}
-</body>
-
-</html>
+{% endblock %}

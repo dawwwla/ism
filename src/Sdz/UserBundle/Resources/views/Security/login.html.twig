@@ -2,7 +2,7 @@
 
 {% extends "SdzUserBundle::layout.html.twig" %}
 
-{% block body %}
+{% block content %}
 
   {# S'il y a une erreur, on l'affiche dans un joli cadre #}
   {% if error %}
@@ -43,5 +43,7 @@
       </div>
     </div>
   </form>
+
 <a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié ?</a>
+
 {% endblock %}

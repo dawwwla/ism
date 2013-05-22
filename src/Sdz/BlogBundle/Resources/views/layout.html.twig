@@ -3,34 +3,83 @@
 {% extends "::layout.html.twig" %}
 
 {% block title %}
-    Blog - {{ parent() }}
+  Blog - {{ parent() }}
 {% endblock %}
 
 {% block header %}
-    <header class="jumbotron subhead">
-      <div class="container">
-        <h1>Blog</h1>
-        <p class="lead">Partager, communiquer, découvrir.</p>
-      </div>
-    </header>
+  <header class="jumbotron subhead">
+    <div class="container">
+      <h1>Blog</h1>
+      <p class="lead">Partager, communiquer, découvrir.</p>
+    </div>
+  </header>
 {% endblock %}
 
-{% block body %}
+{% block content %}
+  <div class="blog">
+  <div class="row-fluid">
+    <!-- Menu
+    ================================================== -->
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
 
-    {# On gère les messages flash de façon globale pour tout le bundle
-       On peut catégoriser les messages dans différents sacs (bag),
-       ici on les a mis dans "info", "success" et "error", qui correspondent aux classes CSS du Bootstrap #}
+          <li class="nav-header">Le blog</li>
+          <li><a href="{{ path('sdzblog_accueil') }}">Accueil du blog</a></li>
 
-    {% for type in ['info', 'success', 'error'] %}
-        {% for message in app.session.flashbag.get(type) %}
-            <div class="alert alert-{{ type }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
+          {% if is_granted('ROLE_AUTEUR') %}
+            <li><a href="{{ path('sdzblog_ajouter') }}">Ajouter un article</a></li>
+          {% endif %}
 
-    {# On définit un nouveau block, que les vues du bundle pourront remplir #}
-    {% block sdzblog_body %}
-    {% endblock %}
+          {# On affiche les 3 derniers articles #}
+          {{ render(controller("SdzBlogBundle:Blog:menu", {'nombre': 3})) }}
+
+          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li class="nav-header">Membre</li>
+            <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</li>
+            <li><a href="{{ path('sdzuser_index') }}">Espace membre</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+          {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
+            <li class="nav-header">Identification</li>
+            {{ render(controller('SdzUserBundle:Security:login')) }}
+          {% endif %}
+
+          {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-header">Administration</li>
+            <li><a href="{{ path('sonata_admin_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ path('fos_user_group_list') }}">Gérer les groupes</a></li>
+          {% endif %}
+
+        </ul>
+      </div><!--/.well -->
+    </div><!--/span-->
+
+    <!-- Content
+    ================================================== -->
+    <div id="content" class="span9">
+      {# On gère les messages flash de façon globale pour tout le bundle
+         On peut catégoriser les messages dans différents sacs (bag),
+         ici on les a mis dans "info", "success" et "error", qui correspondent aux classes CSS du Bootstrap #}
+      {% for type in ['info', 'success', 'error'] %}
+          {% for message in app.session.flashbag.get(type) %}
+              <div class="alert alert-{{ type }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endfor %}
+
+      {# On définit un nouveau block, que les vues du bundle pourront remplir #}
+      {% block sdzblog_body %}
+      {% endblock %}
+    </div>
+
+  </div><!--/row-->
+</div><!-- Blog -->
 
 {% endblock %}
+
+{% block footer %}
+  {{ parent() }} - <a href="{{ path('sdzblog_feed') }}">Flux RSS Blog</a>
+{% endblock %}
+
+
