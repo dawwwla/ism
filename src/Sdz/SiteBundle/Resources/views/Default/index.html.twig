@@ -6,6 +6,20 @@
   Accueil - {{ parent() }}
 {% endblock %}
 
+{% block header %}
+  <div class="jumbotron masthead">
+    <div class="container">
+      <h1>Projet ISM</h1>
+      <p>Ce projet est propulsé par Symfony2 et Bootstrap.</p>
+      <p><a class="btn btn-primary btn-large" href="#">En savoir plus »</a></p>
+      <ul class="masthead-links">
+        <li><a href="https://github.com/melkir/BlogISM">GitHub project</a></li>
+        <li>Version 2.0</li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
 
   <div class="marketing">
@@ -34,7 +48,7 @@
     <hr class="soften">
 
     <h1>Nos Projets.</h1>
-    <p class="marketing-byline">Pour plus d'information, consulter nos <a href="" target="_blank">roadmaps</a> et <a href="">catalogues</a>.</p>
+    <p class="marketing-byline">Pour plus d'information, consulter nos <a href="{{ path('sdzsite_roadmap') }}">roadmaps</a> et <a href="">catalogues</a>.</p>
     <div class="row-fluid">
       <ul class="thumbnails example-sites">
         <li class="span3">

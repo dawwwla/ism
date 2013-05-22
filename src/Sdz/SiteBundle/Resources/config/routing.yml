@@ -1,3 +1,15 @@
-sdzsite_homepage:
+sdzsite_home:
     pattern:  /
     defaults: { _controller: SdzSiteBundle:Default:index }
+
+sdzsite_contact:
+    pattern:  /contact
+    defaults: { _controller: SdzSiteBundle:Default:contact }
+
+sdzsite_lien:
+    pattern:  /lien
+    defaults: { _controller: SdzSiteBundle:Default:lien }
+
+sdzsite_roadmap:
+    pattern:  /roadmap
+    defaults: { _controller: SdzSiteBundle:Default:roadmap }

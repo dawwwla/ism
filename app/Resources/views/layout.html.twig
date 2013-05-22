@@ -26,17 +26,17 @@
         <div class="container">
           <a class="brand" href="#">ISM</a>
           <ul class="nav">
-            <li><a href="{{ path('sdzsite_homepage') }}"><i class="icon-black icon-home"></i> Accueil</a></li>
+            <li><a href="{{ path('sdzsite_home') }}"><i class="icon-black icon-home"></i> Accueil</a></li>
             <li><a href="{{ path('sdzblog_accueil') }}"></i> Blog</a></li>
-            <li><a href="#">A propos</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Liens</a></li>
-            <li><a href="#">Roadmap</a></li>
-            <li><a href="#">Catalogue</a></li>
+            <li><a href="{{ path('sdzsite_contact') }}">Contact</a></li>
+            <li><a href="{{ path('sdzsite_lien') }}">Liens</a></li>
           </ul>
           <ul class="nav pull-right">
-            <form class="navbar-search pull-left">
-              <input type="text" class="search-query" placeholder="Search">
+            <form class="navbar-search pull-left form-search">
+              <div class="input-append">
+                <input type="text" class="span2 search-query">
+                <button type="submit" class="btn">Search</button>
+              </div>
             </form>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
               <li class="dropdown">
