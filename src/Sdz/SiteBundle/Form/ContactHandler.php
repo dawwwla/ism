@@ -37,28 +37,28 @@ class ContactHandler
   public function process()
   {
     // On vérifie qu'elle est de type POST
-    if ($request->getMethod() == 'POST') {
+    if ($this->request->getMethod() == 'POST') {
       // On fait le lien Requête <-> Formulaire
-      $form->bind($request);
-      $data = $form->getData();
+      $this->form->bind($this->request);
+      // On récupère les données
+      $data = $this->form->getData();
+
       $this->onSuccess($data);
       return true;
-
     }
     return false;
-
   }
 
-  protected function onSuccess()
+  protected function onSuccess($data)
   {
     $message = \Swift_Message::newInstance()
-    ->setContentType('text/html')
-    ->setSubject($data['subject'])
-    ->setFrom($data['email'])
-    ->setTo('melkir13@gmail.com')
-    ->setBody($data['content']);
+        ->setContentType('text/html')
+        ->setSubject($data['subject'])
+        ->setFrom($data['email'])
+        ->setTo('melkir13@gmail.com')
+        ->setBody($data['content']);
 
-    $this->get('mailer')->send($message);
+    $this->mailer->send($message);
   }
 
 }

@@ -3,7 +3,7 @@
 namespace Sdz\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sdz\SiteBundle\Form\ContactType;
+use Sdz\SiteBundle\Form\ContactHandler;
 
 class DefaultController extends Controller
 {
@@ -32,23 +32,15 @@ class DefaultController extends Controller
         // On récupère la requête
         $request = $this->getRequest();
 
-        // On vérifie qu'elle est de type POST
-        if ($request->getMethod() == 'POST') {
-            // On fait le lien Requête <-> Formulaire
-            $form->bind($request);
+        // Get the handler
+        $formHandler = new ContactHandler($form, $request, $this->get('mailer'));
 
-            // On récupère les données
-            $data = $form->getData();
+        // Le handler s'occupe de la gestion du formulaire
+        $process = $formHandler->process();
 
-            $message = \Swift_Message::newInstance()
-                ->setContentType('text/html')
-                ->setSubject($data['subject'])
-                ->setFrom($data['email'])
-                ->setTo('melkir13@gmail.com')
-                ->setBody($data['content']);
-
-            $this->get('mailer')->send($message);
-
+        // Si la requête est post, on envoie le formulaire autrement on l'affiche
+        if ($process)
+        {
             // Launch the message flash
             $this->get('session')->getFlashBag()->add('info', 'Message envoyé');
         }
