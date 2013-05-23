@@ -32,16 +32,13 @@ class DefaultController extends Controller
         // On récupère la requête
         $request = $this->getRequest();
 
-        // Get the handler
+        //On récupère le handler associé au formulaire
         $formHandler = new ContactHandler($form, $request, $this->get('mailer'));
 
         // Le handler s'occupe de la gestion du formulaire
-        $process = $formHandler->process();
-
-        // Si la requête est post, on envoie le formulaire autrement on l'affiche
+        $process = $formHandler->process(); // Contient true si la requête est POST et le formulaire valide
         if ($process)
         {
-            // Launch the message flash
             $this->get('session')->getFlashBag()->add('info', 'Message envoyé');
         }
 
