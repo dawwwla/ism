@@ -4,15 +4,26 @@
 namespace Sdz\SiteBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class ContactType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email', 'email',  array('label' => 'Adresse')
-                ->add('subject', 'text')
-                ->add('content', 'textarea');
+        $builder
+        ->add('email', 'email', array(
+              'label' => 'Adresse email',
+              'label_attr' => array('class' => 'control-label'),
+              ))
+        ->add('subject', 'text', array(
+              'label' => 'Sujet',
+              'label_attr' => array('class' => 'control-label')
+              ))
+        ->add('content', 'textarea', array(
+              'label' => 'Message',
+              'label_attr' => array('class' => 'control-label')
+              ))
+        ;
     }
 
     public function getName()

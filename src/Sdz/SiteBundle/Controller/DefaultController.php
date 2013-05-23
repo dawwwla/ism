@@ -4,6 +4,7 @@ namespace Sdz\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sdz\SiteBundle\Form\ContactHandler;
+use Sdz\SiteBundle\Form\ContactType;
 
 class DefaultController extends Controller
 {
@@ -14,20 +15,7 @@ class DefaultController extends Controller
 
     public function contactAction()
     {
-        $form = $this->createFormBuilder()
-                ->add('email', 'email', array(
-                      'label' => 'Adresse email',
-                      'label_attr' => array('class' => 'control-label'),
-                      ))
-                ->add('subject', 'text', array(
-                      'label' => 'Sujet',
-                      'label_attr' => array('class' => 'control-label')
-                      ))
-                ->add('content', 'textarea', array(
-                      'label' => 'Message',
-                      'label_attr' => array('class' => 'control-label')
-                      ))
-                ->getForm();
+        $form = $this->createForm(new ContactType);
 
         // On récupère la requête
         $request = $this->getRequest();
