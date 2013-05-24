@@ -22,9 +22,9 @@ class SecurityController extends BaseController
     if ($this->container->get('request')->attributes->get('_route') == 'fos_user_security_login') {
       $view = 'login';
     } else {
-      // Mais sinon, il s'agit du formulaire de connexion intégré au menu, on utilise la vue "login_content"
+      // Mais sinon, il s'agit du formulaire de connexion intégré au menu, on utilise la vue "login_panel"
       // car il ne faut pas hériter du layout !
-      $view = 'login_content';
+      $view = 'login_panel';
     }
 
     $template = sprintf('FOSUserBundle:Security:%s.html.%s', $view, $this->container->getParameter('fos_user.template.engine'));

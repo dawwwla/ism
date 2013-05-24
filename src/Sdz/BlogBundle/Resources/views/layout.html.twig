@@ -32,23 +32,7 @@
           {% endif %}
 
           {# On affiche les 3 derniers articles #}
-          {{ render(controller("SdzBlogBundle:Blog:menu", {'nombre': 3})) }}
-
-          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <li class="nav-header">Membre</li>
-            <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</li>
-            <li><a href="{{ path('sdzuser_index') }}">Espace membre</a></li>
-            <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
-          {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
-            <li class="nav-header">Identification</li>
-            {{ render(controller('SdzUserBundle:Security:login')) }}
-          {% endif %}
-
-          {% if is_granted('ROLE_ADMIN') %}
-            <li class="nav-header">Administration</li>
-            <li><a href="{{ path('sonata_admin_dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ path('fos_user_group_list') }}">Gérer les groupes</a></li>
-          {% endif %}
+          {{ render(controller("SdzBlogBundle:Blog:menu", {'nombre': 5})) }}
 
         </ul>
       </div><!--/.well -->

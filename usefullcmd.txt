@@ -40,5 +40,6 @@ TODO
  * Installer et configurer FOSCommentBundle
  * Installer et configurer FOSMessageBundle
  * Installer un Breadcrumbs (barre de navigation intégré)
+ * Créer des handlers sur les formulaires du blog pour simplifier le controlleur
  */
 

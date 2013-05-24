@@ -15,7 +15,9 @@ class ArticleType extends AbstractType
   {
     $builder
       ->add('date',        'datetime')
-      ->add('titre',       'text')
+      ->add('titre',       'text', array(
+            'attr' => array('class' => 'span6'),
+            ))
       ->add('contenu', 'ckeditor', array(
           'startup_outline_blocks'       => false,
           'height'                       => '320'
