@@ -14,9 +14,9 @@ use Sdz\BlogBundle\Entity\Categorie;
 use Sdz\BlogBundle\Entity\Commentaire;
 use Sdz\BlogBundle\Entity\ArticleCompetence;
 
-use Sdz\BlogBundle\Form\ArticleType;
-use Sdz\BlogBundle\Form\ArticleEditType;
-use Sdz\BlogBundle\Form\CommentaireType;
+use Sdz\BlogBundle\Form\Type\ArticleType;
+use Sdz\BlogBundle\Form\Type\ArticleEditType;
+use Sdz\BlogBundle\Form\Type\CommentaireType;
 
 use Sdz\BlogBundle\Bigbrother\BigbrotherEvents;
 use Sdz\BlogBundle\Bigbrother\MessagePostEvent;

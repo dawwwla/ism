@@ -3,8 +3,8 @@
 namespace Sdz\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sdz\SiteBundle\Form\ContactHandler;
-use Sdz\SiteBundle\Form\ContactType;
+use Sdz\SiteBundle\Form\Handler\ContactHandler;
+use Sdz\SiteBundle\Form\Type\ContactType;
 
 class DefaultController extends Controller
 {

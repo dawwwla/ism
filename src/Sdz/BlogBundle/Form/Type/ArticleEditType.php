@@ -1,7 +1,7 @@
 <?php
-// src/Sdz/BlogBundle/Form/ArticleEditType.php
+// src/Sdz/BlogBundle/Form/Type/ArticleEditType.php
 
-namespace Sdz\BlogBundle\Form;
+namespace Sdz\BlogBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

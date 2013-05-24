@@ -1,7 +1,7 @@
 <?php
-# src/Sdz/SiteBundle/Form/ContactType.php
+# src/Sdz/SiteBundle/Form/Type/ContactType.php
 
-namespace Sdz\SiteBundle\Form;
+namespace Sdz\SiteBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -1,7 +1,7 @@
 <?php
-// src/Sdz/BlogBundle/Form/ArticleType.php
+// src/Sdz/BlogBundle/Form/Type/ArticleType.php
 
-namespace Sdz\BlogBundle\Form;
+namespace Sdz\BlogBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

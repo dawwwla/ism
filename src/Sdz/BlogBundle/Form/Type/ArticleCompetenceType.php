@@ -1,6 +1,7 @@
 <?php
+// src/Sdz/BlogBundle/Form/Type/ArticleCompetenceType.php
 
-namespace Sdz\BlogBundle\Form;
+namespace Sdz\BlogBundle\Form\Type;
 
 use Sdz\BlogBundle\Entity\ArticleCompetence;
 use Symfony\Component\Form\AbstractType;

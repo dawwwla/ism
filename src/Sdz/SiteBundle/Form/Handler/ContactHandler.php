@@ -1,7 +1,7 @@
 <?php
-# src/Sdz/SiteBundle/Form/ContactHandler.php
+# src/Sdz/SiteBundle/Form/Handler/ContactHandler.php
 
-namespace Sdz\SiteBundle\Form;
+namespace Sdz\SiteBundle\Form\Handler;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
