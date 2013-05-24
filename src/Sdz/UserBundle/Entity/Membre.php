@@ -1,11 +1,12 @@
 <?php
+// src/Sdz/UserBundle/Entity/Membre.php
 
 namespace Sdz\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Membre
+ * Sdz\UserBundle\Entity\Membre
  *
  * @ORM\Table(name="ism_membre")
  * @ORM\Entity(repositoryClass="Sdz\UserBundle\Entity\MembreRepository")
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Membre
 {
     /**
-     * @var integer
+     * @var integer $id
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,56 +23,56 @@ class Membre
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $dateOfBirth
      *
      * @ORM\Column(name="dateOfBirth", type="datetime")
      */
     private $dateOfBirth;
 
     /**
-     * @var string
+     * @var string $firstname
      *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
     private $firstname;
 
     /**
-     * @var string
+     * @var string $lastname
      *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
     private $lastname;
 
     /**
-     * @var string
+     * @var string $website
      *
      * @ORM\Column(name="website", type="string", length=255)
      */
     private $website;
 
     /**
-     * @var string
+     * @var string $gender
      *
      * @ORM\Column(name="gender", type="string", length=255)
      */
     private $gender; // set the default to unknown
 
     /**
-     * @var string
+     * @var string $phone
      *
      * @ORM\Column(name="phone", type="string", length=255)
      */
     private $phone;
 
     /**
-     * @var string
+     * @var string $role
      *
      * @ORM\Column(name="role", type="string", length=255)
      */
     private $role;
 
     /**
-     * @var string
+     * @var string $description
      *
      * @ORM\Column(name="description", type="text", length=255)
      */

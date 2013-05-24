@@ -6,6 +6,8 @@ namespace Sdz\SiteBundle\Form\Handler;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
+use Sdz\SiteBundle\Form\Model\Contact;
+
 /**
  * The ContactHandler.
  * Use for manage your form submitions
@@ -40,23 +42,30 @@ class ContactHandler
     if ($this->request->getMethod() == 'POST') {
       // On fait le lien Requête <-> Formulaire
       $this->form->bind($this->request);
-      // On récupère les données
-      $data = $this->form->getData();
 
-      $this->onSuccess($data);
-      return true;
+      if ($this->form->isValid()) {
+        $contact = $this->form->getData();
+        $this->onSuccess($contact);
+        return true;
+      }
     }
     return false;
   }
 
-  protected function onSuccess($data)
+  /**
+   * Send mail on success
+   *
+   * @param Contact $contact
+   *
+   */
+  protected function onSuccess($contact)
   {
     $message = \Swift_Message::newInstance()
         ->setContentType('text/html')
-        ->setSubject($data['subject'])
-        ->setFrom($data['email'])
+        ->setSubject($contact->getSubject())
+        ->setFrom($contact->getEmail())
         ->setTo('melkir13@gmail.com')
-        ->setBody($data['content']);
+        ->setBody($contact->getContent());
 
     $this->mailer->send($message);
   }

@@ -28,7 +28,7 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @ORM\OneToOne(targetEntity="Sdz\UserBundle\Entity\Membre", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Sdz\UserBundle\Entity\Membre", cascade={"persist", "remove"})
      */
     private $membre;
 

@@ -22,25 +22,25 @@
 
       <div class="control-group">
           {{ form_label(form.email) }}
-          {{ form_errors(form.email) }}
         <div class="controls">
           {{ form_widget(form.email, { 'attr': {'class': 'span3', 'placeholder' : 'Email'} }) }}
+          {{ form_errors(form.email) }}
         </div>
       </div>
 
       <div class="control-group">
           {{ form_label(form.subject) }}
-          {{ form_errors(form.subject) }}
         <div class="controls">
           {{ form_widget(form.subject, { 'attr': {'class': 'span4', 'placeholder' : 'Entrer un sujet'} }) }}
+          {{ form_errors(form.subject) }}
         </div>
       </div>
 
       <div class="control-group">
           {{ form_label(form.content) }}
-          {{ form_errors(form.content) }}
         <div class="controls">
           {{ form_widget(form.content, { 'attr': {'class': 'span6', 'rows':'12', 'placeholder' : 'Votre message ici'} }) }}
+          {{ form_errors(form.content) }}
         </div>
       </div>
 

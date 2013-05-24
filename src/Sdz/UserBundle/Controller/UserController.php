@@ -19,6 +19,9 @@ class UserController extends Controller {
 
   public function ajouterAction()
   {
+    // On créer l'entité User
+    $user = $this->getUser();
+    // On créer l'entité Membre
     $membre = new Membre();
 
     // On créer les champs du formulaire
@@ -33,12 +36,14 @@ class UserController extends Controller {
       // À partir de maintenant, la variable $membre contient les valeurs entrées dans le formulaire par le visiteur
       $form->bind($request);
 
-      // On vérifie que les valeurs entrées sont correctes
-      // (Nous verrons la validation des objets en détail dans le prochain chapitre)
       if ($form->isValid()) {
+
+        // On lie la fiche membre à l'utilisateur
+        $user->setMembre($membre);
+
         // On l'enregistre notre objet $membre dans la base de données
         $em = $this->getDoctrine()->getManager();
-        $em->persist($membre);
+        $em->persist($user);
         $em->flush();
 
         // On redirige vers la page de visualisation du membre nouvellement créé
@@ -52,11 +57,16 @@ class UserController extends Controller {
 
     return $this->render('SdzUserBundle:Blog:ajouter.html.twig', array(
       'form' => $form->createView(),
+      'user' => $user
     ));
   }
 
-  public function voirAction() {
-    return $this->redirect($this->generateUrl('sdzuser_fiche_view', array('id' => $membre->getId())));
+  public function voirAction($id) {
+    // On utilise le raccourci : il crée un objet Response
+    // Et lui donne comme contenu le contenu du template
+    return $this->render('SdzUserBundle:Blog:fiche.html.twig', array(
+      'id'  => $id,
+    ));
   }
 
 }
