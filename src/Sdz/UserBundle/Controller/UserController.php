@@ -9,13 +9,15 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use Sdz\UserBundle\Entity\Membre;
 use Sdz\UserBundle\Entity\User;
-use Sdz\UserBundle\Form\UserType;
+use Sdz\UserBundle\Form\MembreType;
 
 class UserController extends Controller {
 
   public function indexAction()
   {
-    return $this->render('SdzUserBundle:Blog:index.html.twig');
+    $membre = $this->getUser()->getMembre();
+
+    return $this->render('SdzUserBundle:Blog:index.html.twig', array('membre' => $membre));
   }
 
   public function ajouterAction()
@@ -23,10 +25,10 @@ class UserController extends Controller {
     // On créer l'entité User
     $user = $this->getUser();
     // On créer l'entité Membre
-    $membre = new Membre();
+    $membre = new Membre;
 
     // On créer les champs du formulaire
-    $form = $this->createForm(new UserType, $membre);
+    $form = $this->createForm(new MembreType, $membre);
 
     // On récupère la requête
     $request = $this->get('request');
@@ -47,8 +49,11 @@ class UserController extends Controller {
         $em->persist($user);
         $em->flush();
 
+        // On définit un message flash
+        $this->get('session')->getFlashBag()->add('info', 'Fiche membre bien ajouté');
+
         // On redirige vers la page de visualisation du membre nouvellement créé
-        return $this->redirect($this->generateUrl('sdzuser_fiche_voir', array('membre' => $membre)));
+        return $this->redirect($this->generateUrl('sdzuser_fiche_voir', array('id' => $membre->getId())));
       }
     }
 
@@ -57,8 +62,44 @@ class UserController extends Controller {
     // - Soit la requête est de type POST, mais le formulaire n'est pas valide, donc on l'affiche de nouveau
 
     return $this->render('SdzUserBundle:Blog:ajouter.html.twig', array(
-      'form' => $form->createView(),
-      'user' => $user
+      'user' => $user,
+      'form' => $form->createView()
+    ));
+  }
+
+  public function modifierAction(Membre $membre)
+  {
+    return $this->render('SdzUserBundle:Blog:modifier.html.twig');
+  }
+
+  public function supprimerAction(Membre $membre)
+  {
+    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+    // Cela permet de protéger la suppression d'article contre cette faille
+    $form = $this->createFormBuilder()->getForm();
+
+    $request = $this->getRequest();
+    if ($request->getMethod() == 'POST') {
+      $form->bind($request);
+
+      if ($form->isValid()) { // Ici, isValid ne vérifie donc que le CSRF
+        // On supprime l'article
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($membre);
+        $em->flush();
+
+        // On définit un message flash
+        $this->get('session')->getFlashBag()->add('info', 'Fiche membre bien supprimé');
+
+        // Puis on redirige vers l'accueil
+        return $this->redirect($this->generateUrl('sdzuser_index'));
+      }
+    }
+
+    // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+    return $this->render('SdzUserBundle:Blog:supprimer.html.twig', array(
+      'membre' => $membre,
+      'form'    => $form->createView()
     ));
   }
 

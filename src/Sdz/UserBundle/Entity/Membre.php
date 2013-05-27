@@ -14,8 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Membre
 {
     /**
-     * @var integer $id
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,15 +26,11 @@ class Membre
     private $date;
 
     /**
-     * @var string $firstname
-     *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
     private $firstname;
 
     /**
-     * @var string $lastname
-     *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
     private $lastname;
@@ -47,32 +41,29 @@ class Membre
     private $image;
 
     /**
-     * @var string $website
-     *
      * @ORM\Column(name="website", type="string", length=255)
      */
     private $website;
 
     /**
-     * @var string $phone
-     *
      * @ORM\Column(name="phone", type="string", length=255)
      */
     private $phone;
 
     /**
-     * @var string $jobTitle
-     *
      * @ORM\Column(name="jobTitle", type="string", length=255)
      */
     private $jobTitle;
 
     /**
-     * @var string $jobDescription
-     *
      * @ORM\Column(name="jobDescription", type="text", length=255)
      */
     private $jobDescription;
+
+    /**
+    * @ORM\Column(type="date", nullable=true)
+    */
+    private $dateEdition;
 
     /**
      * Get id
@@ -275,4 +266,29 @@ class Membre
     {
         return $this->jobDescription;
     }
+
+    public function __construct()
+    {
+        $this->date = new \Datetime;
+    }
+
+    /**
+    * @ORM\PreUpdate
+    * Callback pour mettre à jour la date d'édition à chaque modification de l'entité
+    */
+    public function updateDate()
+    {
+        $this->setDateEdition(new \Datetime());
+    }
+
+    public function setDateEdition(\Datetime $dateEdition)
+    {
+        $this->dateEdition = $dateEdition;
+    }
+
+    public function getDateEdition()
+    {
+        return $this->dateEdition;
+    }
+
 }

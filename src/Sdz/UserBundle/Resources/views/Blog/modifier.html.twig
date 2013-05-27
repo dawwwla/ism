@@ -1,17 +1,18 @@
+{# src/Sdz/UserBundle/Resources/views/Blog/modifier.html.twig #}
+
 {% extends "SdzUserBundle::layout.html.twig" %}
 
 {% block title %}
-  Fiche membre - {{ parent() }}
+  Modifier une fiche membre - {{ parent() }}
 {% endblock %}
 
 {% block sdzuser_body %}
 
-  <h2>Créer une fiche membre</h2>
+  <h2>Modifier une fiche membre</h2>
 
   {% include "SdzUserBundle:Blog:formulaire.html.twig" %}
 
   <p>
-    Vous ajoutez une nouvelle fiche membre.</br>
     <a href="{{ path('sdzuser_index') }}" class="btn">
       <i class="icon-chevron-left"></i>Annuler
     </a>

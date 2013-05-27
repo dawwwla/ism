@@ -13,7 +13,10 @@
   {% include "SdzBlogBundle:Blog:formulaire.html.twig" %}
 
   <p>
-    Vous ajoutez un nouvel article.
+    Vous ajoutez un nouvel article.</br>
+    <a href="{{ path('sdzblog_accueil') }}" class="btn">
+      <i class="icon-chevron-left"></i>Annuler
+    </a>
   </p>
 
 {% endblock %}

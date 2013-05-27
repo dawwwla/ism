@@ -1,5 +1,5 @@
 <?php
-// src/Sdz/UserBundle/Form/UserType.php
+// src/Sdz/UserBundle/Form/MembreType.php
 
 namespace Sdz\UserBundle\Form;
 
@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType
+class MembreType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
@@ -24,10 +24,10 @@ class UserType extends AbstractType
       ->add('website',      'text',     array(
             'label'  => 'Site web',
             ))
-      ->add('jobTitle',         'text',     array(
+      ->add('jobTitle',     'text',     array(
             'label'  => 'Titre métier'
             ))
-      ->add('jobDescription',  'textarea', array(
+      ->add('jobDescription', 'textarea', array(
             'label'  => 'Description métier',
             'attr' => array('class' => 'span6', 'rows' => '12'),
             ))
@@ -43,6 +43,6 @@ class UserType extends AbstractType
 
   public function getName()
   {
-    return 'sdz_userbundle_usertype';
+    return 'sdz_userbundle_membretype';
   }
 }
