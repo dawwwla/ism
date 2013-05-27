@@ -23,11 +23,9 @@ class Membre
     private $id;
 
     /**
-     * @var \DateTime $dateOfBirth
-     *
-     * @ORM\Column(name="dateOfBirth", type="datetime")
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $dateOfBirth;
+    private $date;
 
     /**
      * @var string $firstname
@@ -44,18 +42,16 @@ class Membre
     private $lastname;
 
     /**
+     * @ORM\OneToOne(targetEntity="Sdz\BlogBundle\Entity\Image", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    /**
      * @var string $website
      *
      * @ORM\Column(name="website", type="string", length=255)
      */
     private $website;
-
-    /**
-     * @var string $gender
-     *
-     * @ORM\Column(name="gender", type="string", length=255)
-     */
-    private $gender; // set the default to unknown
 
     /**
      * @var string $phone
@@ -65,18 +61,18 @@ class Membre
     private $phone;
 
     /**
-     * @var string $role
+     * @var string $jobTitle
      *
-     * @ORM\Column(name="role", type="string", length=255)
+     * @ORM\Column(name="jobTitle", type="string", length=255)
      */
-    private $role;
+    private $jobTitle;
 
     /**
-     * @var string $description
+     * @var string $jobDescription
      *
-     * @ORM\Column(name="description", type="text", length=255)
+     * @ORM\Column(name="jobDescription", type="text", length=255)
      */
-    private $description;
+    private $jobDescription;
 
     /**
      * Get id
@@ -86,29 +82,6 @@ class Membre
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set dateOfBirth
-     *
-     * @param \DateTime $dateOfBirth
-     * @return Membre
-     */
-    public function setDateOfBirth($dateOfBirth)
-    {
-        $this->dateOfBirth = $dateOfBirth;
-
-        return $this;
-    }
-
-    /**
-     * Get dateOfBirth
-     *
-     * @return \DateTime
-     */
-    public function getDateOfBirth()
-    {
-        return $this->dateOfBirth;
     }
 
     /**
@@ -165,7 +138,6 @@ class Membre
         return sprintf("%s %s", $this->getFirstname(), $this->getLastname());
     }
 
-
     /**
      * Set website
      *
@@ -187,29 +159,6 @@ class Membre
     public function getWebsite()
     {
         return $this->website;
-    }
-
-    /**
-     * Set gender
-     *
-     * @param string $gender
-     * @return Membre
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return string
-     */
-    public function getGender()
-    {
-        return $this->gender;
     }
 
     /**
@@ -236,48 +185,94 @@ class Membre
     }
 
     /**
-     * Set role
+     * Set jobTitle
      *
-     * @param string $role
+     * @param string $jobTitle
      * @return Membre
      */
-    public function setRole($role)
+    public function setJobTitle($jobTitle)
     {
-        $this->role = $role;
+        $this->jobTitle = $jobTitle;
 
         return $this;
     }
 
     /**
-     * Get role
+     * Get jobTitle
      *
      * @return string
      */
-    public function getRole()
+    public function getJobTitle()
     {
-        return $this->role;
+        return $this->jobTitle;
     }
 
     /**
-     * Set description
+     * Set image
      *
-     * @param string $description
+     * @param \Sdz\BlogBundle\Entity\Image $image
      * @return Membre
      */
-    public function setDescription($description)
+    public function setImage(\Sdz\BlogBundle\Entity\Image $image = null)
     {
-        $this->description = $description;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get image
+     *
+     * @return \Sdz\BlogBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Membre
+     */
+    public function setDate(\Datetime $date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set jobDescription
+     *
+     * @param string $jobDescription
+     * @return Membre
+     */
+    public function setJobDescription($jobDescription)
+    {
+        $this->jobDescription = $jobDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get jobDescription
      *
      * @return string
      */
-    public function getDescription()
+    public function getJobDescription()
     {
-        return $this->description;
+        return $this->jobDescription;
     }
 }

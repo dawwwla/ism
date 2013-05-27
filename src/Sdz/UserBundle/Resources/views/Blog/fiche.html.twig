@@ -1,9 +1,19 @@
-<h1>Fiche du membre</h1>
-
-<div class="well">
-    <form method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        </br>
-        <input type="submit" class="btn btn-primary" />
-    </form>
+<div itemscope itemtype="http://schema.org/Person">
+  <h2> Fiche membre de <span itemprop="name">{{ membre.fullname }}</span></h2>
+  <i>
+    Créé le <time datetime="{{ membre.date|date('c') }}" itemprop="datePublished">{{ membre.date|date('d/m/Y') }}</time>,
+    par <span itemprop="author">{{ membre.fullname }}</span>.
+  </i>
+  {# On vérifie qu'une image soit bien associée au membre #}
+  {% if membre.image is not null %}
+    <img src="{{ asset(membre.image.webPath) }}" alt="{{ membre.image.alt }}" itemprop="image" />
+  {% endif %}
+  <div class="well">
+    <b>Titre métier :</b> <span itemprop="jobTitle">{{ membre.jobTitle }}</span></br>
+    <b>Description :</b> {{ membre.jobDescription }}</br>
+    <b>Numéro de téléphone :</b> <span itemprop="telephone">{{ membre.phone }}</span></br>
+    <b>Adresse e-mail :</b> <a href="mailto:jane-doe@xyz.edu" itemprop="email">
+      jane-doe@xyz.edu</a></br>
+    <b>Site web :</b> <a href="{{ membre.website }}" itemprop="url">{{ membre.website }}</a></br>
+  </div>
 </div>
