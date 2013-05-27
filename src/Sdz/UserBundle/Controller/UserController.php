@@ -8,6 +8,7 @@ use Symfony\Component\Form\Form;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use Sdz\UserBundle\Entity\Membre;
+use Sdz\UserBundle\Entity\User;
 use Sdz\UserBundle\Form\UserType;
 
 class UserController extends Controller {
@@ -47,7 +48,7 @@ class UserController extends Controller {
         $em->flush();
 
         // On redirige vers la page de visualisation du membre nouvellement créé
-        return $this->redirect($this->generateUrl('sdzuser_index', array('id' => $membre->getId())));
+        return $this->redirect($this->generateUrl('sdzuser_fiche_voir', array('membre' => $membre)));
       }
     }
 
@@ -61,11 +62,10 @@ class UserController extends Controller {
     ));
   }
 
-  public function voirAction($id) {
-    // On utilise le raccourci : il crée un objet Response
-    // Et lui donne comme contenu le contenu du template
-    return $this->render('SdzUserBundle:Blog:fiche.html.twig', array(
-      'id'  => $id,
+  public function voirAction(Membre $membre) {
+
+    return $this->render('SdzUserBundle:Blog:voir.html.twig', array(
+      'membre' => $membre
     ));
   }
 
