@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sdz\SiteBundle\Form\Handler\ContactHandler;
 use Sdz\SiteBundle\Form\Type\ContactType;
 
-class DefaultController extends Controller
+class SiteController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SdzSiteBundle:Default:index.html.twig');
+        return $this->render('SdzSiteBundle:Site:index.html.twig');
     }
 
     public function contactAction()
@@ -30,18 +30,18 @@ class DefaultController extends Controller
             $this->get('session')->getFlashBag()->add('info', 'Message envoyé');
         }
 
-        return $this->render('SdzSiteBundle:Default:contact.html.twig', array(
+        return $this->render('SdzSiteBundle:Site:contact.html.twig', array(
             'form' => $form->createView(),
         ));
     }
 
-    public function lienAction()
+    public function linksAction()
     {
-        return $this->render('SdzSiteBundle:Default:lien.html.twig');
+        return $this->render('SdzSiteBundle:Site:liens.html.twig');
     }
 
     public function roadmapAction()
     {
-        return $this->render('SdzSiteBundle:Default:roadmap.html.twig');
+        return $this->render('SdzSiteBundle:Site:roadmap.html.twig');
     }
 }

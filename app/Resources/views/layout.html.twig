@@ -48,11 +48,11 @@
                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                   <li class="nav-header">Utilisateur</li>
                   <li><a href="{{ path('sdzuser_index') }}"><i class="icon-home"></i> Home</a></li>
-                  <li><a href="#"><i class="icon-cog"></i> Paramamètres</a></li>
+                  <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-wrench"></i> Paramamètres</a></li>
                   {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-header">Administration</li>
-                    <li><a href="{{ path('sonata_admin_dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ path('fos_user_group_list') }}">Gérer les groupes</a></li>
+                    <li><a href="{{ path('sonata_admin_dashboard') }}"><i class="icon-list-alt"></i> Dashboard</a></li>
+                    <li><a href="{{ path('fos_user_group_list') }}"><i class="icon-star"></i> Gérer les groupes</a></li>
                   {% endif %}
                   <li class="divider"></li>
                   <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>

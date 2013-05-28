@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ism_membre")
  * @ORM\Entity(repositoryClass="Sdz\UserBundle\Entity\MembreRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Membre
 {
@@ -36,11 +37,6 @@ class Membre
     private $lastname;
 
     /**
-     * @ORM\OneToOne(targetEntity="Sdz\BlogBundle\Entity\Image", cascade={"persist", "remove"})
-     */
-    private $image;
-
-    /**
      * @ORM\Column(name="website", type="string", length=255)
      */
     private $website;
@@ -61,7 +57,7 @@ class Membre
     private $jobDescription;
 
     /**
-    * @ORM\Column(type="date", nullable=true)
+    * @ORM\Column(name="dateEdition", type="datetime", nullable=true)
     */
     private $dateEdition;
 
@@ -196,29 +192,6 @@ class Membre
     public function getJobTitle()
     {
         return $this->jobTitle;
-    }
-
-    /**
-     * Set image
-     *
-     * @param \Sdz\BlogBundle\Entity\Image $image
-     * @return Membre
-     */
-    public function setImage(\Sdz\BlogBundle\Entity\Image $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Sdz\BlogBundle\Entity\Image
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 
     /**

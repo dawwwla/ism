@@ -1,4 +1,4 @@
-{# src/Sdz/UserBundle/Resources/views/Blog/supprimer.html.twig #}
+{# src/Sdz/UserBundle/Resources/views/User/supprimer.html.twig #}
 
 {% extends "SdzUserBundle::layout.html.twig" %}
 
@@ -16,7 +16,7 @@
 
   {# On met l'id du membre dans la route de l'action du formulaire #}
   <form action="{{ path('sdzuser_fiche_supprimer', {'id': membre.id}) }}" method="post">
-    <a href="{{ path('sdzuser_fiche_voir', {'id': membre.id}) }}" class="btn">
+    <a href="{{ path('sdzuser_voir', {'username': user.username}) }}" class="btn">
       <i class="icon-chevron-left"></i>
       Retour à la fiche membre
     </a>

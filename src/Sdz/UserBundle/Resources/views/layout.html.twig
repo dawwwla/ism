@@ -16,6 +16,14 @@
 
 {% block content %}
 
+    {% for type in ['info', 'success', 'error'] %}
+        {% for message in app.session.flashbag.get(type) %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
   {% for key, message in app.session.flashbag.all() %}
     <div class="alert alert-{{ key }}">
       {{ message|trans({}, 'FOSUserBundle') }}

@@ -3,23 +3,21 @@ sdzuser_index:
     defaults:  { _controller: SdzUserBundle:User:index }
 
 sdzuser_fiche_ajouter:
-    pattern:   /fiche/ajouter
+    pattern:   /ajouter
     defaults:  { _controller: SdzUserBundle:User:ajouter }
 
 sdzuser_fiche_modifier:
-    pattern:   /fiche/modifier/{id}
+    pattern:   /modifier/{id}
     defaults:  { _controller: SdzUserBundle:User:modifier }
     requirements:
         id:   \d+
 
 sdzuser_fiche_supprimer:
-    pattern:   /fiche/supprimer/{id}
+    pattern:   /supprimer/{id}
     defaults:  { _controller: SdzUserBundle:User:supprimer }
     requirements:
         id:   \d+
 
-sdzuser_fiche_voir:
-    pattern:   /fiche/{id}
+sdzuser_voir:
+    pattern:   /{username}
     defaults:  { _controller: SdzUserBundle:User:voir }
-    requirements:
-        id:   \d+

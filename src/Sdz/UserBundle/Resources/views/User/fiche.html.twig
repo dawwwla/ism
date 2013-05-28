@@ -1,0 +1,23 @@
+<div itemscope itemtype="http://schema.org/Person">
+  <h2>A propos</h2>
+  <i>
+    {% if membre.date|date ('d/m/Y H:s') == membre.dateEdition|date('d/m/Y H:s') %}
+      Créé le <time datetime="{{ membre.date|date('c') }}" itemprop="datePublished">{{ membre.date|date('d/m/Y') }}</time> à
+      {{ membre.date|date('H:s') }}</span>.</br>
+    {% else %}
+      Dernière édition le {{ membre.dateEdition|date('d/m/Y') }} à {{ membre.dateEdition|date('H:s', false) }}
+    {% endif %}
+  </i>
+  <div class='well'>
+    <h4>A propos de {{ user.username }}</h4>
+    <p><b>Nom :</b> <span itemprop="familyName">{{ membre.lastname }}</span></p>
+    <p><b>Prénom :</b> <span itemprop="givenName">{{ membre.firstname }}</span></p>
+    <p><b>Email :</b> {{ user.email }}</p>
+    <p><b>Mobile :</b> <span itemprop="telephone">{{ membre.phone }}</span></p>
+    <p><b>Site web :</b> <a href="{{ membre.website }}" itemprop="url">{{ membre.website }}</a></p>
+
+    <h4>Métier</h4>
+    <p><b>Titre métier :</b> <span itemprop="jobTitle">{{ membre.jobTitle }}</span></p>
+    <p><b>Description :</b> {{ membre.jobDescription }}</br></p>
+  </div>
+</div>

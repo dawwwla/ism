@@ -1,28 +1,28 @@
 {% extends "SdzUserBundle::layout.html.twig" %}
 
 {% block title %}
-  Fiche membre - {{ parent() }}
+  A propos de {{ user.username }} - {{ parent() }}
 {% endblock %}
 
 {% block sdzuser_body %}
 
-  {% include "SdzUserBundle:Blog:fiche.html.twig" %}
+  {% include "SdzUserBundle:User:fiche.html.twig" %}
 
   <p>
     <a href="{{ path('sdzuser_index') }}" class="btn">
       <i class="icon-chevron-left"></i>
-      Retour au profil
+      Retour
     </a>
     {% if is_granted('ROLE_AUTEUR') %}
       <a href="{{ path('sdzuser_fiche_modifier', {'id': membre.id}) }}" class="btn">
         <i class="icon-edit"></i>
-        Modifier la fiche
+        Modifier
       </a>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
       <a href="{{ path('sdzuser_fiche_supprimer', {'id': membre.id}) }}" class="btn">
         <i class="icon-trash"></i>
-        Supprimer la fiche
+        Supprimer
       </a>
     {% endif %}
   </p>

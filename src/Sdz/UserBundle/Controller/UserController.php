@@ -15,18 +15,23 @@ class UserController extends Controller {
 
   public function indexAction()
   {
-    $membre = $this->getUser()->getMembre();
+    $user = $this->getUser();
 
-    return $this->render('SdzUserBundle:Blog:index.html.twig', array('membre' => $membre));
+    return $this->render('SdzUserBundle:User:index.html.twig', array(
+      'user' => $user
+    ));
   }
 
   public function ajouterAction()
   {
-    // On créer l'entité User
-    $user = $this->getUser();
     // On créer l'entité Membre
-    $membre = new Membre;
+    $user = $this->getUser();
 
+    if ($user->getMembre() != null) {
+      throw new \Exception('Fiche membre déjà existante');
+    }
+
+    $membre = new Membre;
     // On créer les champs du formulaire
     $form = $this->createForm(new MembreType, $membre);
 
@@ -40,20 +45,18 @@ class UserController extends Controller {
       $form->bind($request);
 
       if ($form->isValid()) {
-
         // On lie la fiche membre à l'utilisateur
         $user->setMembre($membre);
-
         // On l'enregistre notre objet $membre dans la base de données
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-
         // On définit un message flash
         $this->get('session')->getFlashBag()->add('info', 'Fiche membre bien ajouté');
 
         // On redirige vers la page de visualisation du membre nouvellement créé
-        return $this->redirect($this->generateUrl('sdzuser_fiche_voir', array('id' => $membre->getId())));
+ //       return $this->redirect($this->generateUrl('sdzuser_index'));
+        return $this->redirect($this->generateUrl('sdzuser_voir', array('username' => $user->getUsername())));
       }
     }
 
@@ -61,7 +64,7 @@ class UserController extends Controller {
     // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
     // - Soit la requête est de type POST, mais le formulaire n'est pas valide, donc on l'affiche de nouveau
 
-    return $this->render('SdzUserBundle:Blog:ajouter.html.twig', array(
+    return $this->render('SdzUserBundle:User:ajouter.html.twig', array(
       'user' => $user,
       'form' => $form->createView()
     ));
@@ -69,13 +72,37 @@ class UserController extends Controller {
 
   public function modifierAction(Membre $membre)
   {
-    return $this->render('SdzUserBundle:Blog:modifier.html.twig');
+    $form = $this->createForm(new MembreType, $membre);
+    $user = $this->getUser();
+
+    $request = $this->getRequest();
+
+    if ($request->getMethod() == 'POST') {
+      $form->bind($request);
+
+      if ($form->isValid()) {
+        // On enregistre le membre
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($membre);
+        $em->flush();
+        // On définit un message flash
+        $this->get('session')->getFlashBag()->add('info', 'Fiche membre bien modifié');
+
+        return $this->redirect($this->generateUrl('sdzuser_index'));
+      }
+    }
+
+    return $this->render('SdzUserBundle:User:modifier.html.twig', array(
+      'form'    => $form->createView(),
+      'membre' => $membre,
+      'user' => $user
+    ));
   }
 
   public function supprimerAction(Membre $membre)
   {
     // On crée un formulaire vide, qui ne contiendra que le champ CSRF
-    // Cela permet de protéger la suppression d'article contre cette faille
+    // Cela permet de protéger la suppression d'une fiche membre contre cette faille
     $form = $this->createFormBuilder()->getForm();
 
     $request = $this->getRequest();
@@ -83,8 +110,11 @@ class UserController extends Controller {
       $form->bind($request);
 
       if ($form->isValid()) { // Ici, isValid ne vérifie donc que le CSRF
-        // On supprime l'article
+        // On détache la fiche de l'utilisateur
+        $user = $this->getUser()->setMembre(null);
+        // On supprime la fiche membre
         $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
         $em->remove($membre);
         $em->flush();
 
@@ -97,16 +127,18 @@ class UserController extends Controller {
     }
 
     // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
-    return $this->render('SdzUserBundle:Blog:supprimer.html.twig', array(
+    return $this->render('SdzUserBundle:User:supprimer.html.twig', array(
       'membre' => $membre,
-      'form'    => $form->createView()
+      'form'    => $form->createView(),
+      'user'    => $this->getUser()
     ));
   }
 
-  public function voirAction(Membre $membre) {
+  public function voirAction(User $user) {
 
-    return $this->render('SdzUserBundle:Blog:voir.html.twig', array(
-      'membre' => $membre
+    return $this->render('SdzUserBundle:User:voir.html.twig', array(
+      'user' => $user,
+      'membre' => $user->getMembre()
     ));
   }
 
