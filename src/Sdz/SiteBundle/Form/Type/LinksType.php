@@ -1,6 +1,6 @@
 <?php
 
-namespace Sdz\SiteBundle\Form;
+namespace Sdz\SiteBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,6 @@ class LinksType extends AbstractType
         $builder
             ->add('firstname')
             ->add('lastname')
-            ->add('username')
             ->add('website')
             ->add('description')
         ;

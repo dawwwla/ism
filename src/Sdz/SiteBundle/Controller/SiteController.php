@@ -35,11 +35,6 @@ class SiteController extends Controller
         ));
     }
 
-    public function linksAction()
-    {
-        return $this->render('SdzSiteBundle:Site:liens.html.twig');
-    }
-
     public function roadmapAction()
     {
         return $this->render('SdzSiteBundle:Site:roadmap.html.twig');

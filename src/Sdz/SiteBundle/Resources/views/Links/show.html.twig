@@ -1,54 +1,44 @@
-{% extends "SdzSiteBundle::layout.html.twig" %}
+{% extends "SdzSiteBundle::Links/links.html.twig" %}
 
-{% block sdzsite_body %}
-    <h1>Links</h1>
+{% block sdzsite_body -%}
+  <h2>{{ entity.website }}</h2>
+  <i>Ajouté par {{ entity.user }}</i>
+  </br></br>
+  <table class="record_properties">
+    <tbody>
+      <tr>
+        <th>Auteur</th>
+        <td>{{ entity.fullname }}</td>
+      </tr>
+      <tr>
+        <th>Website</th>
+        <td>{{ entity.website }}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>{{ entity.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </br>
+  <p>
+    <a href="{{ path('links') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    {% if is_granted('ROLE_AUTEUR') %}
+      <a href="{{ path('links_edit', { 'id': entity.id }) }}" class="btn">
+        <i class="icon-edit"></i>
+        Modifier
+      </a>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('links_delete', { 'id': entity.id }) }}" class="btn">
+        <i class="icon-trash"></i>
+        Supprimer
+      </a>
+    {% endif %}
+  </p>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ entity.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ entity.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ entity.username }}</td>
-            </tr>
-            <tr>
-                <th>Website</th>
-                <td>{{ entity.website }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ entity.description }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('links') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('links_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('links_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
 {% endblock %}

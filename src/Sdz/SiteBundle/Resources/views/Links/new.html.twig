@@ -1,20 +1,17 @@
-{% extends "SdzSiteBundle::layout.html.twig" %}
+{% extends "SdzSiteBundle::Links/links.html.twig" %}
 
-{% block sdzsite_body %}
-    <h1>Links creation</h1>
+{% block sdzsite_body -%}
+    <h2>Ajouter un nouveau lien</h2>
 
     <form action="{{ path('links_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
-            <button type="submit">Create</button>
+            <a href="{{ path('links') }}" class="btn">
+              <i class="icon-chevron-left"></i>
+              Retour à la liste
+            </a>
+            <button type="submit" class='btn'>Valider</button>
         </p>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('links') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 {% endblock %}

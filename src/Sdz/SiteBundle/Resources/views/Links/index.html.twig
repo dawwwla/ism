@@ -1,49 +1,40 @@
-{% extends "SdzSiteBundle::layout.html.twig" %}
+{% extends "SdzSiteBundle::Links/links.html.twig" %}
 
-{% block sdzsite_body %}
-    <h1>Links list</h1>
+{% block sdzsite_body -%}
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Username</th>
-                <th>Website</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('links_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.firstname }}</td>
-                <td>{{ entity.lastname }}</td>
-                <td>{{ entity.username }}</td>
-                <td>{{ entity.website }}</td>
-                <td>{{ entity.description }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('links_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('links_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+  <table class="table table-condensed table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Site web</th>
+        <th>Description</th>
+        <th style="width: 1%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+      <tr>
+        <td><a href="{{ path('links_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+        <td>{{ entity.firstname }}</td>
+        <td>{{ entity.lastname }}</td>
+        <td>{{ entity.website }}</td>
+        <td>{{ entity.description|truncate(100, true, '[...]') }}</td>
+        <td>
+            <div class="btn-group">
+            <a href="{{ path('links_delete', { 'id': entity.id }) }}" class='btn btn-danger'><i class="icon-trash icon-white"></i></a>
+            <a href="{{ path('links_edit', { 'id': entity.id }) }}" class='btn'><i class="icon-edit"></i></a>
+            <a href="{{ path('links_show', { 'id': entity.id }) }}" class='btn'><i class="icon-chevron-right"></i></a>
+            </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('links_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+  <a href="{{ path('links_new') }}" class="btn">
+    Ajouter un nouveau lien
+  </a>
+
+{% endblock %}

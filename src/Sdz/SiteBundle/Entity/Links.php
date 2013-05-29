@@ -36,11 +36,9 @@ class Links
     private $lastname;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Username", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Sdz\UserBundle\Entity\User")
      */
-    private $username;
+    private $user;
 
     /**
      * @var string
@@ -60,7 +58,7 @@ class Links
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,14 +74,14 @@ class Links
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
-    
+
         return $this;
     }
 
     /**
      * Get firstname
      *
-     * @return string 
+     * @return string
      */
     public function getFirstname()
     {
@@ -99,41 +97,28 @@ class Links
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
-    
+
         return $this;
     }
 
     /**
      * Get lastname
      *
-     * @return string 
+     * @return string
      */
     public function getLastname()
     {
         return $this->lastname;
     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return Links
-     */
-    public function setUsername($username)
+    public function setUser(\Sdz\UserBundle\Entity\User $user = null)
     {
-        $this->username = $username;
-    
-        return $this;
+        $this->user = $user;
     }
 
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
+    public function getUser()
     {
-        return $this->username;
+        return $this->user;
     }
 
     /**
@@ -145,14 +130,14 @@ class Links
     public function setWebsite($website)
     {
         $this->website = $website;
-    
+
         return $this;
     }
 
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -168,17 +153,25 @@ class Links
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullname()
+    {
+        return sprintf("%s %s", $this->getLastname(), $this->getFirstname());
     }
 }

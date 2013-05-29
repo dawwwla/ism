@@ -1,0 +1,30 @@
+links:
+    pattern:  /
+    defaults: { _controller: "SdzSiteBundle:Links:index" }
+
+links_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SdzSiteBundle:Links:show" }
+
+links_new:
+    pattern:  /new
+    defaults: { _controller: "SdzSiteBundle:Links:new" }
+
+links_create:
+    pattern:  /create
+    defaults: { _controller: "SdzSiteBundle:Links:create" }
+    requirements: { _method: post }
+
+links_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SdzSiteBundle:Links:edit" }
+
+links_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SdzSiteBundle:Links:update" }
+    requirements: { _method: post|put }
+
+links_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SdzSiteBundle:Links:delete" }
+    requirements: { _method: post|delete|get }

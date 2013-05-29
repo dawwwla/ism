@@ -4,25 +4,19 @@ namespace Sdz\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 use Sdz\SiteBundle\Entity\Links;
-use Sdz\SiteBundle\Form\LinksType;
+use Sdz\SiteBundle\Form\Type\LinksType;
 
 /**
  * Links controller.
  *
- * @Route("/links")
  */
 class LinksController extends Controller
 {
     /**
      * Lists all Links entities.
      *
-     * @Route("/", name="links")
-     * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -30,21 +24,23 @@ class LinksController extends Controller
 
         $entities = $em->getRepository('SdzSiteBundle:Links')->findAll();
 
-        return array(
+        return $this->render('SdzSiteBundle:Links:index.html.twig', array(
             'entities' => $entities,
-        );
+        ));
     }
 
     /**
      * Creates a new Links entity.
      *
-     * @Route("/", name="links_create")
-     * @Method("POST")
-     * @Template("SdzSiteBundle:Links:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Links();
+        $entity = new Links();
+
+        if ($this->getUser()) {
+          // On définit le User par défaut dans le formulaire (utilisateur courant)
+          $entity->setUser($this->getUser());
+        }
         $form = $this->createForm(new LinksType(), $entity);
         $form->bind($request);
 
@@ -56,36 +52,30 @@ class LinksController extends Controller
             return $this->redirect($this->generateUrl('links_show', array('id' => $entity->getId())));
         }
 
-        return array(
+        return $this->render('SdzSiteBundle:Links:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
      * Displays a form to create a new Links entity.
      *
-     * @Route("/new", name="links_new")
-     * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Links();
-        $form   = $this->createForm(new LinksType(), $entity);
+        $form = $this->createForm(new LinksType(), $entity);
 
-        return array(
+        return $this->render('SdzSiteBundle:Links:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
      * Finds and displays a Links entity.
      *
-     * @Route("/{id}", name="links_show")
-     * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -99,18 +89,15 @@ class LinksController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('SdzSiteBundle:Links:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * Displays a form to edit an existing Links entity.
      *
-     * @Route("/{id}/edit", name="links_edit")
-     * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -125,19 +112,16 @@ class LinksController extends Controller
         $editForm = $this->createForm(new LinksType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('SdzSiteBundle:Links:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * Edits an existing Links entity.
      *
-     * @Route("/{id}", name="links_update")
-     * @Method("PUT")
-     * @Template("SdzSiteBundle:Links:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -160,37 +144,41 @@ class LinksController extends Controller
             return $this->redirect($this->generateUrl('links_edit', array('id' => $id)));
         }
 
-        return array(
+        return $this->render('SdzSiteBundle:Links:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * Deletes a Links entity.
      *
-     * @Route("/{id}", name="links_delete")
-     * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Links $entity)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'article contre cette faille
+        $form = $this->createFormBuilder()->getForm();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SdzSiteBundle:Links')->find($id);
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Links entity.');
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($entity);
+                $em->flush();
             }
 
-            $em->remove($entity);
-            $em->flush();
+            return $this->redirect($this->generateUrl('links'));
         }
 
-        return $this->redirect($this->generateUrl('links'));
+        // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+        return $this->render('SdzSiteBundle:Links:delete.html.twig', array(
+            'entity' => $entity,
+            'delete_form' => $form->createView(),
+        ));
     }
 
     /**

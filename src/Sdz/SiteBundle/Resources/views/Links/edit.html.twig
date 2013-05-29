@@ -1,28 +1,18 @@
-{% extends "SdzSiteBundle::layout.html.twig" %}
+{% extends "SdzSiteBundle::Links/links.html.twig" %}
 
-{% block sdzsite_body %}
-    <h1>Links edit</h1>
+{% block sdzsite_body -%}
+    <h2>Edition du lien</h2>
 
     <form action="{{ path('links_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
         {{ form_widget(edit_form) }}
         <p>
-            <button type="submit">Edit</button>
+            <a href="{{ path('links') }}" class="btn">
+              <i class="icon-chevron-left"></i>
+              Retour à la liste
+            </a>
+            <button type="submit" class='btn'>Valider</button>
         </p>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('links') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('links_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
 {% endblock %}

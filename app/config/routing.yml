@@ -7,8 +7,12 @@ SdzUserBundlePrefix:
     prefix:   /membre
 
 SdzSiteBundlePrefix:
-    resource: "@SdzSiteBundle/Resources/config/routing.yml"
+    resource: "@SdzSiteBundle/Resources/config/routing/site.yml"
     prefix:   /
+
+SdzSiteBundle_links:
+    resource: "@SdzSiteBundle/Resources/config/routing/links.yml"
+    prefix:   /links
 
 # Les imports pour FOSUB :
 fos_user_security:

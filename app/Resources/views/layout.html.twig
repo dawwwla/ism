@@ -29,7 +29,7 @@
             <li><a href="{{ path('sdzsite_home') }}"><i class="icon-black icon-home"></i> Accueil</a></li>
             <li><a href="{{ path('sdzblog_accueil') }}"></i> Blog</a></li>
             <li><a href="{{ path('sdzsite_contact') }}">Contact</a></li>
-            <li><a href="{{ path('sdzsite_lien') }}">Liens</a></li>
+            <li><a href="{{ path('links') }}">Liens</a></li>
             <li><a href="{{ path('sdzsite_roadmap') }}">Roadmaps</a></li>
           </ul>
           <ul class="nav pull-right">
@@ -45,7 +45,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="icon-black icon-user"></i> {{ app.user.username }} <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
                   <li class="nav-header">Utilisateur</li>
                   <li><a href="{{ path('sdzuser_index') }}"><i class="icon-home"></i> Home</a></li>
                   <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-wrench"></i> Paramamètres</a></li>
@@ -64,7 +64,7 @@
                 <a href="#" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="icon-black icon-user"></i> Se connecter <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
                     {{ render(controller('SdzUserBundle:Security:login')) }}
                 </ul>
               </li>
