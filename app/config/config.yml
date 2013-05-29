@@ -78,6 +78,7 @@ services:
        tags:
            - { name: twig.extension }
 
+# FOS Configuration
 fos_user:
     db_driver:     orm                        # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
     firewall_name: main                       # Le nom du firewall duquel on utilisera ces utilisateurs
@@ -89,14 +90,15 @@ fos_comment:
     db_driver: orm
     class:
         model:
-            comment: Sdz\BlogBundle\Entity\Commentaire
-            thread: Sdz\BlogBundle\Entity\Article
+            comment: Sdz\BlogBundle\Entity\Comment
+            thread: Sdz\BlogBundle\Entity\Thread
 
 # Ornicar\AksimetBundle
 ornicar_akismet:
     api_key: %akismet_key%
     url:     %akismet_url%
 
+# Sonata Configuration
 sonata_block:
     default_contexts: [cms]
     blocks:
