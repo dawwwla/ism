@@ -9,6 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Form;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
 use Sdz\BlogBundle\Entity\Article;
 use Sdz\BlogBundle\Entity\Categorie;
 use Sdz\BlogBundle\Entity\Commentaire;
@@ -302,6 +307,7 @@ class BlogController extends Controller
 
     $request = $this->getRequest();
     if ($request->getMethod() == 'POST') {
+
       $form->bind($request);
 
       if ($form->isValid()) { // Ici, isValid ne vérifie donc que le CSRF

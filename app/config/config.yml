@@ -24,7 +24,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ SdzSiteBundle ]
+    bundles:        [ FOSCommentBundle, SdzSiteBundle ]
     # java: %java_path%
     filters:
         cssrewrite: ~
@@ -84,6 +84,13 @@ fos_user:
     user_class:    Sdz\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
     group:
         group_class: Sdz\UserBundle\Entity\Group
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: Sdz\BlogBundle\Entity\Commentaire
+            thread: Sdz\BlogBundle\Entity\Article
 
 # Ornicar\AksimetBundle
 ornicar_akismet:

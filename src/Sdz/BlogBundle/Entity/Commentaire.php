@@ -12,6 +12,7 @@ use Sdz\BlogBundle\Validator\AntiFlood;
  * @ORM\Table(name="ism_commentaire")
  * @ORM\Entity(repositoryClass="Sdz\BlogBundle\Entity\CommentaireRepository")
  * @Akismet
+ *
  */
 class Commentaire
 {
@@ -21,6 +22,12 @@ class Commentaire
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Sdz\BlogBundle\Entity\Article", inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $article;
 
     /**
      * @ORM\Column(name="auteur", type="string", length=255, nullable=true)
@@ -44,12 +51,6 @@ class Commentaire
      * @ORM\Column(name="ip", type="string", length=255)
      */
     private $ip;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Sdz\BlogBundle\Entity\Article", inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $article;
 
     /**
      * @ORM\ManyToOne(targetEntity="Sdz\UserBundle\Entity\User")
