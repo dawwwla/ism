@@ -5,6 +5,9 @@ jms_security_extra:
     expressions: true
 
 security:
+    acl:
+        connection: default
+
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
         Sdz\UserBundle\Entity\User: sha512

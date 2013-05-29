@@ -35,7 +35,7 @@ TODO
  * http://symfony.com/fr/doc/current/cookbook/security/acl.html
  * Installer un editeur améliorer tel que CKEditor, voir SDZ "les tags sur les services" -> DONE
  * Améliorer BigBrother pour prendre des paramètres sur les mot à interdire
- * Ajouter le userprofile dans userHelpers pour voir la description de l'utilisateur
+ * Ajouter le userprofile dans userHelpers pour voir la description de l'utilisateur -> DONE
  * Ajouter la recherche par catégorie, tag ou compétence
  * Installer et configurer FOSCommentBundle
  * Installer et configurer FOSMessageBundle
