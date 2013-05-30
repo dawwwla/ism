@@ -1,6 +1,6 @@
-SdzBlogBundle_traduction:
+IsmBlogBundle_traduction:
     pattern:  /{_locale}/traduction/{name}
-    defaults: { _controller: SdzBlogBundle:Blog:traduction }
+    defaults: { _controller: IsmBlogBundle:Blog:traduction }
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

@@ -1,0 +1,27 @@
+{% extends "IsmBlogBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Supprimer l'article</h1>
+
+    <p>
+      Etes-vous sûr de vouloir supprimer l'article "{{ article.titre }}" ?
+    </p>
+
+    <form action="{{ path('article_delete', { 'id': article.id }) }}" method="post" {{ form_enctype(delete_form) }}>
+      <input type="hidden" name="_method" value="DELETE" />
+      {{ form_widget(delete_form) }}
+      <p>
+        <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn">
+          <i class="icon-chevron-left"></i>
+          Retour à l'article
+        </a>
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+      </p>
+    </form>
+
+    <i>
+      L'article sera définitivement supprimé en base de donnée.
+      Si vous souhaitez le supprimer uniquement de la page d'accueil, décocher la case "publication" dans le formulaire d'édition.
+    </i>
+
+{% endblock %}

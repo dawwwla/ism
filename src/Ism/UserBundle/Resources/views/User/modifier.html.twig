@@ -1,0 +1,22 @@
+{# src/Ism/UserBundle/Resources/views/User/modifier.html.twig #}
+
+{% extends "IsmUserBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier - {{ parent() }}
+{% endblock %}
+
+{% block ismuser_body %}
+
+  <h2>Modifier une fiche membre</h2>
+
+  {% include "IsmUserBundle:User:formulaire.html.twig" %}
+
+  <p>
+    <a href="{{ path('ismuser_voir', {'username': user.username}) }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la fiche membre
+    </a>
+  </p>
+
+{% endblock %}

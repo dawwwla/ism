@@ -1,7 +1,0 @@
-parameters:
-#    sdz_site.example.class: Sdz\SiteBundle\Example
-
-services:
-#    sdz_site.example:
-#        class: %sdz_site.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

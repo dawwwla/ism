@@ -1,0 +1,16 @@
+Ism\SiteBundle\Form\Model\Contact:
+  properties:
+    email:
+      - Email: { message: "L'adresse email est invalide" }
+    subject:
+      - Length:
+          min: 2
+          max: 140
+          minMessage: Le sujet doit faire au moins contenir {{ limit }} caractères.
+          maxMessage: Le sujet ne doit pas dépasser les {{ limit }} caractères.
+    content:
+      - Length:
+          min: 40
+          max: 2000
+          minMessage: Le message doit faire au moins contenir {{ limit }} caractères.
+          maxMessage: Le message ne doit pas dépasser les {{ limit }} caractères.

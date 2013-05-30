@@ -1,21 +1,17 @@
-# Les imports pour Sdz
-SdzBlogBundlePrefix:
-    resource: "@SdzBlogBundle/Resources/config/routing.yml"
-    prefix:   /blog
+# Les imports pour Ism
+IsmUserBundlePrefix:
+    resource: "@IsmUserBundle/Resources/config/routing.yml"
+    prefix:   /user
 
-SdzUserBundlePrefix:
-    resource: "@SdzUserBundle/Resources/config/routing.yml"
-    prefix:   /membre
-
-SdzSiteBundlePrefix:
-    resource: "@SdzSiteBundle/Resources/config/routing/site.yml"
+IsmSiteBundlePrefix:
+    resource: "@IsmSiteBundle/Resources/config/routing.yml"
     prefix:   /
 
-SdzSiteBundle_links:
-    resource: "@SdzSiteBundle/Resources/config/routing/links.yml"
-    prefix:   /links
+IsmBlogBundlePrefix:
+    resource: "@IsmBlogBundle/Resources/config/routing.yml"
+    prefix:   /blog
 
-# Les imports pour FOSUB :
+# Les imports pour FOSUser :
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
@@ -39,7 +35,7 @@ fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
 
-# Les imports pour FOSCB
+# Les imports de FOSComment :
 fos_comment_api:
     type: rest
     resource: "@FOSCommentBundle/Resources/config/routing.yml"

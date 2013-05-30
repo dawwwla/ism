@@ -1,0 +1,15 @@
+{% macro link(user, username) %}
+  {% spaceless %}
+
+  {% if user.membre is not null %}
+    {# Affiche un lien vers le profile du membre #}
+    <a href="{{ path('ismuser_voir', {'username': user.username}) }}">
+      {{ user.username }}
+    </a>
+  {% else %}
+    {# Le membre n'a pas remplie sa fiche, on affiche uniquement son nom #}
+    {{ user.username }}
+  {% endif %}
+
+  {% endspaceless %}
+{% endmacro %}

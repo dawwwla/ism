@@ -39,11 +39,11 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
-            // Sdz Bundles
-            new Sdz\BlogBundle\SdzBlogBundle(),
-            new Sdz\UserBundle\SdzUserBundle(),
-            new Sdz\SiteBundle\SdzSiteBundle(),
-            new Sdz\AdminBundle\SdzAdminBundle(),
+            // Ism Bundles
+            new Ism\UserBundle\IsmUserBundle(),
+            new Ism\SiteBundle\IsmSiteBundle(),
+            new Ism\AdminBundle\IsmAdminBundle(),
+            new Ism\BlogBundle\IsmBlogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

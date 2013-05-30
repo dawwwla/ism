@@ -1,0 +1,20 @@
+{% extends "IsmSiteBundle::Links/links.html.twig" %}
+
+{% block ismsite_body -%}
+  <h2>Suppression du lien</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer le lien {{ entity.website }} ?
+  </p>
+
+  <form action="{{ path('links_delete', { 'id': entity.id }) }}" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+      {{ form_widget(delete_form) }}
+    <a href="{{ path('links') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    <button type="submit" class='btn btn-danger'>Supprimer</button>
+  </form>
+
+{% endblock %}

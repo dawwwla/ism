@@ -1,0 +1,11 @@
+{% extends "IsmUserBundle::layout.html.twig" %}
+
+{% block title %}
+  A propos de {{ user.username }} - {{ parent() }}
+{% endblock %}
+
+{% block ismuser_body %}
+
+  {% include "IsmUserBundle:Blog:fiche.html.twig" %}
+
+{% endblock %}

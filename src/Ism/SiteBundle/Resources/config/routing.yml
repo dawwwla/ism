@@ -1,0 +1,7 @@
+IsmSiteBundlePrefix:
+    resource: "@IsmSiteBundle/Resources/config/routing/site.yml"
+    prefix:   /
+
+IsmSiteBundle_links:
+    resource: "@IsmSiteBundle/Resources/config/routing/links.yml"
+    prefix:   /links

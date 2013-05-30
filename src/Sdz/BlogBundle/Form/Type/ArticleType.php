@@ -16,18 +16,20 @@ class ArticleType extends AbstractType
     $builder
       ->add('date',        'datetime')
       ->add('titre',       'text', array(
-            'attr' => array('class' => 'span6'),
-            ))
+        'attr' => array('class' => 'span6'),
+        ))
       ->add('contenu', 'ckeditor', array(
-          'startup_outline_blocks'       => false,
-          'height'                       => '320'
-      ))
-      ->add('image',       new ImageType(), array('required' => false))
-      ->add('categories',  'entity',        array(
+        'startup_outline_blocks'       => false,
+        'height'                       => '320'
+        ))
+      ->add('image',       new ImageType(), array(
+        'required' => false
+        ))
+      ->add('categories',  'entity', array(
         'class'    => 'SdzBlogBundle:Categorie',
         'property' => 'nom',
         'multiple' => true
-      ))
+        ))
       /*
        * Rappel pour un champ de type collection :
        ** - 1er argument : nom du champ, ici "categories" car c'est le nom de l'attribut ;
@@ -35,13 +37,13 @@ class ArticleType extends AbstractType
        ** - 3e argument : tableau d'options du champ.
       */
       ->add('articleCompetences', 'collection', array(
-          'type'         => new ArticleCompetenceType(),
-          'allow_add'    => true,
-          'allow_delete' => true,
-          'by_reference' => false,
-          'required'     => false,
-          'label'        => 'Compétences'
-      ))
+        'type'         => new ArticleCompetenceType(),
+        'allow_add'    => true,
+        'allow_delete' => true,
+        'by_reference' => false,
+        'required'     => false,
+        'label'        => 'Compétences'
+        ))
     ;
 
     // On ajoute une fonction qui va écouter l'évènement PRE_SET_DATA

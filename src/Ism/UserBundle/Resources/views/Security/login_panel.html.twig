@@ -1,0 +1,19 @@
+{# S'il y a une erreur, on l'affiche dans un joli cadre #}
+{% if error %}
+  <div class="alert alert-error">{{ error }}</div>
+{% endif %}
+<div class = "container-fluid">
+<form action="{{ path("fos_user_security_check") }}" method="post" class="container_fluid">
+  <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+  <fieldset class="textbox">
+    <label>{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Pseudo ou email" /><br>
+    <label>{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+    <input type="password" id="password" name="_password" required="required" placeholder="Mot de passe" /><br>
+    <div>
+      <label for="remember_me" class="checkbox">Mémoriser<input type="checkbox" id="remember_me" name="_remember_me" value="on" /></label>
+      <button type="submit" id="_submit" name="_submit" class="btn btn-primary">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+    </div>
+  </fieldset>
+</form>
+</div>

@@ -1,0 +1,17 @@
+{# src/Ism/UserBundle/Resources/views/User/index.html.twig #}
+
+{% extends "IsmUserBundle::layout.html.twig" %}
+
+{% block ismuser_body %}
+  <div>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="{{ path('fos_user_profile_edit') }}">Modifier mes paramamètres</a></li>
+      {% if user.membre is not null %}
+        <li><a href="{{ path('ismuser_voir', {'username': user.username}) }}">Gérer ma fiche membre</a></li>
+      {% else %}
+        <li><a href="{{ path('ismuser_fiche_ajouter') }}">Créer ma fiche membre</a></li>
+      {% endif %}
+
+    </ul>
+  </div>
+{% endblock %}

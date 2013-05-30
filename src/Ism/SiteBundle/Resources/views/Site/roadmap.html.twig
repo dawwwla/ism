@@ -1,0 +1,55 @@
+{# src/Ism/SiteBundle/Resources/views/Site/roadmap.html.twig #}
+
+{% extends "IsmSiteBundle::layout.html.twig" %}
+
+{% block title %}
+  Roadmaps - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+  <header class="jumbotron subhead">
+    <div class="container">
+      <h1>Roadmaps</h1>
+      <p class="lead">Consulter les roadmaps d'ISM.</p>
+    </div>
+  </header>
+{% endblock %}
+
+{% block ismsite_body %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Produit</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="success">
+        <td>1</td>
+        <td>TB - Monthly</td>
+        <td>01/04/2012</td>
+        <td>Accepté</td>
+      </tr>
+      <tr class="error">
+        <td>2</td>
+        <td>TB - Monthly</td>
+        <td>02/04/2012</td>
+        <td>Decliné</td>
+      </tr>
+      <tr class="warning">
+        <td>3</td>
+        <td>TB - Monthly</td>
+        <td>03/04/2012</td>
+        <td>En attente</td>
+      </tr>
+      <tr class="info">
+        <td>4</td>
+        <td>TB - Monthly</td>
+        <td>04/04/2012</td>
+        <td>Inconnu</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

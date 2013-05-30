@@ -1,0 +1,23 @@
+ismuser_index:
+    pattern:   /
+    defaults:  { _controller: IsmUserBundle:User:index }
+
+ismuser_fiche_ajouter:
+    pattern:   /new
+    defaults:  { _controller: IsmUserBundle:User:ajouter }
+
+ismuser_fiche_modifier:
+    pattern:   /{id}/edit
+    defaults:  { _controller: IsmUserBundle:User:modifier }
+    requirements:
+        id:   \d+
+
+ismuser_fiche_supprimer:
+    pattern:   /{id}/delete
+    defaults:  { _controller: IsmUserBundle:User:supprimer }
+    requirements:
+        id:   \d+
+
+ismuser_voir:
+    pattern:   /{username}
+    defaults:  { _controller: IsmUserBundle:User:voir }

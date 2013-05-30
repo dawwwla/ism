@@ -1,0 +1,25 @@
+{% extends "IsmBlogBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Modifier l'article</h1>
+
+    <form action="{{ path('article_update', { 'id': article.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+      <input type="hidden" name="_method" value="PUT" />
+      {{ form_widget(edit_form) }}
+      <p>
+        <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn">
+          <i class="icon-chevron-left"></i>
+          Retour à l'article
+        </a>
+        <button type="submit" class="btn btn-primary">Valider</button>
+      </p>
+    </form>
+
+    <p>
+      Vous éditez un article déjà existant,
+      ne le changez pas trop pour éviter
+      aux membres de ne pas comprendre
+      ce qu'il se passe.
+    </p>
+
+{% endblock %}

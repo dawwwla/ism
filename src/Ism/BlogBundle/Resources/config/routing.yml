@@ -1,0 +1,9 @@
+ismblog:
+    pattern:  /{page}
+    defaults: { _controller: IsmBlogBundle:Blog:index, page: 1 }
+    requirements:
+        page:  \d+
+
+IsmBlogBundle_article:
+    resource: "@IsmBlogBundle/Resources/config/routing/article.yml"
+    prefix:   /article

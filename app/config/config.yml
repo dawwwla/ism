@@ -24,7 +24,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ FOSCommentBundle, SdzSiteBundle ]
+    bundles:        [ "IsmSiteBundle", "FOSCommentBundle" ]
     # java: %java_path%
     filters:
         cssrewrite: ~
@@ -82,16 +82,16 @@ services:
 fos_user:
     db_driver:     orm                        # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
     firewall_name: main                       # Le nom du firewall duquel on utilisera ces utilisateurs
-    user_class:    Sdz\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
+    user_class:    Ism\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
     group:
-        group_class: Sdz\UserBundle\Entity\Group
+        group_class: Ism\UserBundle\Entity\Group
 
 fos_comment:
     db_driver: orm
     class:
         model:
-            comment: Sdz\BlogBundle\Entity\Comment
-            thread: Sdz\BlogBundle\Entity\Thread
+            comment: Ism\BlogBundle\Entity\Commentaire
+            thread: Ism\BlogBundle\Entity\Thread
 
 # Ornicar\AksimetBundle
 ornicar_akismet:
@@ -114,13 +114,13 @@ sonata_admin:
         groups:
             Blog:
                 items:
-                    - sdz.blog.admin.article
-                    - sdz.blog.admin.categorie
-                    - sdz.blog.admin.commentaire
-                    - sdz.blog.admin.competence
+                    - ism.blog.admin.article
+                    - ism.blog.admin.categorie
+                    - ism.blog.admin.commentaire
+                    - ism.blog.admin.competence
             Utilisateurs:
                 items:
-                    - sdz.admin.user
+                    - ism.admin.user
             Mediateque:
                 items:
-                    - sdz.blog.admin.image
+                    - ism.blog.admin.image

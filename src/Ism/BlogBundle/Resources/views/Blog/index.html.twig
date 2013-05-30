@@ -1,0 +1,15 @@
+{% extends "IsmBlogBundle::layout.html.twig" %}
+
+{% block body -%}
+  <h1>Liste des articles</h1>
+
+  <ul>
+    {% for article in articles %}
+      {% include "IsmBlogBundle:Article:article.html.twig" with {'accueil': true} %}
+      <hr />
+    {% else %}
+      <p>Pas (encore !) d'articles</p>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

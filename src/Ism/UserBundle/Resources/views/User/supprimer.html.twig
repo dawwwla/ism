@@ -1,0 +1,27 @@
+{# src/Ism/UserBundle/Resources/views/User/supprimer.html.twig #}
+
+{% extends "IsmUserBundle::layout.html.twig" %}
+
+{% block title %}
+  Supprimer - {{ parent() }}
+{% endblock %}
+
+{% block ismuser_body %}
+
+  <h2>Supprimer une fiche membre</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer la fiche membre de {{ membre.fullname }} ?
+  </p>
+
+  {# On met l'id du membre dans la route de l'action du formulaire #}
+  <form action="{{ path('ismuser_fiche_supprimer', {'id': membre.id}) }}" method="post">
+    <a href="{{ path('ismuser_voir', {'username': user.username}) }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la fiche membre
+    </a>
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {{ form_rest(form) }}
+  </form>
+
+{% endblock %}

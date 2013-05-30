@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="author" content="Thibault Vieux">
-    <meta name="keywords" content="Symfony2.2, blog">
-    <link rel="alternate" type="application/rss+xml" title="Blog sur Symfony2" href="{{ url('sdzblog_feed') }}">
+    <meta name="keywords" content="Symfony2.2, ism">
 
     <title>{% block title %}ISM{% endblock %}</title>
 
@@ -12,7 +11,7 @@
       {% stylesheets output='css/main.css' filter='cssrewrite, ?yui_css'
         'css/bootstrap.css'
         'css/bootstrap-responsive.css'
-        '@SdzBlogBundle/Resources/public/css/main.css' %}
+        '@IsmBlogBundle/Resources/public/css/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
       {% endstylesheets %}
     {% endblock %}
@@ -26,11 +25,11 @@
         <div class="container">
           <a class="brand" href="#">ISM</a>
           <ul class="nav">
-            <li><a href="{{ path('sdzsite_home') }}"><i class="icon-black icon-home"></i> Accueil</a></li>
-            <li><a href="{{ path('sdzblog_accueil') }}"></i> Blog</a></li>
-            <li><a href="{{ path('sdzsite_contact') }}">Contact</a></li>
+            <li><a href="{{ path('ismsite_home') }}"><i class="icon-black icon-home"></i> Accueil</a></li>
+            <li><a href="{{ path('ismblog') }}"></i> Blog</a></li>
+            <li><a href="{{ path('ismsite_contact') }}">Contact</a></li>
             <li><a href="{{ path('links') }}">Liens</a></li>
-            <li><a href="{{ path('sdzsite_roadmap') }}">Roadmaps</a></li>
+            <li><a href="{{ path('ismsite_roadmap') }}">Roadmaps</a></li>
           </ul>
           <ul class="nav pull-right">
             <form class="navbar-search pull-left form-search">
@@ -47,7 +46,7 @@
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
                   <li class="nav-header">Utilisateur</li>
-                  <li><a href="{{ path('sdzuser_index') }}"><i class="icon-home"></i> Home</a></li>
+                  <li><a href="{{ path('ismuser_index') }}"><i class="icon-home"></i> Home</a></li>
                   <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-wrench"></i> Paramamètres</a></li>
                   {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-header">Administration</li>
@@ -65,7 +64,7 @@
                   <i class="icon-black icon-user"></i> Se connecter <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
-                    {{ render(controller('SdzUserBundle:Security:login')) }}
+                    {{ render(controller('IsmUserBundle:Security:login')) }}
                 </ul>
               </li>
             {% endif %}
@@ -107,7 +106,7 @@
       {# Tous nos javascripts avec Assetic #}
       {% javascripts output='js/main.js' filter='?yui_js'
         'js/bootstrap.js'
-        '@SdzBlogBundle/Resources/public/js/*' %}
+        '@IsmBlogBundle/Resources/public/js/*' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
       {% endjavascripts %}
     {% endblock %}

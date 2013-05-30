@@ -1,0 +1,7 @@
+parameters:
+#    ismblog.example.class: Ism\BlogBundle\Example
+
+services:
+#    ismblog.example:
+#        class: %ism_blog.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

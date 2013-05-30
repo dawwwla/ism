@@ -1,0 +1,43 @@
+parameters:
+#    ism_admin.example.class: Ism\AdminBundle\Example
+
+services:
+#    ism_admin.example:
+#        class: %ism_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    ism.blog.admin.article:
+        class: Ism\AdminBundle\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ismblog, label: Articles }
+        arguments: [null, Ism\BlogBundle\Entity\Article, IsmAdminBundle:ArticleAdmin]
+
+    ism.blog.admin.categorie:
+        class: Ism\AdminBundle\Admin\CategorieAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ismblog, label: Categories }
+        arguments: [null, Ism\BlogBundle\Entity\Categorie, IsmAdminBundle:CategorieAdmin]
+
+    ism.blog.admin.commentaire:
+        class: Ism\AdminBundle\Admin\CommentaireAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ismblog, label: Commentaires }
+        arguments: [null, Ism\BlogBundle\Entity\Commentaire, IsmAdminBundle:CommentaireAdmin]
+
+    ism.blog.admin.competence:
+        class: Ism\AdminBundle\Admin\CompetenceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ismblog, label: Competences }
+        arguments: [null, Ism\BlogBundle\Entity\Competence, IsmAdminBundle:CompetenceAdmin]
+
+    ism.blog.admin.image:
+        class: Ism\AdminBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ismblog, label: Images }
+        arguments: [null, Ism\BlogBundle\Entity\Image, IsmAdminBundle:ImageAdmin]
+
+    ism.admin.user:
+        class: Ism\AdminBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ismblog, label: Utilisateurs }
+        arguments: [null, Ism\UserBundle\Entity\User, IsmAdminBundle:UserAdmin]

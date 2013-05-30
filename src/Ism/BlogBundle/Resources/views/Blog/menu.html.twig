@@ -1,0 +1,7 @@
+{# src/Ism/BlogBundle/Resources/views/Blog/menu.html.twig #}
+{% if (null != liste_articles) %}
+  <li class="nav-header">Les derniers articles</li>
+  {% for article in liste_articles %}
+    <li><a href="{{ path('article_show', {'slug': article.slug}) }}">{{ article.titre }}</a></li>
+  {% endfor %}
+{% endif %}

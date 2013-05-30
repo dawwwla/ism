@@ -1,0 +1,31 @@
+article_new:
+    pattern:  /new
+    defaults: { _controller: "IsmBlogBundle:Article:new" }
+
+article_create:
+    pattern:  /create
+    defaults: { _controller: "IsmBlogBundle:Article:create" }
+    requirements: { _method: post }
+
+article_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "IsmBlogBundle:Article:edit" }
+
+article_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "IsmBlogBundle:Article:update" }
+    requirements: { _method: post|put }
+
+article_confirm:
+    pattern:  /{id}/confirm
+    defaults: { _controller: "IsmBlogBundle:Article:confirm" }
+
+article_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "IsmBlogBundle:Article:delete" }
+    requirements: { _method: post|delete }
+
+article_show:
+    pattern:   /{slug}
+    defaults:  { _controller: IsmBlogBundle:Article:show }
+
