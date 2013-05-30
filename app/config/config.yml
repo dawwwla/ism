@@ -24,7 +24,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ "IsmSiteBundle", "FOSCommentBundle" ]
+    bundles:        [ "IsmSiteBundle", "IsmBlogBundle", "FOSCommentBundle" ]
     # java: %java_path%
     filters:
         cssrewrite: ~
@@ -90,8 +90,14 @@ fos_comment:
     db_driver: orm
     class:
         model:
-            comment: Ism\BlogBundle\Entity\Commentaire
-            thread: Ism\BlogBundle\Entity\Thread
+            comment: Ism\CommentBundle\Entity\Comment
+            thread: Ism\CommentBundle\Entity\Thread
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }
 
 # Ornicar\AksimetBundle
 ornicar_akismet:

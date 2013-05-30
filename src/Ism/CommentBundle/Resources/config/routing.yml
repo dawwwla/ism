@@ -1,0 +1,3 @@
+ism_comment_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: IsmCommentBundle:Default:index }

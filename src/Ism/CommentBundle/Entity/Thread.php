@@ -1,13 +1,12 @@
 <?php
-// src/Ism/BlogBundle/Entity/Thread.php
+// src/Ism/ThreadBundle/Entity/Thread.php
 
-namespace Ism\BlogBundle\Entity;
+namespace Ism\ThreadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Thread as BaseThread;
 
 /**
- * @ORM\Table(name="ism_thread")
  * @ORM\Entity
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */

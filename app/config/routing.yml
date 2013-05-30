@@ -1,15 +1,19 @@
 # Les imports pour Ism
-IsmUserBundlePrefix:
-    resource: "@IsmUserBundle/Resources/config/routing.yml"
-    prefix:   /user
-
 IsmSiteBundlePrefix:
     resource: "@IsmSiteBundle/Resources/config/routing.yml"
     prefix:   /
 
+IsmUserBundlePrefix:
+    resource: "@IsmUserBundle/Resources/config/routing.yml"
+    prefix:   /user
+
 IsmBlogBundlePrefix:
     resource: "@IsmBlogBundle/Resources/config/routing.yml"
     prefix:   /blog
+
+IsmCommentBundlePrefix:
+    resource: "@IsmCommentBundle/Resources/config/routing.yml"
+    prefix:   /blog/comment
 
 # Les imports pour FOSUser :
 fos_user_security:

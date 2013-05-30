@@ -44,6 +44,7 @@ class AppKernel extends Kernel
             new Ism\SiteBundle\IsmSiteBundle(),
             new Ism\AdminBundle\IsmAdminBundle(),
             new Ism\BlogBundle\IsmBlogBundle(),
+            new Ism\CommentBundle\IsmCommentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
