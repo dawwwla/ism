@@ -1,5 +1,11 @@
-# SdzBlog (non official, private copy !)
+# Ism project
+Liens utiles : 
+Bundles - http://knpbundles.com/
+Documentation - http://symfony.com/doc/master/cookbook/index.html
+Composer - http://getcomposer.org/
+
 Code source du blog construit grâce au [cours du Site du Zéro](http://www.siteduzero.com/informatique/tutoriels/developpez-votre-site-web-avec-le-framework-symfony2).
+
 
 ## 1. Définir vos paramètres d'application
 http://symfony.com/fr/doc/2.1/book/installation.html
