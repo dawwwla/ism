@@ -13,7 +13,6 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * @ORM\Table(name="ism_article")
  * @ORM\Entity(repositoryClass="Ism\BlogBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
- * @Assert\Callback(methods={"contenuValide"})
  */
 class Article
 {
@@ -268,16 +267,4 @@ class Article
         return $this->user;
     }
 
-    public function contenuValide(ExecutionContextInterface $context)
-    {
-        $mots_interdits = array('échec', 'abandon');
-
-        // On vérifie que le contenu ne contient pas l'un des mots
-        if (preg_match('#'.implode('|', $mots_interdits).'#', $this->getContenu())) {
-            // La règle est violée, on définit l'erreur et son message
-            // 1er argument : on dit quel attribut l'erreur concerne, ici « contenu »
-            // 2e argument : le message d'erreur
-            $context->addViolationAt('contenu', 'Contenu invalide car il contient un mot interdit.', array(), null);
-        }
-    }
 }

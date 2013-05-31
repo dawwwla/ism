@@ -11,10 +11,6 @@ IsmBlogBundlePrefix:
     resource: "@IsmBlogBundle/Resources/config/routing.yml"
     prefix:   /blog
 
-IsmCommentBundlePrefix:
-    resource: "@IsmCommentBundle/Resources/config/routing.yml"
-    prefix:   /blog/comment
-
 # Les imports pour FOSUser :
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
