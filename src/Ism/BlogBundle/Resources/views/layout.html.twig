@@ -33,7 +33,7 @@
           {% endif %}
 
           {# On affiche les 3 derniers articles #}
-          {{ render(controller("IsmBlogBundle:Blog:menu", {'nombre': 5})) }}
+          {{ render(controller("IsmBlogBundle:Blog:menu", {'nombre': 3})) }}
 
         </ul>
       </div><!--/.well -->
@@ -64,5 +64,5 @@
 {% endblock %}
 
 {% block footer %}
-  {{ parent() }} - <a href="{# path('ismblog_feed') #}">Flux RSS du Blog</a>
+  {{ parent() }} - <a href="{{ path('ismblog_feed') }}">Flux RSS du Blog</a>
 {% endblock %}

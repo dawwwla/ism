@@ -169,7 +169,7 @@ class LinksController extends Controller
                 $em->flush();
             }
 
-            return $this->redirect($this->generateUrl('links'));
+            return $this->redirect($this->generateUrl('ismsite_links'));
         }
 
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer

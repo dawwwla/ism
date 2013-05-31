@@ -48,4 +48,19 @@ class BlogController extends Controller
         'liste_articles' => $liste // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
       ));
     }
+
+    public function feedAction()
+    {
+      $articles = $this->getDoctrine()
+                       ->getManager()
+                       ->getRepository('IsmBlogBundle:Article')
+                       ->getArticles(10, 1);
+
+      $lastArticle = current($articles->getIterator());
+
+      return $this->render('IsmBlogBundle:Blog:feed.xml.twig', array(
+        'articles'  => $articles,
+        'buildDate' => $lastArticle->getDate()
+      ));
+    }
 }

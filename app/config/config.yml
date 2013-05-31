@@ -93,12 +93,6 @@ fos_comment:
             comment: Ism\CommentBundle\Entity\Comment
             thread: Ism\CommentBundle\Entity\Thread
 
-fos_comment_api:
-    type: rest
-    resource: "@FOSCommentBundle/Resources/config/routing.yml"
-    prefix: /api
-    defaults: { _format: html }
-
 # Ornicar\AksimetBundle
 ornicar_akismet:
     api_key: %akismet_key%

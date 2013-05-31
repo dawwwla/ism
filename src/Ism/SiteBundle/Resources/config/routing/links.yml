@@ -1,7 +1,3 @@
-links:
-    pattern:  /
-    defaults: { _controller: "IsmSiteBundle:Links:index" }
-
 links_show:
     pattern:  /{id}/show
     defaults: { _controller: "IsmSiteBundle:Links:show" }

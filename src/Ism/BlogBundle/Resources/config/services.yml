@@ -1,7 +1,40 @@
 parameters:
-#    ismblog.example.class: Ism\BlogBundle\Example
+#    ism_blog.example.class: Ism\BlogBundle\Example
 
 services:
-#    ismblog.example:
-#        class: %ism_blog.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    ismblog.antispam:
+        class:     Ism\BlogBundle\Antispam\IsmAntispam
+        arguments: [@mailer, 5]
+        calls:
+            - [ setLocale, [%locale%] ]
+        tags:
+            -  { name: twig.extension }
+
+    ismblog.censure_listener:
+        class: Ism\BlogBundle\Bigbrother\CensureListener
+        arguments:
+            - [1, 2]                # 1er argument = liste des id des membres à surveiller (totalement arbitraire)
+            - %ismblog.dest_email%  # 2e argument = le destinataire des emails
+            - @mailer               # 3e argument = le service pour envoyer des emails
+        tags:
+            - { name: kernel.event_listener, event: ismblog.bigbrother.post_message, method: onMessagePost }
+
+    ismblog.beta_listener:
+        class: Ism\BlogBundle\Beta\BetaListener
+        arguments: ["2013-06-21"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 2 }
+
+    ismblog.validator.akismet:
+        class:     Ism\BlogBundle\Akismet\AkismetValidator
+        arguments: [@ornicar_akismet, @security.context]
+        scope:     request
+        tags:
+            - { name: validator.constraint_validator, alias: akismet }
+
+    ismblog.validator.antiflood:                                # Le nom du service
+        class:     Ism\BlogBundle\Validator\AntiFloodValidator  # La classe du service, ici notre validateur déjà créé
+        arguments: [@request, @doctrine.orm.entity_manager]     # Les données qu'on injecte au service, la requête et l'EntityManager
+        scope:     request                                      # Comme on injecte la requête, on doit préciser ce scope
+        tags:
+            - { name: validator.constraint_validator, alias: ismblog_antiflood }  # C'est avec l'alias qu'on retrouvera le service

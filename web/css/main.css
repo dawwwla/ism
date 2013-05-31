@@ -7284,26 +7284,26 @@ padding-top: 20px;
 
 /* Blog Style
 -------------------------------------------------- */
-.blog h1 {
+.container h1 {
 font-size: 30px;
 line-height: 32px;
 }
 
-.blog h2 {
+.container h2 {
 font-size: 24px;
 line-height: 32px;
 }
 
-.blog p {
+.container p {
 margin: 0 0 9px;
 }
 
-.blog h2 {
+.container h2 {
 margin-bottom:2px;
 margin-top:12px;
 }
 
-.blog h3 {
+.container h3 {
 margin-bottom:2px;
 margin-top:15px;
 }

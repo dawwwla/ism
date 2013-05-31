@@ -8,6 +8,7 @@ use FOS\CommentBundle\Entity\Comment as BaseComment;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="ism_comment")
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class Comment extends BaseComment

@@ -15,6 +15,9 @@ use Ism\BlogBundle\Entity\Commentaire;
 use Ism\BlogBundle\Form\ArticleType;
 use Ism\BlogBundle\Form\ImageType;
 
+use Ism\BlogBundle\Bigbrother\BigbrotherEvents;
+use Ism\BlogBundle\Bigbrother\MessagePostEvent;
+
 /**
  * Article controller.
  *
@@ -23,7 +26,7 @@ class ArticleController extends Controller
 {
     /**
      * Creates a new Article entity.
-     *
+     * @Secure(roles="ROLE_AUTEUR")
      */
     public function createAction(Request $request)
     {
@@ -38,6 +41,18 @@ class ArticleController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
+            // --- Début de notre fonctionnalité BigBrother ---
+            // On crée l'évènement
+            $event = new MessagePostEvent($article->getContenu(), $this->getUser());
+
+            // On déclenche l'évènement
+            $this->get('event_dispatcher')
+                 ->dispatch(BigbrotherEvents::onMessagePost, $event);
+
+             // On récupère ce qui a été modifié par le ou les listener(s), ici le message
+             $article->setContenu($event->getMessage());
+            // --- Fin de notre fonctionnalité BigBrother ---
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
@@ -90,12 +105,11 @@ class ArticleController extends Controller
 
     /**
      * Displays a form to edit an existing Article entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $article = $em->getRepository('IsmBlogBundle:Article')->find($id);
 
         if (!$article) {
@@ -112,7 +126,7 @@ class ArticleController extends Controller
 
     /**
      * Edits an existing Article entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function updateAction(Request $request, $id)
     {
@@ -143,7 +157,7 @@ class ArticleController extends Controller
 
     /**
      * Affiche un message de confirmation pour la suppression.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function confirmAction($id)
     {
@@ -165,7 +179,7 @@ class ArticleController extends Controller
 
     /**
      * Deletes a Article entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function deleteAction(Request $request, $id)
     {

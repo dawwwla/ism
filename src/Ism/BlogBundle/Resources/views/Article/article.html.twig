@@ -25,15 +25,13 @@
   </h2>
 
   <i>
-      Le <time datetime="{{ article.date|date('c') }}" itemprop="datePublished">{{ article.date|date('d/m/Y') }}</time>,
-      par <span itemprop="author">{{ userHelpers.link(article.user) }}</span>.
+    Publié le <time datetime="{{ article.date|date('c') }}" itemprop="datePublished">{{ article.date|date('d/m/Y') }}</time> par <span itemprop="author">{{ userHelpers.link(article.user) }}</span>.
   </i>
 
   <div class="well" itemprop="articleBody">
       {# On parse les messages en MarkDown grâce à KnpMardownBundle #}
       {{ article.contenu|markdown }}
   </div>
-
   <div class="well well-small">
     <p><i>
       {# On affiche les catégories éventuelles #}
@@ -46,3 +44,4 @@
     </i></p>
   </div>
 </div>
+

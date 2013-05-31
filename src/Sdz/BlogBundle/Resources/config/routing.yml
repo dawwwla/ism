@@ -29,7 +29,7 @@ sdzblog_rechercher:
     defaults:  { _controller: SdzBlogBundle:Blog:rechercher }
 
 sdzblog_ajouter_commentaire:
-    pattern:  /ajouter/{id}/commentaire
+    pattern:  /ajouter/commentaire/{id}
     defaults: { _controller: SdzBlogBundle:Blog:ajouterCommentaire }
     methods:  POST
     requirements:

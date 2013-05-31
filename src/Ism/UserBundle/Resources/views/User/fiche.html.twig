@@ -1,11 +1,11 @@
 <div itemscope itemtype="http://schema.org/Person">
   <h2>A propos</h2>
   <i>
-    {% if membre.date|date ('d/m/Y H:s') == membre.dateEdition|date('d/m/Y H:s') %}
-      Créé le <time datetime="{{ membre.date|date('c') }}" itemprop="datePublished">{{ membre.date|date('d/m/Y') }}</time> à
-      {{ membre.date|date('H:s') }}</span>.</br>
+    {% if membre.dateEdition is null %}
+      Créé le <time datetime="{{ membre.date|date('c') }}" itemprop="datePublished">{{ membre.date|date('d/m/Y') }}</time>
+    </span>.</br>
     {% else %}
-      Dernière édition le {{ membre.dateEdition|date('d/m/Y') }} à {{ membre.dateEdition|date('H:s', false) }}
+      Dernière édition le {{ membre.dateEdition|date('d/m/Y') }}.
     {% endif %}
   </i>
   <div class='well'>

@@ -6,10 +6,10 @@ ismsite_contact:
     pattern:  /contact
     defaults: { _controller: IsmSiteBundle:Site:contact }
 
-ismsite_lien:
-    pattern:  /liens
-    defaults: { _controller: IsmSiteBundle:Site:links }
-
 ismsite_roadmap:
     pattern:  /roadmaps
     defaults: { _controller: IsmSiteBundle:Site:roadmap }
+
+ismsite_links:
+    pattern: /links
+    defaults: { _controller: "IsmSiteBundle:Links:index" }

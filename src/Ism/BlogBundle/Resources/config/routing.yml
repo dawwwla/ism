@@ -4,6 +4,10 @@ ismblog:
     requirements:
         page:  \d+
 
+ismblog_feed:
+    pattern:   /feed.rss
+    defaults:  { _controller: IsmBlogBundle:Blog:feed }
+
 IsmBlogBundle_article:
     resource: "@IsmBlogBundle/Resources/config/routing/article.yml"
     prefix:   /article

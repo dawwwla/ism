@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Ism\UserBundle\Entity\Membre
  *
  * @ORM\Table(name="ism_membre")
- * @ORM\Entity(repositoryClass="Ism\UserBundle\Entity\MembreRepository")
+ * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
 class Membre
