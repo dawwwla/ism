@@ -110,6 +110,11 @@ class LinksController extends Controller
             throw $this->createNotFoundException('Unable to find Links entity.');
         }
 
+        if (false === $this->isAuteurOrAdmin($entity)) {
+            throw new \Exception('Vous ne disposer pas des droits suffisant pour modifier le lien.
+                                 Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
+        }
+
         $editForm = $this->createForm(new LinksType(), $entity);
 
         return $this->render('IsmSiteBundle:Links:edit.html.twig', array(
@@ -159,6 +164,11 @@ class LinksController extends Controller
         // Cela permet de protéger la suppression d'article contre cette faille
         $form = $this->createFormBuilder()->getForm();
 
+        if (false === $this->isAuteurOrAdmin($entity)) {
+            throw new \Exception('Vous ne disposer pas des droits suffisant pour supprimer le lien.
+                                 Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
+        }
+
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
@@ -192,5 +202,25 @@ class LinksController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * Vérifie si l'utilisateur courant est l'auteur du lien ou alors s'il dispose des droits d'administrateur
+     *
+     * @param  Article  $article Entité de l'article
+     *
+     * @return boolean          Renvoi 'true' si c'est le cas, autrement 'false'
+     */
+    private function isAuteurOrAdmin(Links $links)
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $isAdmin = $this->get('security.context')->isGranted('ROLE_ADMIN');
+        $auteur = $links->getUser();
+        // Si l'utilisateur courant est l'auteur de l'article ou dispose des droits d'administrateur on renvoi vrai
+        if ($user == $links || $isAdmin) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

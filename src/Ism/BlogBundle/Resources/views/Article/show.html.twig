@@ -15,13 +15,11 @@
       <i class="icon-chevron-left"></i>
       Retour à la liste
     </a>
-    {% if is_granted('ROLE_AUTEUR') and (article.user == app.user.username) %}
+    {% if (is_granted('ROLE_AUTEUR') and (article.user == app.user.username)) or is_granted('ROLE_ADMIN') %}
       <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn">
         <i class="icon-edit"></i>
         Modifier l'article
       </a>
-    {% endif %}
-    {% if is_granted('ROLE_AUTEUR') and (article.user == app.user.username) %}
       <a href="{{ path('article_confirm', {'id': article.id}) }}" class="btn">
         <i class="icon-trash"></i>
         Supprimer l'article
@@ -34,7 +32,7 @@
 
   <!-- CSS -->
   {% stylesheets '@FOSCommentBundle/Resources/assets/css/comments.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
   {% endstylesheets %}
 
 {% endblock %}

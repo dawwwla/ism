@@ -23,8 +23,10 @@
         <td>{{ entity.description|truncate(100, true, '[...]') }}</td>
         <td>
             <div class="btn-group">
-            <a href="{{ path('links_delete', { 'id': entity.id }) }}" class='btn btn-danger'><i class="icon-trash icon-white"></i></a>
-            <a href="{{ path('links_edit', { 'id': entity.id }) }}" class='btn'><i class="icon-edit"></i></a>
+            {% if (is_granted('ROLE_AUTEUR') and (entity.user == app.user.username)) or is_granted('ROLE_ADMIN') %}
+              <a href="{{ path('links_delete', { 'id': entity.id }) }}" class='btn btn-danger'><i class="icon-trash icon-white"></i></a>
+              <a href="{{ path('links_edit', { 'id': entity.id }) }}" class='btn'><i class="icon-edit"></i></a>
+            {% endif %}
             <a href="{{ path('links_show', { 'id': entity.id }) }}" class='btn'><i class="icon-chevron-right"></i></a>
             </div>
         </td>
