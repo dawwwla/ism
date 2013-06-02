@@ -95,17 +95,14 @@ class ArticleController extends Controller
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($article->getId());
-
         return $this->render('IsmBlogBundle:Article:show.html.twig', array(
             'article'      => $article,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Displays a form to edit an existing Article entity.
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_AUTEUR")
      */
     public function editAction($id)
     {
@@ -114,6 +111,11 @@ class ArticleController extends Controller
 
         if (!$article) {
             throw $this->createNotFoundException('Unable to find Article entity.');
+        }
+
+        if (false === $this->isAuteurOrAdmin($article)) {
+            throw new \Exception('Vous ne disposer pas des droits suffisant pour modifier l\'article.
+                                 Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
         }
 
         $editForm = $this->createForm(new ArticleType(), $article);
@@ -126,7 +128,7 @@ class ArticleController extends Controller
 
     /**
      * Edits an existing Article entity.
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_AUTEUR")
      */
     public function updateAction(Request $request, $id)
     {
@@ -157,7 +159,7 @@ class ArticleController extends Controller
 
     /**
      * Affiche un message de confirmation pour la suppression.
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_AUTEUR")
      */
     public function confirmAction($id)
     {
@@ -167,6 +169,11 @@ class ArticleController extends Controller
 
         if (!$article) {
             throw $this->createNotFoundException('Unable to find Article entity.');
+        }
+
+        if (false === $this->isAuteurOrAdmin($article)) {
+            throw new \Exception('Vous ne disposer pas des droits suffisant pour supprimer l\'article.
+                                 Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -179,7 +186,7 @@ class ArticleController extends Controller
 
     /**
      * Deletes a Article entity.
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_AUTEUR")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -215,5 +222,25 @@ class ArticleController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * Vérifie si l'utilisateur courant est l'auteur de l'article ou alors s'il dispose des droits d'administrateur
+     *
+     * @param  Article  $article Entité de l'article
+     *
+     * @return boolean          Renvoi 'true' si c'est le cas, autrement 'false'
+     */
+    private function isAuteurOrAdmin(Article $article)
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $isAdmin = $this->get('security.context')->isGranted('ROLE_ADMIN');
+        $auteur = $article->getUser();
+        // Si l'utilisateur courant est l'auteur de l'article ou dispose des droits d'administrateur on renvoi vrai
+        if ($user == $auteur || $isAdmin) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

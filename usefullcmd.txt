@@ -43,3 +43,9 @@ TODO
  * Créer des handlers sur les formulaires du blog pour simplifier le controlleur
  */
 
+/*
+Information
+Pour la gestion des articles en fonction du membre
+$this->getUser() = $tocken->getUser() dans le constructeur
+Puis faire la vérification dans le constructeur
+ */
