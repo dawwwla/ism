@@ -6,7 +6,7 @@ namespace Ism\SiteBundle\Form\Handler;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
-use Ism\SiteBundle\Form\Model\Contact;
+use Ism\SiteBundle\Form\Model\ContactModel;
 
 /**
  * The ContactHandler.

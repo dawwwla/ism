@@ -1,9 +1,9 @@
 <?php
-# src/SiteBundle/Form/Model/Contact.php
+# src/SiteBundle/Form/Model/ContactModel.php
 
 namespace Ism\SiteBundle\Form\Model;
 
-class Contact
+class ContactModel
 {
     /**
      * Email

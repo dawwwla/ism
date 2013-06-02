@@ -38,24 +38,20 @@ class ArticleController extends Controller
 
         if ($request->getMethod() == 'POST') {
 
-            if ($user = $this->getUser()) {
-                // On définit le User par défaut dans le formulaire (utilisateur courant)
-                $article->setUser($user);
-            }
-
             $form->bind($request);
 
             if ($form->isValid()) {
+                $article->setUser($user = $this->getUser());
                 // --- Début de notre fonctionnalité BigBrother ---
                 // On crée l'évènement
-                $event = new MessagePostEvent($article->getContenu(), $this->getUser());
+                $event = new MessagePostEvent($article->getContenu(), $user);
 
                 // On déclenche l'évènement
                 $this->get('event_dispatcher')
                      ->dispatch(BigbrotherEvents::onMessagePost, $event);
 
-                 // On récupère ce qui a été modifié par le ou les listener(s), ici le message
-                 $article->setContenu($event->getMessage());
+                // On récupère ce qui a été modifié par le ou les listener(s), ici le message
+                $article->setContenu($event->getMessage());
                 // --- Fin de notre fonctionnalité BigBrother ---
 
                 $em = $this->getDoctrine()->getManager();
@@ -79,12 +75,6 @@ class ArticleController extends Controller
      */
     public function showAction(Article $article)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        if (!$article) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
-        }
-
         return $this->render('IsmBlogBundle:Article:show.html.twig', array(
             'article'      => $article,
         ));
@@ -94,83 +84,32 @@ class ArticleController extends Controller
      * Displays a form to edit an existing Article entity.
      * @Secure(roles="ROLE_AUTEUR")
      */
-    public function editAction($id)
+    public function editAction(Article $article)
     {
-        $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository('IsmBlogBundle:Article')->find($id);
-
-        if (!$article) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
-        }
-
         if (false === $this->isAuteurOrAdmin($article)) {
             throw new \Exception('Vous ne disposer pas des droits suffisant pour modifier l\'article.
                                  Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
         }
 
-        $editForm = $this->createForm(new ArticleType(), $article);
+        $form = $this->createForm(new ArticleType(), $article);
 
-        return $this->render('IsmBlogBundle:Article:edit.html.twig', array(
-            'article'       => $article,
-            'edit_form'     => $editForm->createView(),
-        ));
-    }
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
 
-    /**
-     * Edits an existing Article entity.
-     * @Secure(roles="ROLE_AUTEUR")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($article);
+                $em->flush();
 
-        $article = $em->getRepository('IsmBlogBundle:Article')->find($id);
-
-        if (!$article) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
-        }
-
-        $editForm = $this->createForm(new ArticleType(), $article);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($article);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('info', 'Article bien modifié');
-            return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));
+                $this->get('session')->getFlashBag()->add('info', 'Article bien modifié');
+                return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));
+            }
         }
 
         return $this->render('IsmBlogBundle:Article:edit.html.twig', array(
             'article'       => $article,
-            'edit_form'     => $editForm->createView(),
-        ));
-    }
-
-    /**
-     * Affiche un message de confirmation pour la suppression.
-     * @Secure(roles="ROLE_AUTEUR")
-     */
-    public function confirmAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $article = $em->getRepository('IsmBlogBundle:Article')->find($id);
-
-        if (!$article) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
-        }
-
-        if (false === $this->isAuteurOrAdmin($article)) {
-            throw new \Exception('Vous ne disposer pas des droits suffisant pour supprimer l\'article.
-                                 Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('IsmBlogBundle:Article:delete.html.twig' , array(
-            'article'       => $article,
-            'delete_form'   => $deleteForm->createView(),
+            'edit_form'     => $form->createView(),
         ));
     }
 
@@ -178,40 +117,34 @@ class ArticleController extends Controller
      * Deletes a Article entity.
      * @Secure(roles="ROLE_AUTEUR")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Article $article)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        if (false === $this->isAuteurOrAdmin($article)) {
+            throw new \Exception('Vous ne disposer pas des droits suffisant pour supprimer l\'article.
+                                 Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
+        }
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'article contre cette faille
+        $form = $this->createFormBuilder()->getForm();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $article = $em->getRepository('IsmBlogBundle:Article')->find($id);
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
 
-            if (!$article) {
-                throw $this->createNotFoundException('Unable to find Article entity.');
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($article);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('info', 'Article bien supprimé');
+                return $this->redirect($this->generateUrl('ismblog'));
             }
-
-            $em->remove($article);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('info', 'Article bien supprimé');
         }
 
-        return $this->redirect($this->generateUrl('ismblog'));
-    }
-
-    /**
-     * Creates a form to delete a Article entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->render('IsmBlogBundle:Article:delete.html.twig' , array(
+            'article'       => $article,
+            'delete_form'   => $form->createView(),
+        ));
     }
 
     /**

@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Création d'un article</h1>
 
-    <form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('article_new') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
             <a href="{{ path('ismblog') }}" class="btn">
