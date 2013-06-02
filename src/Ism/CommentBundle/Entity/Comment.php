@@ -33,7 +33,7 @@ class Comment extends BaseComment implements SignedCommentInterface
     /**
      * Author of the comment
      *
-     * @ORM\ManyToOne(targetEntity="MyProject\MyBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Ism\UserBundle\Entity\User")
      * @var User
      */
     protected $author;
