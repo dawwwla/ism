@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use Ism\BlogBundle\Entity\Article;
-use Ism\BlogBundle\Entity\Membre;
 use Ism\BlogBundle\Entity\Commentaire;
 
 use Ism\BlogBundle\Form\ArticleType;
