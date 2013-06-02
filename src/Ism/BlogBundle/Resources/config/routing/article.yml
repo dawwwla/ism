@@ -1,7 +1,3 @@
-article_new:
-    pattern:  /new
-    defaults: { _controller: "IsmBlogBundle:Article:new" }
-
 article_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "IsmBlogBundle:Article:edit" }

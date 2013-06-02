@@ -11,3 +11,7 @@ ismblog_feed:
 IsmBlogBundle_article:
     resource: "@IsmBlogBundle/Resources/config/routing/article.yml"
     prefix:   /article
+
+article_new:
+    pattern:  /new
+    defaults: { _controller: "IsmBlogBundle:Article:new" }
