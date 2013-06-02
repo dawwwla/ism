@@ -27,7 +27,7 @@ class SiteController extends Controller
         $process = $formHandler->process(); // Contient true si la requête est POST et le formulaire valide
         if ($process)
         {
-            $this->get('session')->getFlashBag()->add('info', 'Message envoyé');
+            $this->get('session')->getFlashBag()->add('success', 'Message envoyé');
         }
 
         return $this->render('IsmSiteBundle:Site:contact.html.twig', array(

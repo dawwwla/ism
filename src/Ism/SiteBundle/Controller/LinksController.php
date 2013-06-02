@@ -49,7 +49,7 @@ class LinksController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add('success', 'Lien ajouté');
             return $this->redirect($this->generateUrl('links_show', array('id' => $entity->getId())));
         }
 
@@ -138,7 +138,7 @@ class LinksController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add('success', 'Lien modifié');
             return $this->redirect($this->generateUrl('links_show', array('id' => $id)));
         }
 
@@ -168,7 +168,7 @@ class LinksController extends Controller
                 $em->remove($entity);
                 $em->flush();
             }
-
+            $this->get('session')->getFlashBag()->add('success', 'Lien supprimé');
             return $this->redirect($this->generateUrl('ismsite_links'));
         }
 

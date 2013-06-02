@@ -2,7 +2,7 @@
 
 {% block ismsite_body -%}
   <h2>{{ entity.website }}</h2>
-  <i>Ajouté par {{ entity.user }}</i>
+  <i>Ajouté par {{ entity.user }} le {{ entity.date|date('d/m/Y') }}</i>
   </br></br>
   <table class="record_properties">
     <tbody>

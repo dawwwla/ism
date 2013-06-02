@@ -54,6 +54,20 @@ class Links
      */
     private $description;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * Initialise la date à la date actuelle
+     */
+    public function __construct()
+    {
+        $this->date = new \Datetime;
+    }
 
     /**
      * Get id
@@ -165,6 +179,29 @@ class Links
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Article
+     */
+    public function setDate(\Datetime $date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 
     /**
