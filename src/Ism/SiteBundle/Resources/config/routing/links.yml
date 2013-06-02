@@ -10,12 +10,7 @@ links_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "IsmSiteBundle:Links:edit" }
 
-links_update:
-    pattern:  /{id}/update
-    defaults: { _controller: "IsmSiteBundle:Links:update" }
-    requirements: { _method: post|put }
-
 links_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "IsmSiteBundle:Links:delete" }
-    requirements: { _method: post|delete|get }
+    requirements: { _method: post|get }
