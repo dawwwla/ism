@@ -25,19 +25,18 @@ use Ism\BlogBundle\Bigbrother\MessagePostEvent;
 class ArticleController extends Controller
 {
     /**
-     * Displays a form to create a new Article entity.
+     * Créer un article
+     *
      * @Secure(roles="ROLE_AUTEUR")
      */
     public function newAction()
     {
         $article = new Article();
-
         $form = $this->createForm(new ArticleType(), $article);
 
         $request = $this->getRequest();
-
+        // Si la requête est de type POST on enregiste l'article autrement on affiche le formulaire
         if ($request->getMethod() == 'POST') {
-
             $form->bind($request);
 
             if ($form->isValid()) {
@@ -70,7 +69,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Finds and displays a Article entity.
+     * Voir un article
      *
      */
     public function showAction(Article $article)
@@ -81,7 +80,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Article entity.
+     * Modifier un article
+     *
      * @Secure(roles="ROLE_AUTEUR")
      */
     public function editAction(Article $article)
@@ -114,7 +114,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * Deletes a Article entity.
+     * Supprimer un article
+     *
      * @Secure(roles="ROLE_AUTEUR")
      */
     public function deleteAction(Article $article)

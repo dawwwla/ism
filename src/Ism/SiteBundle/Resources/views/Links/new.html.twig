@@ -3,7 +3,7 @@
 {% block ismsite_body -%}
     <h2>Ajouter un nouveau lien</h2>
 
-    <form action="{{ path('links_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('links_new') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
             <a href="{{ path('ismsite_links') }}" class="btn">

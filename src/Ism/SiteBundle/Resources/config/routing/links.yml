@@ -6,11 +6,6 @@ links_new:
     pattern:  /new
     defaults: { _controller: "IsmSiteBundle:Links:new" }
 
-links_create:
-    pattern:  /create
-    defaults: { _controller: "IsmSiteBundle:Links:create" }
-    requirements: { _method: post }
-
 links_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "IsmSiteBundle:Links:edit" }
