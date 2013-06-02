@@ -13,4 +13,3 @@ article_delete:
 article_show:
     pattern:   /{slug}
     defaults:  { _controller: IsmBlogBundle:Article:show }
-

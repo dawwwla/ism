@@ -16,7 +16,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class LinksController extends Controller
 {
     /**
-     * Lists all Links entities.
+     * Liste tous les liens
      *
      */
     public function indexAction()
@@ -31,43 +31,32 @@ class LinksController extends Controller
     }
 
     /**
-     * Creates a new Links entity.
+     * Créer un nouveau lien
      *
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Links();
-
-        if ($this->getUser()) {
-          // On définit le User par défaut dans le formulaire (utilisateur courant)
-          $entity->setUser($this->getUser());
-        }
-        $form = $this->createForm(new LinksType(), $entity);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Lien ajouté');
-            return $this->redirect($this->generateUrl('links_show', array('id' => $entity->getId())));
-        }
-
-        return $this->render('IsmSiteBundle:Links:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to create a new Links entity.
-     *
+     * @Secure(roles="ROLE_AUTEUR")
      */
     public function newAction()
     {
         $entity = new Links();
         $form = $this->createForm(new LinksType(), $entity);
 
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                // On défini l'utilisateur connecté
+                $entity->setUser($this->getUser());
+                // On enregistre le lien en base de donnée
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('success', 'Lien ajouté');
+                return $this->redirect($this->generateUrl('links_show', array('id' => $entity->getId())));
+            }
+        }
+
         return $this->render('IsmSiteBundle:Links:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -75,88 +64,52 @@ class LinksController extends Controller
     }
 
     /**
-     * Finds and displays a Links entity.
+     * Afficher les détails sur un lien
      *
      */
-    public function showAction($id)
+    public function showAction(Links $entity)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('IsmSiteBundle:Links')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Links entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('IsmSiteBundle:Links:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Links entity.
+     * Modifier un lien
      *
+     * @Secure(roles="ROLE_AUTEUR")
      */
-    public function editAction($id)
+    public function editAction(Links $entity)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('IsmSiteBundle:Links')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Links entity.');
-        }
-
         if (false === $this->isAuteurOrAdmin($entity)) {
             throw new \Exception('Vous ne disposer pas des droits suffisant pour modifier le lien.
                                  Vérifier que vous en êtes bien l\'auteur ou disposer des droits d\'administrateur.');
         }
+        $form = $this->createForm(new LinksType(), $entity);
 
-        $editForm = $this->createForm(new LinksType(), $entity);
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
 
-        return $this->render('IsmSiteBundle:Links:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        ));
-    }
-
-    /**
-     * Edits an existing Links entity.
-     *
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('IsmSiteBundle:Links')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Links entity.');
-        }
-
-        $editForm = $this->createForm(new LinksType(), $entity);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Lien modifié');
-            return $this->redirect($this->generateUrl('links_show', array('id' => $id)));
+                $this->get('session')->getFlashBag()->add('success', 'Lien modifié');
+                return $this->redirect($this->generateUrl('links_show', array('id' => $entity->getId())));
+            }
         }
 
         return $this->render('IsmSiteBundle:Links:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'edit_form'   => $form->createView(),
         ));
     }
 
     /**
-     * Deletes a Links entity.
+     * Supprimer un lien
      *
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_AUTEUR")
      */
     public function deleteAction(Links $entity)
     {
@@ -187,21 +140,6 @@ class LinksController extends Controller
             'entity' => $entity,
             'delete_form' => $form->createView(),
         ));
-    }
-
-    /**
-     * Creates a form to delete a Links entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
     }
 
     /**
