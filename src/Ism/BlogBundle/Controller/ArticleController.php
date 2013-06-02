@@ -233,9 +233,9 @@ class ArticleController extends Controller
      */
     private function isAuteurOrAdmin(Article $article)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser()->getId();
         $isAdmin = $this->get('security.context')->isGranted('ROLE_ADMIN');
-        $auteur = $article->getUser();
+        $auteur = $article->getUser()->getId();
         // Si l'utilisateur courant est l'auteur de l'article ou dispose des droits d'administrateur on renvoi vrai
         if ($user == $auteur || $isAdmin) {
             return true;

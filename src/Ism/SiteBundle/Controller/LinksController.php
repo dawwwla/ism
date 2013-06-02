@@ -22,7 +22,7 @@ class LinksController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        // On récupére tous les liens
         $entities = $em->getRepository('IsmSiteBundle:Links')->findAll();
 
         return $this->render('IsmSiteBundle:Links:index.html.twig', array(
@@ -213,11 +213,11 @@ class LinksController extends Controller
      */
     private function isAuteurOrAdmin(Links $links)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser()->getId();
         $isAdmin = $this->get('security.context')->isGranted('ROLE_ADMIN');
-        $auteur = $links->getUser();
-        // Si l'utilisateur courant est l'auteur de l'article ou dispose des droits d'administrateur on renvoi vrai
-        if ($user == $links || $isAdmin) {
+        $auteur = $links->getUser()->getId();
+        // Si l'utilisateur courant est l'auteur du lien ou dispose des droits d'administrateur on renvoi vrai
+        if ($user == $auteur || $isAdmin) {
             return true;
         } else {
             return false;

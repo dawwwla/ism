@@ -15,7 +15,7 @@
       <i class="icon-chevron-left"></i>
       Retour à la liste
     </a>
-    {% if (is_granted('ROLE_AUTEUR') and (article.user == app.user.username)) or is_granted('ROLE_ADMIN') %}
+    {% if (is_granted('ROLE_AUTEUR') and (article.user.id == app.user.id)) or is_granted('ROLE_ADMIN') %}
       <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn">
         <i class="icon-edit"></i>
         Modifier l'article

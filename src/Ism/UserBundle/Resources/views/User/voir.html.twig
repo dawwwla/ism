@@ -13,13 +13,11 @@
       <i class="icon-chevron-left"></i>
       Retour
     </a>
-    {% if is_granted('ROLE_AUTEUR') %}
+    {% if (is_granted('ROLE_AUTEUR') and (user.id == app.user.id)) or is_granted('ROLE_ADMIN') %}
       <a href="{{ path('ismuser_fiche_modifier', {'id': membre.id}) }}" class="btn">
         <i class="icon-edit"></i>
         Modifier
       </a>
-    {% endif %}
-    {% if is_granted('ROLE_ADMIN') %}
       <a href="{{ path('ismuser_fiche_supprimer', {'id': membre.id}) }}" class="btn">
         <i class="icon-trash"></i>
         Supprimer
