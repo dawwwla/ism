@@ -37,3 +37,6 @@ php app/console generate:bundle
 
 Installer les nouveaux bundle avec composer
 php composer.phar install
+
+Plus d'information ?
+Voir ici http://www.kitpages.fr/fr/cms/22/aide-memoire-symfony2
