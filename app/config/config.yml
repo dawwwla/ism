@@ -124,3 +124,8 @@ sonata_admin:
             Mediateque:
                 items:
                     - ism.blog.admin.image
+
+fpn_tag:
+    model:
+        tag_class:     Ism\TagBundle\Entity\Tag
+        tagging_class: Ism\TagBundle\Entity\Tagging

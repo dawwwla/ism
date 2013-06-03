@@ -6,8 +6,7 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Prénom</th>
-        <th>Nom</th>
+        <th>Auteur</th>
         <th>Site web</th>
         <th>Description</th>
         <th style="width: 1%">Actions</th>
@@ -17,8 +16,7 @@
     {% for entity in entities %}
       <tr>
         <td><a href="{{ path('links_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-        <td>{{ entity.firstname }}</td>
-        <td>{{ entity.lastname }}</td>
+        <td>{{ entity.fullname }}</td>
         <td>{{ entity.website }}</td>
         <td>{{ entity.description|truncate(100, true, '[...]') }}</td>
         <td>

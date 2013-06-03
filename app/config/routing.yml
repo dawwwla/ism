@@ -1,3 +1,7 @@
+ism_tag:
+    resource: "@IsmTagBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # Les imports pour Ism
 IsmSiteBundlePrefix:
     resource: "@IsmSiteBundle/Resources/config/routing.yml"

@@ -268,3 +268,7 @@ font-size: 60px;
 .footer-links li:first-child {
   padding-left: 0;
 }
+
+.fos_comment_comment_replies {
+  padding-left: 20px;
+}
