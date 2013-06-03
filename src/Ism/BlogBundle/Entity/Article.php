@@ -3,6 +3,10 @@
 namespace Ism\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineExtensions\Taggable\Taggable;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Symfony\Component\Validator\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -13,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Ism\BlogBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Article
+class Article implements Taggable
 {
     /**
      * @var integer $id
@@ -81,12 +85,13 @@ class Article
      */
     private $user;
 
+    private $tags;
+
     public function __construct()
     {
         $this->publication  = true;
         $this->date         = new \Datetime;
         $this->categories   = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -264,5 +269,22 @@ class Article
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+
+        return $this->tags;
+    }
+
+    public function getTaggableType()
+    {
+        return 'acme_tag';
+    }
+
+    public function getTaggableId()
+    {
+        return $this->getId();
     }
 }
