@@ -33,8 +33,7 @@
         "knplabs/knp-menu-bundle":"1.1.x-dev",
         "sonata-project/block-bundle": "dev-master",
         "Trsteel/ckeditor-bundle": "dev-master",
-        "friendsofsymfony/comment-bundle": "dev-master",
-        "fpn/tag-bundle": "dev-master"
+        "friendsofsymfony/comment-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

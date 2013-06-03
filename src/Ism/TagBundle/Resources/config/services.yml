@@ -1,7 +1,0 @@
-parameters:
-#    ism_tag.example.class: Ism\TagBundle\Example
-
-services:
-#    ism_tag.example:
-#        class: %ism_tag.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

@@ -34,15 +34,6 @@ class ArticleController extends Controller
         $article = new Article();
         $form = $this->createForm(new ArticleType(), $article);
 
-        $tagManager = $this->get('fpn_tag.tag_manager');
-
-        $tagNames = $tagManager->splitTagNames('Clark Kent, Loïs Lane');
-        // ask the tag manager to create a Tag object
-        $tagList = $tagManager->loadOrCreateTags($tagNames);
-
-        // assign the tagList to the post
-        $tagManager->addTags($tagList, $article);
-
         $request = $this->getRequest();
         // Si la requête est de type POST on enregiste l'article autrement on affiche le formulaire
         if ($request->getMethod() == 'POST') {
@@ -65,8 +56,6 @@ class ArticleController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $em->flush();
-
-                $tagManager->saveTagging($article);
 
                 $this->get('session')->getFlashBag()->add('info', 'Article bien ajouté');
                 return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));
