@@ -85,7 +85,7 @@ class Article implements Taggable
      */
     private $user;
 
-    private $tags;
+    protected $tags;
 
     public function __construct()
     {
@@ -271,20 +271,19 @@ class Article implements Taggable
         return $this->user;
     }
 
-    public function getTags()
-    {
-        $this->tags = $this->tags ?: new ArrayCollection();
-
-        return $this->tags;
-    }
-
     public function getTaggableType()
     {
-        return 'acme_tag';
+        return 'article';
     }
 
     public function getTaggableId()
     {
         return $this->getId();
+    }
+
+    public function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+        return $this->tags;
     }
 }

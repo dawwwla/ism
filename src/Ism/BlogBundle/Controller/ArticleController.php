@@ -11,6 +11,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use Ism\BlogBundle\Entity\Article;
 use Ism\BlogBundle\Entity\Membre;
 use Ism\BlogBundle\Entity\Commentaire;
+use Ism\TagBundle\Entity\Tag;
 
 use Ism\BlogBundle\Form\ArticleType;
 use Ism\BlogBundle\Form\ImageType;
@@ -34,6 +35,14 @@ class ArticleController extends Controller
         $article = new Article();
         $form = $this->createForm(new ArticleType(), $article);
 
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        // Load or create a list of tags
+        $tagNames = $tagManager->splitTagNames('Clark Kent, Loïs Lane');
+        $tags = $tagManager->loadOrCreateTags($tagNames);
+
+        // assign the foo tag to the post
+        $tagManager->addTags($tags, $article);
+
         $request = $this->getRequest();
         // Si la requête est de type POST on enregiste l'article autrement on affiche le formulaire
         if ($request->getMethod() == 'POST') {
@@ -56,6 +65,8 @@ class ArticleController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $em->flush();
+                // after flushing the post, tell the tag manager to actually save the tags
+                $tagManager->saveTagging($article);
 
                 $this->get('session')->getFlashBag()->add('info', 'Article bien ajouté');
                 return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));
@@ -74,8 +85,13 @@ class ArticleController extends Controller
      */
     public function showAction(Article $article)
     {
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        $tags = $tagManager->loadTagging($article);
+        $count = $article->getTags()->count();
         return $this->render('IsmBlogBundle:Article:show.html.twig', array(
             'article'   => $article,
+            'tags'      => $tags,
+            'count'     => $count
         ));
     }
 

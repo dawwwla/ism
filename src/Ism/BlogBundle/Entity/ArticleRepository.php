@@ -33,5 +33,4 @@ class ArticleRepository extends EntityRepository
 
     return new Paginator($query);
   }
-
 }

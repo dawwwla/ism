@@ -21,13 +21,13 @@ class BlogController extends Controller
 
         // On récupère les articles de la page courante
         $articles = $this->getDoctrine()
-                        ->getManager()
-                        ->getRepository('IsmBlogBundle:Article')
-                        ->getArticles($nbParPage, $page); // getArticles() est défini dans ArticleRepository
+                         ->getManager()
+                         ->getRepository('IsmBlogBundle:Article')
+                         ->getArticles($nbParPage, $page); // getArticles() est défini dans ArticleRepository
 
         // On passe le tout à la vue
         return $this->render('IsmBlogBundle:Blog:index.html.twig', array(
-            'articles'   => $articles,
+            'articles'  => $articles,
             'page'      => $page,
             'nb_page'   => ceil(count($articles) / $nbParPage) ?: 1
         ));
