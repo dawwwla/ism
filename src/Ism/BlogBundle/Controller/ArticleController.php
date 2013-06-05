@@ -54,23 +54,17 @@ class ArticleController extends Controller
                 $article->setContenu($event->getMessage());
                 // --- Fin de notre fonctionnalité BigBrother ---
 
-                if (null != ( $tags = $form->get('tags')->getData())) {
-                    // --- Ajout des tags ---
-                    $tagManager = $this->get('fpn_tag.tag_manager');
-                    // Load or create a list of tags
-                    $tagNames = $tagManager->splitTagNames($tags);
-                    $tags = $tagManager->loadOrCreateTags($tagNames);
-                    // assign the foo tag to the article
-                    $tagManager->addTags($tags, $article);
-                    // -- Fin ajout des tags
-                }
+                // On récupère le tagManager
+                $tagManager = $this->get('fpn_tag.tag_manager');
+                // On lie les tags contenu dans le champ du formulaire à l'article
+                $this->addStringTags($tagManager, $article, $form->get('tags')->getData());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $em->flush();
 
                 // on persist les tags après le flush()
-                if(null != $tags) { $tagManager->saveTagging($article); }
+                $tagManager->saveTagging($article);
 
                 $this->get('session')->getFlashBag()->add('info', 'Article bien ajouté');
                 return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));
@@ -111,32 +105,27 @@ class ArticleController extends Controller
 
         $form = $this->createForm(new ArticleType(), $article);
 
-        // On charge les tags liés à l'article
-        $tagManager = $this->get('fpn_tag.tag_manager');
-        $tagManager->loadTagging($article);
-        // On les ajoutes dans le champ texte avec une certaine mise en forme
-        $tags = $article->getTags();
-        $chaine = "";
-        foreach ($tags as $tag) {
-            $chaine = "{$chaine}{$tag->getName()},";
-        }
-        $chaine = substr($chaine,0,-1);
-        $form->get('tags')->setData($chaine);
+        // On récupère les tags sous la forme d'une string
+        $StrTags = $this->getStringTags($article);
+        // On les ajoutes au champ 'tags' du formulaire
+        $form->get('tags')->setData($StrTags);
 
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
 
             if ($form->isValid()) {
-                // On les remets sous forme de Array
-                $tagNames = $tagManager->splitTagNames($chaine);
+                // On récupére le tagManager
+                $tagManager = $this->get('fpn_tag.tag_manager');
+                // On remplace les tags lié à l'article par ceux contenu dans le champ tag du formulaire
+                $this->replaceStringTags($tagManager, $article, $form->get('tags')->getData());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $em->flush();
 
-                // On remplace les tags modifiés
-                $tagManager->replaceTags($tagNames, $article);
+                // on persist les tags après le flush()
+                $tagManager->saveTagging($article);
 
                 $this->get('session')->getFlashBag()->add('info', 'Article bien modifié');
                 return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));
@@ -202,5 +191,58 @@ class ArticleController extends Controller
         } else {
             return false;
         }
+    }
+    /**
+     * Récupère les tags rattaché à un article et les renvois sous forme d'une string
+     *
+     * @param  Article $article
+     * @return string           Renvoi une chaine de caractère contenant les tags de l'article
+     */
+    private function getStringTags(Article $article)
+    {
+        // On charge les tags liés à l'article
+        $tagManager = $this->get('fpn_tag.tag_manager')->loadTagging($article);
+        // On les récupéres sous forme d'Array
+        $tags = $article->getTags();
+        // On les tranformes en une chaine de caractère
+        $chaine = "";
+        foreach ($tags as $tag) {
+            $chaine = "{$chaine}{$tag->getName()},";
+        }
+        // Suppression de la dernière virgule
+        $chaine = substr($chaine,0,-1);
+        return $chaine;
+    }
+
+    /**
+     * Equivalent de la fonction addTags pour les string
+     *
+     * @param Article $article
+     * @param string  $chaine  de la forme 'tag1,tag2,tag3'
+     */
+    private function addStringTags($tagManager, Article $article, $chaine)
+    {
+        // On transforme notre string en un tableau d'Array
+        $tagNames = $tagManager->splitTagNames($chaine);
+        // On charge/créé les nouveaux tags
+        $tags = $tagManager->loadOrCreateTags($tagNames);
+        // On les assignes à l'articles
+        $tagManager->addTags($tags, $article);
+    }
+
+    /**
+     * Equivalent de la fonction replaceTags pour les string
+     *
+     * @param Article $article
+     * @param string  $chaine  de la forme 'tag1,tag2,tag3'
+     */
+    private function replaceStringTags($tagManager, Article $article, $chaine)
+    {
+        // On transforme notre string en un tableau d'Array
+        $tagNames = $tagManager->splitTagNames($chaine);
+        // On charge/créé les nouveaux tags
+        $tags = $tagManager->loadOrCreateTags($tagNames);
+        // On les assignes à l'articles
+        $tagManager->replaceTags($tags, $article);
     }
 }

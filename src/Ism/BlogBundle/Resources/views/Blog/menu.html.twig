@@ -11,4 +11,10 @@
     {% endfor %}
   </ul>
   <li class="nav-header">Catégories</li>
+  <select class="span12">
+    <option>Choisir une catégorie</option>
+  {% for categorie in liste_categories %}
+    <option>{{ categorie.nom }}</option>
+  {% endfor %}
+  </select>
 {% endif %}

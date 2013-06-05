@@ -3,7 +3,6 @@
 namespace Ism\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use DoctrineExtensions\Taggable\Entity\Tag;
 
 class BlogController extends Controller
 {
@@ -39,7 +38,7 @@ class BlogController extends Controller
       $em = $this->getDoctrine()->getManager();
       // On affiche récupére les derniers articles
       $repository = $em->getRepository('IsmBlogBundle:Article');
-      $liste = $repository->findBy(
+      $articles = $repository->findBy(
         array(),                 // Pas de critère
         array('date' => 'desc'), // On tri par date décroissante
         $nombre,                 // On sélectionne $nombre articles
@@ -48,10 +47,14 @@ class BlogController extends Controller
       // On récupére les mot-clés
       $tagRepo = $em->getRepository('IsmTagBundle:Tag');
       $tags = $tagRepo->getTagsWithCountArray('ism_tag');
+      // On récupére les catégories
+      $repository = $em->getRepository('IsmBlogBundle:Categorie');
+      $categories = $repository->findAll();
 
       return $this->render('IsmBlogBundle:Blog:menu.html.twig', array(
-        'liste_articles' => $liste, // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
-        'liste_tags'     => $tags
+        'liste_articles'    => $articles, // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
+        'liste_tags'        => $tags,
+        'liste_categories'  => $categories
       ));
     }
 
