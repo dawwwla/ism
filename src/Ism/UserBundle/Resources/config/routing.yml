@@ -18,6 +18,10 @@ ismuser_fiche_supprimer:
     requirements:
         id:   \d+
 
+ismuser_profile:
+    pattern:   /profile
+    defaults:  { _controller: IsmUserBundle:User:profile }
+
 ismuser_voir:
     pattern:   /{username}
     defaults:  { _controller: IsmUserBundle:User:voir }

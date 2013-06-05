@@ -273,7 +273,7 @@ class Article implements Taggable
 
     public function getTaggableType()
     {
-        return 'article';
+        return 'ism_tag';
     }
 
     public function getTaggableId()
@@ -286,4 +286,5 @@ class Article implements Taggable
         $this->tags = $this->tags ?: new ArrayCollection();
         return $this->tags;
     }
+
 }

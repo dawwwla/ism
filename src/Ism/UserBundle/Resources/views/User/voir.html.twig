@@ -1,7 +1,7 @@
 {% extends "IsmUserBundle::layout.html.twig" %}
 
 {% block title %}
-  A propos de {{ user.username }} - {{ parent() }}
+  Fiche membre de {{ user.username }} - {{ parent() }}
 {% endblock %}
 
 {% block ismuser_body %}
@@ -9,11 +9,11 @@
   {% include "IsmUserBundle:User:fiche.html.twig" %}
 
   <p>
-    <a href="{{ path('ismuser_index') }}" class="btn">
-      <i class="icon-chevron-left"></i>
-      Retour
-    </a>
     {% if (is_granted('ROLE_AUTEUR') and (user.id == app.user.id)) or is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('ismuser_index') }}" class="btn">
+        <i class="icon-chevron-left"></i>
+        Retour
+      </a>
       <a href="{{ path('ismuser_fiche_modifier', {'id': membre.id}) }}" class="btn">
         <i class="icon-edit"></i>
         Modifier
@@ -22,6 +22,11 @@
         <i class="icon-trash"></i>
         Supprimer
       </a>
+      {% else %}
+        <a href="{{ path('ismblog') }}" class="btn">
+          <i class="icon-chevron-left"></i>
+          Retour au blog
+        </a>
     {% endif %}
   </p>
 

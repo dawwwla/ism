@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ism_tag")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DoctrineExtensions\Taggable\Entity\TagRepository")
  */
 class Tag extends BaseTag
 {

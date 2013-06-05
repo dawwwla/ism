@@ -35,14 +35,6 @@ class ArticleController extends Controller
         $article = new Article();
         $form = $this->createForm(new ArticleType(), $article);
 
-        $tagManager = $this->get('fpn_tag.tag_manager');
-        // Load or create a list of tags
-        $tagNames = $tagManager->splitTagNames('Clark Kent, Loïs Lane');
-        $tags = $tagManager->loadOrCreateTags($tagNames);
-
-        // assign the foo tag to the post
-        $tagManager->addTags($tags, $article);
-
         $request = $this->getRequest();
         // Si la requête est de type POST on enregiste l'article autrement on affiche le formulaire
         if ($request->getMethod() == 'POST') {
@@ -62,11 +54,23 @@ class ArticleController extends Controller
                 $article->setContenu($event->getMessage());
                 // --- Fin de notre fonctionnalité BigBrother ---
 
+                if (null != ( $tags = $form->get('tags')->getData())) {
+                    // --- Ajout des tags ---
+                    $tagManager = $this->get('fpn_tag.tag_manager');
+                    // Load or create a list of tags
+                    $tagNames = $tagManager->splitTagNames($tags);
+                    $tags = $tagManager->loadOrCreateTags($tagNames);
+                    // assign the foo tag to the article
+                    $tagManager->addTags($tags, $article);
+                    // -- Fin ajout des tags
+                }
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $em->flush();
-                // after flushing the post, tell the tag manager to actually save the tags
-                $tagManager->saveTagging($article);
+
+                // on persist les tags après le flush()
+                if(null != $tags) { $tagManager->saveTagging($article); }
 
                 $this->get('session')->getFlashBag()->add('info', 'Article bien ajouté');
                 return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));
@@ -86,12 +90,10 @@ class ArticleController extends Controller
     public function showAction(Article $article)
     {
         $tagManager = $this->get('fpn_tag.tag_manager');
-        $tags = $tagManager->loadTagging($article);
-        $count = $article->getTags()->count();
+        $tagManager->loadTagging($article);
+
         return $this->render('IsmBlogBundle:Article:show.html.twig', array(
             'article'   => $article,
-            'tags'      => $tags,
-            'count'     => $count
         ));
     }
 
@@ -109,14 +111,32 @@ class ArticleController extends Controller
 
         $form = $this->createForm(new ArticleType(), $article);
 
+        // On charge les tags liés à l'article
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        $tagManager->loadTagging($article);
+        // On les ajoutes dans le champ texte avec une certaine mise en forme
+        $tags = $article->getTags();
+        $chaine = "";
+        foreach ($tags as $tag) {
+            $chaine = "{$chaine}{$tag->getName()},";
+        }
+        $chaine = substr($chaine,0,-1);
+        $form->get('tags')->setData($chaine);
+
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
 
             if ($form->isValid()) {
+                // On les remets sous forme de Array
+                $tagNames = $tagManager->splitTagNames($chaine);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $em->flush();
+
+                // On remplace les tags modifiés
+                $tagManager->replaceTags($tagNames, $article);
 
                 $this->get('session')->getFlashBag()->add('info', 'Article bien modifié');
                 return $this->redirect($this->generateUrl('article_show', array('slug' => $article->getSlug())));

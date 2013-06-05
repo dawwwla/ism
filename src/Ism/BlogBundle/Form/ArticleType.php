@@ -13,10 +13,10 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre',  'text', array(
+            ->add('titre', 'text', array(
               'attr' => array('class' => 'span6'),
             ))
-            ->add('image',       new ImageType(), array(
+            ->add('image', new ImageType(), array(
               'required' => false,
               'label'    => 'Vignette'
             ))
@@ -28,6 +28,11 @@ class ArticleType extends AbstractType
               'class'    => 'IsmBlogBundle:Categorie',
               'property' => 'nom',
               'multiple' => true
+            ))
+            ->add('tags', null, array(
+              'mapped'    => false,
+              'label'     => 'Tags (séparé par des virgules)',
+              'required'  => false
             ))
         ;
 

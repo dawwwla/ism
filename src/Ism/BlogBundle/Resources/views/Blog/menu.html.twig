@@ -1,7 +1,14 @@
 {# src/Ism/BlogBundle/Resources/views/Blog/menu.html.twig #}
 {% if (null != liste_articles) %}
-  <li class="nav-header">Les derniers articles</li>
+  <li class="nav-header">Articles récents</li>
   {% for article in liste_articles %}
     <li><a href="{{ path('article_show', {'slug': article.slug}) }}">{{ article.titre }}</a></li>
   {% endfor %}
+  <li class="nav-header">Mots-clefs</li>
+  <ul class="tags">
+    {% for key, value in liste_tags %}
+      <li><a href="" class="tag">{{ key|upper }} ({{ value }})</a></li>
+    {% endfor %}
+  </ul>
+  <li class="nav-header">Catégories</li>
 {% endif %}

@@ -56,7 +56,7 @@ class UserController extends Controller {
 
         // On redirige vers la page de visualisation du membre nouvellement créé
  //       return $this->redirect($this->generateUrl('ismuser_index'));
-        return $this->redirect($this->generateUrl('ismuser_voir', array('username' => $user->getUsername())));
+        return $this->redirect($this->generateUrl('ismuser_profile'));
       }
     }
 
@@ -88,7 +88,7 @@ class UserController extends Controller {
         // On définit un message flash
         $this->get('session')->getFlashBag()->add('info', 'Fiche membre bien modifié');
 
-        return $this->redirect($this->generateUrl('ismuser_index'));
+        return $this->redirect($this->generateUrl('ismuser_profile'));
       }
     }
 
@@ -131,6 +131,14 @@ class UserController extends Controller {
       'membre' => $membre,
       'form'    => $form->createView(),
       'user'    => $this->getUser()
+    ));
+  }
+
+  public function profileAction() {
+
+    return $this->render('IsmUserBundle:User:voir.html.twig', array(
+      'user' => $this->getUser(),
+      'membre'  => $this->getUser()->getMembre()
     ));
   }
 
