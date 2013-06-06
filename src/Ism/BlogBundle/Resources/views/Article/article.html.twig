@@ -45,7 +45,7 @@
       {% if article.tags.count > 0 %}
         <ul class="tags">
           {% for tag in article.tags %}
-            <li><a href="#" class="tag">{{ tag|upper }}</a></li>
+            <li><a href="{{ path('ism_search_tag', {'name': tag}) }}" class="tag">{{ tag|upper }}</a></li>
           {% endfor %}
         </ul>
       {% endif %}

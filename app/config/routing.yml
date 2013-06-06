@@ -13,7 +13,7 @@ IsmBlogBundlePrefix:
 
 IsmTagBundlePrefix:
     resource: "@IsmTagBundle/Resources/config/routing.yml"
-    prefix:   /tag
+    prefix:   /blog/tag
 
 # Les imports pour FOSUser :
 fos_user_security:

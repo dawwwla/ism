@@ -12,6 +12,9 @@ IsmBlogBundle_article:
     resource: "@IsmBlogBundle/Resources/config/routing/article.yml"
     prefix:   /article
 
+IsmBlogBundle_search:
+    resource: "@IsmBlogBundle/Resources/config/routing/search.yml"
+
 article_new:
     pattern:  /new
-    defaults: { _controller: "IsmBlogBundle:Article:new" }
+    defaults: { _controller: IsmBlogBundle:Article:new }

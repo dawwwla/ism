@@ -33,4 +33,21 @@ class ArticleRepository extends EntityRepository
 
     return new Paginator($query);
   }
+
+  public function getArticlesForCategorie($name)
+  {
+    $query = $this->createQueryBuilder('a')
+                  ->leftJoin('a.image', 'i')
+                    ->addSelect('i')
+                  ->leftJoin('a.categories', 'cat')
+                    ->addSelect('cat')
+                  ->where('a.publication = true')
+                  ->andWhere('cat.nom LIKE :name')
+                  ->orderBy('a.date', 'DESC')
+                  ->getQuery();
+
+    $query->setParameter('name', '%'.$name.'%');
+
+    return new Paginator($query);
+  }
 }

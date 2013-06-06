@@ -58,6 +58,39 @@ class BlogController extends Controller
       ));
     }
 
+    public function searchCategorieAction($name)
+    {
+      $articles = $this->getDoctrine()
+                       ->getManager()
+                       ->getRepository('IsmBlogBundle:Article')
+                       ->getArticlesForCategorie($name);
+
+      // On passe le tout à la vue
+      return $this->render('IsmBlogBundle:Search:categorie.html.twig', array(
+          'articles'  => $articles,
+          'name'      => $name
+      ));
+    }
+
+    public function searchTagAction($name)
+    {
+      $em = $this->getDoctrine()->getManager();
+      // find all article ids matching a particular query
+      $ids = $em->getRepository('IsmTagBundle:Tag')->getResourceIdsForTag('ism_tag', $name);
+
+      if (null != $ids) {
+        $query = 'SELECT a FROM IsmBlogBundle:Article a Where a.id IN (:ids)';
+        $articles = $em->createQuery($query)->setParameter('ids', $ids)->getResult();
+      } else {
+        $articles = null;
+      }
+
+      return $this->render('IsmBlogBundle:Search:tag.html.twig', array(
+        'name'      => $name,
+        'articles'  => $articles
+      ));
+    }
+
     public function feedAction()
     {
       $articles = $this->getDoctrine()

@@ -1,0 +1,7 @@
+ism_search_categorie:
+    pattern:  /cat/{name}
+    defaults: { _controller: IsmBlogBundle:Blog:searchCategorie }
+
+ism_search_tag:
+    pattern:  /tag/{name}
+    defaults: { _controller: IsmBlogBundle:Blog:searchTag }

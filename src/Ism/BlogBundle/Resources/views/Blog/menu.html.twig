@@ -7,14 +7,16 @@
   <li class="nav-header">Mots-clefs</li>
   <ul class="tags">
     {% for key, value in liste_tags %}
-      <li><a href="" class="tag">{{ key|upper }} ({{ value }})</a></li>
+      <li><a href="{{ path('ism_search_tag', {'name': key}) }}" class="tag">{{ key|upper }} ({{ value }})</a></li>
     {% endfor %}
   </ul>
   <li class="nav-header">Catégories</li>
-  <select class="span12">
+  <select class="span12" onchange="if (this.value) window.location.href=this.value">
     <option>Choisir une catégorie</option>
-  {% for categorie in liste_categories %}
-    <option>{{ categorie.nom }}</option>
-  {% endfor %}
+    {% for categorie in liste_categories %}
+      <option value="{{ path('ism_search_categorie', {'name' :  categorie.nom }) }}">{{ categorie.nom }}</option>
+    {% endfor %}
   </select>
+
 {% endif %}
+

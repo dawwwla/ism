@@ -1,3 +1,0 @@
-ism_tag_search:
-    pattern:  /{name}
-    defaults: { _controller: IsmTagBundle:Tag:search }
