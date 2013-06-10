@@ -17,8 +17,8 @@
       <tr>
         <td><a href="{{ path('links_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
         <td>{{ entity.fullname }}</td>
-        <td>{{ entity.website }}</td>
-        <td>{{ entity.description|truncate(100, true, '[...]') }}</td>
+        <td><a href="{{ entity.website }}">{{ entity.website }}</a></td>
+        <td>{{ entity.description|truncate(100, true, ' [...]') }}</td>
         <td>
             <div class="btn-group">
             {% if (is_granted('ROLE_AUTEUR') and (entity.user == app.user.username)) or is_granted('ROLE_ADMIN') %}

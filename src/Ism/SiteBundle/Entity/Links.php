@@ -50,7 +50,7 @@ class Links
     /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="text")
+     * @ORM\Column(name="Description", type="text", nullable=true)
      */
     private $description;
 

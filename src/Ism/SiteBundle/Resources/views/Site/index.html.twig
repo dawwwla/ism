@@ -10,7 +10,7 @@
   <div class="jumbotron masthead">
     <div class="container">
       <h1>Projet ISM</h1>
-      <p>Ce projet est propulsé par Symfony2 et Bootstrap.</p>
+      <p>Ce projet est fondé Symfony2 et Bootstrap.</p>
       <p><a class="btn btn-primary btn-large" href="#">En savoir plus »</a></p>
       <ul class="masthead-links">
         <li><a href="https://github.com/melkir/ism">GitHub project</a></li>
@@ -52,27 +52,79 @@
     <div class="row-fluid">
       <ul class="thumbnails example-sites">
         <li class="span3">
-          <a class="thumbnail" href="http://soundready.fm/" target="_blank">
+          <a class="thumbnail" href="" target="_blank">
             <img src="../assets/img/example-sites/soundready.png" alt="SoundReady.fm">
           </a>
         </li>
         <li class="span3">
-          <a class="thumbnail" href="http://kippt.com/" target="_blank">
+          <a class="thumbnail" href="" target="_blank">
             <img src="../assets/img/example-sites/kippt.png" alt="Kippt">
           </a>
         </li>
         <li class="span3">
-          <a class="thumbnail" href="http://www.gathercontent.com/" target="_blank">
+          <a class="thumbnail" href="" target="_blank">
             <img src="../assets/img/example-sites/gathercontent.png" alt="Gather Content">
           </a>
         </li>
         <li class="span3">
-          <a class="thumbnail" href="http://www.jshint.com/" target="_blank">
+          <a class="thumbnail" href="" target="_blank">
             <img src="../assets/img/example-sites/jshint.png" alt="JS Hint">
           </a>
         </li>
       </ul>
-     </div>
+    </div>
 
+    <hr class="soften">
+
+    <h1>Les métiers.</h1>
+    <div class="row-fluid">
+      <div class="span4">
+        <h2><a href="{{ path('ism_search_categorie', {'name' : 'Middleware' }) }}">Middleware</a></h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <ul class="tags">
+            <li><a href="{{ path('ism_search_tag', {'name': 'Tomcat' }) }}" class="tag">TOMCAT</a></li>
+            <li><a href="{{ path('ism_search_tag', {'name': 'Websphère' }) }}" class="tag">WEBSPHERE</a></li>
+            <li><a href="{{ path('ism_search_tag', {'name': 'Weblogic' }) }}" class="tag">WEBLOGIC</a></li>
+        </ul>
+      </div><!--/span-->
+      <div class="span4">
+        <h2><a href="{{ path('ism_search_categorie', {'name' : 'Système' }) }}">Système</a></h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <ul class="tags">
+          <li><a href="{{ path('ism_search_tag', {'name': 'Unix' }) }}" class="tag">UNIX</a></li>
+          <li><a href="{{ path('ism_search_tag', {'name': 'Windows' }) }}" class="tag">WINDOWS</a></li>
+        </ul>
+      </div><!--/span-->
+      <div class="span4">
+        <h2><a href="{{ path('ism_search_categorie', {'name' : 'Infrastructure' }) }}">Infrastructure</a></h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <ul class="tags">
+          <li><a href="{{ path('ism_search_tag', {'name': 'Matériel' }) }}" class="tag">MATÉRIEL</a></li>
+          <li><a href="{{ path('ism_search_tag', {'name': 'Stockage' }) }}" class="tag">STOCKAGE</a></li>
+        </ul>
+      </div><!--/span-->
+    </div><!--/row-->
+    </br>
+    <div class="row-fluid">
+      <div class="span4">
+        <h2><a href="{{ path('ism_search_categorie', {'name' :  'BDD' }) }}">Base de données</a></h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <ul class="tags">
+          <li><a href="{{ path('ism_search_tag', {'name': 'Oracle' }) }}" class="tag">ORACLE</a></li>
+          <li><a href="{{ path('ism_search_tag', {'name': 'DBL' }) }}" class="tag">DBL</a></li>
+          <li><a href="{{ path('ism_search_tag', {'name': 'Sybase' }) }}" class="tag">SYBASE</a></li>
+          <li><a href="{{ path('ism_search_tag', {'name': 'Mysql' }) }}" class="tag">MYSQL</a></li>
+          <li><a href="{{ path('ism_search_tag', {'name': 'Mssql' }) }}" class="tag">MSSQL</a></li>
+        </ul>
+      </div><!--/span-->
+      <div class="span4">
+        <h2><a href="{{ path('ism_search_categorie', {'name' : 'Bureautique' }) }}">Bureautique</a></h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <ul class="tags">
+          <li><a href="{{ path('ism_search_tag', {'name': 'Support' }) }}" class="tag">SUPPORT</a></li>
+        </ul>
+      </div><!--/span-->
+    </div><!--/row-->
   </div>
+
 {% endblock %}

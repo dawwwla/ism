@@ -1,10 +1,10 @@
 {% extends "IsmSiteBundle::Links/links.html.twig" %}
 
 {% block ismsite_body -%}
-  <h2>{{ entity.website }}</h2>
+  <h2><a href="{{ entity.website }}">{{ entity.website }}</a></h2>
   <i>Ajouté par {{ entity.user }} le {{ entity.date|date('d/m/Y') }}</i>
   </br></br>
-  <table class="record_properties">
+  <table class="table">
     <tbody>
       <tr>
         <th>Auteur</th>
@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <th>Website</th>
-        <td>{{ entity.website }}</td>
+        <td><a href="{{ entity.website }}">{{ entity.website }}</a></td>
       </tr>
       <tr>
         <th>Description</th>

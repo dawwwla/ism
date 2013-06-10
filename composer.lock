@@ -1714,12 +1714,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "90fc070a846338069119aa09caa5063f9d793c4a"
+                "reference": "4fcbd5f7b894669ae4d57ff4d39f7fb9382475ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/90fc070a846338069119aa09caa5063f9d793c4a",
-                "reference": "90fc070a846338069119aa09caa5063f9d793c4a",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/4fcbd5f7b894669ae4d57ff4d39f7fb9382475ba",
+                "reference": "4fcbd5f7b894669ae4d57ff4d39f7fb9382475ba",
                 "shasum": ""
             },
             "require": {
@@ -1777,7 +1777,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-06-05 16:46:15"
+            "time": "2013-06-06 22:28:57"
         },
         {
             "name": "kriswallsmith/buzz",
@@ -2376,12 +2376,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "c3962f988176e0f950293106c18befd5a802678f"
+                "reference": "0a54d14984eb9871c46f14072dacab5a5fdf66b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/c3962f988176e0f950293106c18befd5a802678f",
-                "reference": "c3962f988176e0f950293106c18befd5a802678f",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/0a54d14984eb9871c46f14072dacab5a5fdf66b3",
+                "reference": "0a54d14984eb9871c46f14072dacab5a5fdf66b3",
                 "shasum": ""
             },
             "require": {
@@ -2431,7 +2431,7 @@
                 "block",
                 "sonata"
             ],
-            "time": "2013-06-04 20:46:06"
+            "time": "2013-06-06 13:48:02"
         },
         {
             "name": "sonata-project/cache-bundle",
@@ -2506,12 +2506,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "55dc502e8a30e215177a0d177ccf37f69e724f2c"
+                "reference": "7704c105fec7de4c42a4a22544c19b2b1a16bb1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/55dc502e8a30e215177a0d177ccf37f69e724f2c",
-                "reference": "55dc502e8a30e215177a0d177ccf37f69e724f2c",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/7704c105fec7de4c42a4a22544c19b2b1a16bb1e",
+                "reference": "7704c105fec7de4c42a4a22544c19b2b1a16bb1e",
                 "shasum": ""
             },
             "require": {
@@ -2554,20 +2554,20 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2013-06-01 16:39:11"
+            "time": "2013-06-07 10:56:17"
         },
         {
             "name": "sonata-project/exporter",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "1.2.2"
+                "reference": "1.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/1.2.2",
-                "reference": "1.2.2",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/1.3.0",
+                "reference": "1.3.0",
                 "shasum": ""
             },
             "require": {
@@ -2575,6 +2575,7 @@
             },
             "require-dev": {
                 "php": ">=5.3.0",
+                "symfony/property-access": ">=2.2, <3.0.0-dev",
                 "symfony/routing": "*"
             },
             "suggest": {
@@ -2607,7 +2608,7 @@
                 "export",
                 "xls"
             ],
-            "time": "2013-05-02 17:17:04"
+            "time": "2013-06-06 20:59:26"
         },
         {
             "name": "sonata-project/intl-bundle",

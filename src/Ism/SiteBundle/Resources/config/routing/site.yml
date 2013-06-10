@@ -13,3 +13,4 @@ ismsite_roadmap:
 ismsite_links:
     pattern: /links
     defaults: { _controller: "IsmSiteBundle:Links:index" }
+

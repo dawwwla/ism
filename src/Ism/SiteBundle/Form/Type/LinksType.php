@@ -11,10 +11,17 @@ class LinksType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('website')
-            ->add('description')
+            ->add('firstname', 'text', array(
+            'label' => 'Prénom'))
+            ->add('lastname', 'text', array(
+            'label' => 'Nom'))
+            ->add('website', 'url', array(
+            'label' => 'Site web',
+            'trim'  => true))
+            ->add('description', 'textarea', array(
+            'attr'     => array('class' => 'span6', 'rows' => 12),
+            'required' => false
+            ))
         ;
     }
 

@@ -1,13 +1,14 @@
 {% extends "IsmBlogBundle:Blog:index.html.twig" %}
 
 {% block body -%}
-<h2>Liste des articles - Catégorie &laquo; {{ name }} &raquo;</h2>
+<h2>Catégorie &laquo; {{ name }} &raquo;</h2>
 <ul>
   {% for article in articles %}
     {% include "IsmBlogBundle:Article:article.html.twig" with {'accueil': true} %}
     <hr />
   {% else %}
-    <p>Aucun article ne correspond pour ce tag</p>
+    </br>
+    <p>Aucun article correspondant pour cette catégorie</p>
   {% endfor %}
 </ul>
 {% endblock %}
