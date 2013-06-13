@@ -18,7 +18,7 @@ php composer.phar install
 
 ## 3. Quelques commandes utiles
 Compléte une entité
-php app/console doctrine:generate:entities melkirBlogBundle:Article
+php app/console doctrine:generate:entities IsmBlogBundle:Article
 
 Créée une entité
 php app/console doctrine:generate:entity
@@ -27,7 +27,7 @@ Affiche les requêtes / Met à jours la BBD
 php app/console doctrine:schema:update [--dump-sql | --force]
 
 Tester ces requêtes
-php app/console doctrine:query:dql "select a from melkirBlogBundle:Article a"
+php app/console doctrine:query:dql "select a from IsmBlogBundle:Article a"
 
 Charger les datafixtures
 php app/console doctrine:fixtures:load
