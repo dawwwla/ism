@@ -1,0 +1,19 @@
+{% extends "IsmSiteBundle::Roadmaps/roadmaps.html.twig" %}
+
+{% block ismsite_body -%}
+    <h2>Edition de la roadmap</h2>
+
+    <form action="{{ path('roadmaps_edit', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(edit_form) }}
+        <p>
+            <a href="{{ path('ismsite_roadmaps') }}" class="btn">
+              <i class="icon-chevron-left"></i>
+              Retour à la liste
+            </a>
+            <button type="submit" class='btn'>Valider</button>
+        </p>
+    </form>
+
+{% endblock %}
+

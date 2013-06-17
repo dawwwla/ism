@@ -1,0 +1,18 @@
+{% extends "IsmSiteBundle::Roadmaps/roadmaps.html.twig" %}
+
+{% block ismsite_body -%}
+    <h2>Ajouter d'une roadmap</h2>
+
+    <form action="{{ path('roadmaps_new') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <a href="{{ path('ismsite_roadmaps') }}" class="btn">
+              <i class="icon-chevron-left"></i>
+              Retour à la liste
+            </a>
+            <button type="submit" class='btn'>Valider</button>
+        </p>
+    </form>
+
+{% endblock %}
+

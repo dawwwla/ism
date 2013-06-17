@@ -1,0 +1,46 @@
+{% extends "IsmSiteBundle::Roadmaps/roadmaps.html.twig" %}
+
+{% block ismsite_body -%}
+  <h1>Listes des roadmaps</h1>
+  <table class="table table-condensed table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Produit</th>
+        <th>Version</th>
+        <th>Date début</th>
+        <th>Date fin</th>
+        <th>Status</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+      <tr>
+        <td><a href="{{ path('roadmaps_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+        <td>{{ entity.produit }}</td>
+        <td>{{ entity.version }}</td>
+        <td>{% if entity.datedeb %}{{ entity.datedeb|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>{% if entity.datefin %}{{ entity.datefin|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>{{ entity.status }}</td>
+        <td>{{ entity.description|truncate(100, true, ' [...]') }}</td>
+        <td>
+          <div class="btn-group">
+          {% if (is_granted('ROLE_AUTEUR') and (entity.user == app.user.username)) or is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('roadmaps_delete', { 'id': entity.id }) }}" class='btn btn-danger'><i class="icon-trash icon-white"></i></a>
+            <a href="{{ path('roadmaps_edit', { 'id': entity.id }) }}" class='btn'><i class="icon-edit"></i></a>
+          {% endif %}
+          <a href="{{ path('roadmaps_show', { 'id': entity.id }) }}" class='btn'><i class="icon-chevron-right"></i></a>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{{ path('roadmaps_new') }}" class="btn">
+    Ajouter une nouvelle roadmap
+  </a>
+
+{% endblock %}

@@ -5,3 +5,7 @@ IsmSiteBundlePrefix:
 IsmSiteBundle_links:
     resource: "@IsmSiteBundle/Resources/config/routing/links.yml"
     prefix:   /links
+
+IsmSiteBundle_roadmaps:
+    resource: "@IsmSiteBundle/Resources/config/routing/roadmaps.yml"
+    prefix:   /roadmaps

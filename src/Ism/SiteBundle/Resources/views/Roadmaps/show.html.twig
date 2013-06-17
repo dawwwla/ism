@@ -1,0 +1,30 @@
+{% extends "IsmSiteBundle::Roadmaps/roadmaps.html.twig" %}
+
+{% block ismsite_body -%}
+  <h2>{{ entity.produit }}</h2>
+  <i>Ajouté par {{ entity.user }} le {{ entity.date|date('d/m/Y') }}</i>
+  </br></br>
+  <table class="table">
+    <tbody>
+    </tbody>
+  </table>
+  </br>
+  <p>
+    <a href="{{ path('ismsite_roadmaps') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    {% if (is_granted('ROLE_AUTEUR') and (entity.user.id == app.user.id)) or is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('roadmaps_edit', { 'id': entity.id }) }}" class="btn">
+      <i class="icon-edit"></i>
+      Modifier
+    </a>
+    <a href="{{ path('roadmaps_delete', { 'id': entity.id }) }}" class="btn">
+      <i class="icon-trash"></i>
+      Supprimer
+    </a>
+  {% endif %}
+  </p>
+
+
+{% endblock %}

@@ -62,7 +62,7 @@ class Links
     private $date;
 
     /**
-     * Initialise la date à la date actuelle
+     * Initialise la date de création à la date actuelle
      */
     public function __construct()
     {

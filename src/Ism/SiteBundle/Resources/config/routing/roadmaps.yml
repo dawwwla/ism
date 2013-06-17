@@ -1,0 +1,16 @@
+roadmaps_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "IsmSiteBundle:Roadmaps:show" }
+
+roadmaps_new:
+    pattern:  /new
+    defaults: { _controller: "IsmSiteBundle:Roadmaps:new" }
+
+roadmaps_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "IsmSiteBundle:Roadmaps:edit" }
+
+roadmaps_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "IsmSiteBundle:Roadmaps:delete" }
+    requirements: { _method: post|get }

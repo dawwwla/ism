@@ -1,0 +1,20 @@
+{% extends "IsmSiteBundle::Roadmaps/roadmaps.html.twig" %}
+
+{% block ismsite_body -%}
+  <h2>Suppression de la roadmap</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer la roadmap {{ entity.produit }} ?
+  </p>
+
+  <form action="{{ path('roadmaps_delete', { 'id': entity.id }) }}" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+      {{ form_widget(delete_form) }}
+    <a href="{{ path('ismsite_roadmaps') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    <button type="submit" class='btn btn-danger'>Supprimer</button>
+  </form>
+
+{% endblock %}
