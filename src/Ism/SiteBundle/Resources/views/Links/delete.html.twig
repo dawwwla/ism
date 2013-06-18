@@ -8,7 +8,7 @@
   </p>
 
   <form action="{{ path('links_delete', { 'id': entity.id }) }}" method="post">
-    <input type="hidden" name="_method" value="DELETE" />
+    <input type="hidden" />
       {{ form_widget(delete_form) }}
     <a href="{{ path('ismsite_links') }}" class="btn">
       <i class="icon-chevron-left"></i>

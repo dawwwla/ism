@@ -13,4 +13,4 @@ links_edit:
 links_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "IsmSiteBundle:Links:delete" }
-    requirements: { _method: post|get }
+    requirements: { _method: get|delete|post }

@@ -4,7 +4,7 @@
     <h1>Modifier l'article</h1>
 
     <form action="{{ path('article_edit', { 'id': article.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-      <input type="hidden" name="_method" value="PUT" />
+      <input type="hidden" />
       {{ form_widget(edit_form) }}
       <p>
         <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn">

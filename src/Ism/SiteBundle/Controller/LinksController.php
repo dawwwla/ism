@@ -125,7 +125,6 @@ class LinksController extends Controller
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
-
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($entity);
