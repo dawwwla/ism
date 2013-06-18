@@ -24,11 +24,6 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
-            // Sonata Bundles
-            new Sonata\BlockBundle\SonataBlockBundle(),
-            new Sonata\jQueryBundle\SonatajQueryBundle(),
-            new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             // Knp Bundles
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
@@ -40,13 +35,14 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             new FPN\TagBundle\FPNTagBundle(),
+            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             // Ism Bundles
             new Ism\UserBundle\IsmUserBundle(),
             new Ism\SiteBundle\IsmSiteBundle(),
-            new Ism\AdminBundle\IsmAdminBundle(),
             new Ism\BlogBundle\IsmBlogBundle(),
             new Ism\CommentBundle\IsmCommentBundle(),
             new Ism\TagBundle\IsmTagBundle(),
+            // new Ism\AdminBundle\IsmAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

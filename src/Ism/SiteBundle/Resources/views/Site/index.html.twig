@@ -11,7 +11,7 @@
     <div class="container">
       <h1>Projet ISM</h1>
       <p>Ce projet est fondé sur Symfony2 et Bootstrap.</p>
-      <p><a class="btn btn-primary btn-large" href="#">En savoir plus »</a></p>
+      <p><a class="btn btn-primary btn-large" href="#more">En savoir plus »</a></p>
       <ul class="masthead-links">
         <li><a href="https://github.com/melkir/ism">GitHub project</a></li>
         <li>Version 2.0</li>
@@ -47,7 +47,7 @@
 
     <hr class="soften">
 
-    <h1>Nos Projets.</h1>
+    <h1>Nos projets.</h1>
     <p class="marketing-byline">Pour plus d'information, consulter nos <a href="{{ path('ismsite_roadmaps') }}">roadmaps</a> et <a href="">catalogues</a>.</p>
     <div class="row-fluid">
       <ul class="thumbnails example-sites">
@@ -75,8 +75,9 @@
     </div>
 
     <hr class="soften">
-
-    <h1>Les métiers.</h1>
+    <balise id="more">
+      <h1>Les métiers.</h1>
+    </balise>
     <div class="row-fluid">
       <div class="span4">
         <h2><a href="{{ path('ism_search_categorie', {'name' : 'Middleware' }) }}">Middleware</a></h2>

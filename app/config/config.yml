@@ -20,6 +20,8 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
+bc_bootstrap:
+    less_filter: lessphp
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
@@ -27,6 +29,9 @@ assetic:
     bundles:        [ "IsmSiteBundle", "IsmBlogBundle", "FOSCommentBundle" ]
     # java: %java_path%
     filters:
+        lessphp:
+            file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
+            apply_to:   "\.less$"
         cssrewrite: ~
         yui_js:
             jar: %kernel.root_dir%/Resources/java/yuicompressor.jar
@@ -98,34 +103,34 @@ ornicar_akismet:
     api_key: %akismet_key%
     url:     %akismet_url%
 
-# Sonata Configuration
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
-
-        sonata.block.service.text:
-        sonata.block.service.rss:
-
-sonata_admin:
-    title:      ISM - Panneau d'administration
-    dashboard:
-        groups:
-            Blog:
-                items:
-                    - ism.blog.admin.article
-                    - ism.blog.admin.categorie
-                    - ism.blog.admin.commentaire
-                    - ism.blog.admin.competence
-            Utilisateurs:
-                items:
-                    - ism.admin.user
-            Mediateque:
-                items:
-                    - ism.blog.admin.image
-
 fpn_tag:
     model:
         tag_class:     Ism\TagBundle\Entity\Tag
         tagging_class: Ism\TagBundle\Entity\Tagging
+
+# Sonata Configuration
+#sonata_block:
+#    default_contexts: [cms]
+#    blocks:
+#        sonata.admin.block.admin_list:
+#            contexts:   [admin]
+#
+#        sonata.block.service.text:
+#        sonata.block.service.rss:
+#
+#sonata_admin:
+#    title:      ISM - Panneau d'administration
+#    dashboard:
+#        groups:
+#            Blog:
+#                items:
+#                    - ism.blog.admin.article
+#                    - ism.blog.admin.categorie
+#                    - ism.blog.admin.commentaire
+#                    - ism.blog.admin.competence
+#            Utilisateurs:
+#                items:
+#                    - ism.admin.user
+#            Mediateque:
+#                items:
+#                    - ism.blog.admin.image
