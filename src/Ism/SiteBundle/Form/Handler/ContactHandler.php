@@ -29,7 +29,7 @@ class ContactHandler
    * @param $mailer
    *
    */
-  public function __construct(Form $form, Request $request, $mailer)
+  public function __construct(Form $form, Request $request, \Swift_Mailer $mailer)
   {
     $this->form = $form;
     $this->request = $request;
@@ -64,6 +64,7 @@ class ContactHandler
    */
   protected function onSuccess($contact)
   {
+    //$destination = $this->container->getParameter('mailer_user');
     $message = \Swift_Message::newInstance()
         ->setSubject("ISM - Un utilisateur vous a envoyé un message")
         ->setFrom('no-reply@nobody.com')

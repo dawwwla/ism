@@ -13,7 +13,7 @@ services:
     ismblog.censure_listener:
         class: Ism\BlogBundle\Bigbrother\CensureListener
         arguments:
-            - [1, 2]                # 1er argument = liste des id des membres à surveiller (totalement arbitraire)
+            - [1, 2, 3, 4]          # 1er argument = liste des id des membres à surveiller (totalement arbitraire)
             - %ismblog.dest_email%  # 2e argument = le destinataire des emails
             - @mailer               # 3e argument = le service pour envoyer des emails
         tags:

@@ -42,6 +42,15 @@ class ArticleController extends Controller
 
             if ($form->isValid()) {
                 $article->setUser($user = $this->getUser());
+
+                // --- Début de notre fonctionnalité Antispam ---
+                // On récupère le service
+                $antispam = $this->container->get('ismblog.antispam');
+                if ($antispam->isSpam($article->getContenu())) {
+                  throw new \Exception('Votre message a été détecté comme spam !');
+                }
+                // --- Fin de notre fonctionnalité Antispam
+
                 // --- Début de notre fonctionnalité BigBrother ---
                 // On crée l'évènement
                 $event = new MessagePostEvent($article->getContenu(), $user);
