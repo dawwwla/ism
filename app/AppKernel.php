@@ -42,7 +42,6 @@ class AppKernel extends Kernel
             new Ism\BlogBundle\IsmBlogBundle(),
             new Ism\CommentBundle\IsmCommentBundle(),
             new Ism\TagBundle\IsmTagBundle(),
-            // new Ism\AdminBundle\IsmAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
